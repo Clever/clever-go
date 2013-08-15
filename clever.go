@@ -200,7 +200,7 @@ type Term struct {
 	EndDate   string `json:"end_date"`
 }
 
-func (clever *Clever) query(path string, params map[string]string, resp interface{}) error {
+func (clever *Clever) Query(path string, params map[string]string, resp interface{}) error {
 	v := url.Values{}
 	for key, val := range params {
 		v.Set(key, val)
