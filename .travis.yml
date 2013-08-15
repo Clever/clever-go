@@ -3,3 +3,7 @@ go:
     - 1.1
     - tip
 script: make test
+
+notifications:
+  email:
+    - dev@getclever.com
