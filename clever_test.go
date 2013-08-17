@@ -6,7 +6,7 @@ import (
 )
 
 func TestQueryDistricts(t *testing.T) {
-	clever := New(Auth{"DEMO_KEY", ""}, "https://api.getclever.com")
+	clever := NewMock("./data")
 	resp1 := &DistrictsResp{}
 	if err := clever.Query("/v1.1/districts", map[string]string{}, resp1); err != nil {
 		t.Error(fmt.Errorf("Error retrieving districts: %s\n", err))
@@ -18,7 +18,7 @@ func TestQueryDistricts(t *testing.T) {
 }
 
 func TestQuerySchools(t *testing.T) {
-	clever := New(Auth{"DEMO_KEY", ""}, "https://api.getclever.com")
+	clever := NewMock("./data")
 	resp1 := &SchoolsResp{}
 	if err := clever.Query("/v1.1/schools", map[string]string{}, resp1); err != nil {
 		t.Error(fmt.Errorf("Error retrieving schools: %s\n", err))
@@ -30,7 +30,7 @@ func TestQuerySchools(t *testing.T) {
 }
 
 func TestQueryTeachers(t *testing.T) {
-	clever := New(Auth{"DEMO_KEY", ""}, "https://api.getclever.com")
+	clever := NewMock("./data")
 	resp1 := &TeachersResp{}
 	if err := clever.Query("/v1.1/teachers", map[string]string{}, resp1); err != nil {
 		t.Error(fmt.Errorf("Error retrieving teachers: %s\n", err))
@@ -42,7 +42,7 @@ func TestQueryTeachers(t *testing.T) {
 }
 
 func TestQueryStudents(t *testing.T) {
-	clever := New(Auth{"DEMO_KEY", ""}, "https://api.getclever.com")
+	clever := NewMock("./data")
 	resp1 := &StudentsResp{}
 	if err := clever.Query("/v1.1/students", map[string]string{}, resp1); err != nil {
 		t.Error(fmt.Errorf("Error retrieving students: %s\n", err))
@@ -54,7 +54,7 @@ func TestQueryStudents(t *testing.T) {
 }
 
 func TestQuerySections(t *testing.T) {
-	clever := New(Auth{"DEMO_KEY", ""}, "https://api.getclever.com")
+	clever := NewMock("./data")
 	resp1 := &SectionsResp{}
 	if err := clever.Query("/v1.1/sections", map[string]string{}, resp1); err != nil {
 		t.Error(fmt.Errorf("Error retrieving sections: %s\n", err))

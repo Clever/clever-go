@@ -1,0 +1,56 @@
+{
+  "data": [
+    {
+      "data": {
+        "id": "4fee004cca2e43cf27000002",
+        "created": "2012-11-06T00:00:00Z",
+        "district": "51a5a56312ec00cc5100007e",
+        "high_grade": "8",
+        "last_modified": "2012-11-07T00:44:53.079Z",
+        "location": {
+          "address": "42139 Fadel Mountains",
+          "city": "Thomasfort",
+          "state": "AP",
+          "zip": "61397-3760"
+        },
+        "low_grade": "6",
+        "name": "Clever Preparatory",
+        "nces_id": "94755881",
+        "phone": "(527) 825-2248",
+        "principal": {
+          "email": "nikolas@mailinator.com",
+          "name": "Rudolph Howe"
+        },
+        "school_number": "2559",
+        "sis_id": "2559",
+        "state_id": "23"
+      }
+    },
+    {
+      "data": {
+        "id": "4fee004cca2e43cf27000003",
+        "created": "2012-11-06T00:00:00Z",
+        "district": "51a5a56312ec00cc5100007e",
+        "high_grade": "12",
+        "last_modified": "2012-11-07T00:44:53.079Z",
+        "location": {
+          "address": "140 Second Street",
+          "city": "San Francisco",
+          "state": "CA",
+          "zip": "94321"
+        },
+        "low_grade": "9",
+        "name": "Clever High",
+        "nces_id": "94755882",
+        "phone": "(527) 825-2248",
+        "principal": {
+          "email": "nikolas@mailinator.com",
+          "name": "Rudolph Howe"
+        },
+        "school_number": "2558",
+        "sis_id": "2558",
+        "state_id": "24"
+      }
+    }
+  ]
+}
