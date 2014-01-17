@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	clever := clevergo.New(clevergo.Auth{"DEMO_KEY", ""}, "https://api.getclever.com")
+	clever := clevergo.New(clevergo.Auth{"DEMO_KEY", ""}, "https://api.clever.com")
 	resp := &clevergo.DistrictsResp{}
 	if err := clever.Query("/v1.1/districts", map[string]string{}, resp); err != nil {
 		fmt.Fprintf(os.Stderr, "Error getting districts: %s \n", err)

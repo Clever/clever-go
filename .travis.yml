@@ -6,4 +6,4 @@ script: make test
 
 notifications:
   email:
-    - dev@getclever.com
+    - dev@clever.com
