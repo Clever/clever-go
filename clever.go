@@ -22,7 +22,7 @@ type Clever struct {
 	Url string
 }
 
-// Creates a new clever object to make requests with. URL must be a valid base url, e.g. "https://api.getclever.com"
+// Creates a new clever object to make requests with. URL must be a valid base url, e.g. "https://api.clever.com"
 func New(auth Auth, url string) *Clever {
 	return &Clever{auth, url}
 }
