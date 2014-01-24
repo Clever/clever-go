@@ -85,7 +85,7 @@ type School struct {
 	HighGrade    string `json:"high_grade"`
 	Id           string
 	LastModified string `json:"last_modified"`
-	Location
+	Location     Location
 	LowGrade     string `json:"low_grade"`
 	Name         string
 	NcesId       string `json:"nces_id"`
@@ -108,12 +108,12 @@ type TeacherResp struct {
 }
 
 type Teacher struct {
-	Created      string
-	District     string
-	Email        string
-	Id           string
-	LastModified string `json:"last_modified"`
-	Name
+	Created       string
+	District      string
+	Email         string
+	Id            string
+	LastModified  string `json:"last_modified"`
+	Name          Name
 	School        string
 	SisId         string `json:"sis_id"`
 	TeacherNumber string `json:"teacher_number"`
@@ -143,13 +143,13 @@ type Student struct {
 	HispanicEthnicity string `json:"hispanic_ethnicity"`
 	Id                string
 	LastModified      string `json:"last_modified"`
-	Location
-	Name
-	Race          string
-	School        string
-	SisId         string `json:"sis_id"`
-	StateId       string `json:"state_id"`
-	StudentNumber string `json:"student_number"`
+	Location          Location
+	Name              Name
+	Race              string
+	School            string
+	SisId             string `json:"sis_id"`
+	StateId           string `json:"state_id"`
+	StudentNumber     string `json:"student_number"`
 }
 
 type SectionsResp struct {
@@ -172,12 +172,12 @@ type Section struct {
 	Grade        string
 	Id           string `json:"id"`
 	LastModified string `json:"last_modified"`
-	Name
-	School   string
-	SisId    string `json:"sis_id"`
-	Students []string
-	Subject  string
-	Teacher  string
+	Name         string
+	School       string
+	SisId        string `json:"sis_id"`
+	Students     []string
+	Subject      string
+	Teacher      string
 	Term
 }
 
