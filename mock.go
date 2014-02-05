@@ -8,7 +8,9 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"os"
+	"strconv"
 )
 
 // Loads a directory with json files representing mock resources. See ./data for an example
@@ -49,7 +51,7 @@ func NewMock(dir string) *Clever {
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/sections",
-				Dest:    MockResource(fmt.Sprintf("%s/sections.json", dir)),
+				Dest:    MockResource(fmt.Sprintf("%s/sections.json", dir), fmt.Sprintf("%s/sections2.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/sections/:id",
@@ -72,11 +74,17 @@ func NewMock(dir string) *Clever {
 	return &Clever{Auth{"doesntmatter", ""}, ts.URL}
 }
 
-func MockResource(filename string) func(http.ResponseWriter, *http.Request, map[string]string) {
+func MockResource(filenames ...string) func(http.ResponseWriter, *http.Request, map[string]string) {
 	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
-		file, err := os.Open(filename)
+		page := 1
+		u, _ := url.Parse(req.RequestURI)
+		query, _ := url.ParseQuery(u.RawQuery)
+		if _, ok := query["page"]; ok {
+			page, _ = strconv.Atoi(query["page"][0])
+		}
+		file, err := os.Open(filenames[page-1])
 		if err != nil {
-			http.Error(w, fmt.Sprintf("couldn't read %s", filename), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("couldn't read %s", filenames[page-1]), http.StatusInternalServerError)
 			return
 		}
 		io.Copy(w, file)

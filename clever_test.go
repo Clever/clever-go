@@ -173,3 +173,19 @@ func TestQuerySections(t *testing.T) {
 		t.Error(fmt.Errorf("Student did not match expected."))
 	}
 }
+
+func TestQueryAll(t *testing.T) {
+	clever := NewMock("./data")
+	result := clever.QueryAll("/v1.1/sections", nil)
+
+	count := 0
+	for result.Next() {
+		section := &Section{}
+		result.Scan(section)
+		count++
+	}
+
+	if count != 2 {
+		t.Error(fmt.Errorf("Did not get both section pages."))
+	}
+}
