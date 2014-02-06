@@ -50,12 +50,6 @@ type Link struct {
 	Uri string
 }
 
-type DistrictsResp struct {
-	Districts []DistrictResp `json:"data"`
-	Links     []Link
-	Paging    Paging
-}
-
 type DistrictResp struct {
 	District District `json:"data"`
 	Links    []Link
@@ -65,12 +59,6 @@ type DistrictResp struct {
 type District struct {
 	Id   string
 	Name string
-}
-
-type SchoolsResp struct {
-	Links   []Link
-	Paging  Paging
-	Schools []SchoolResp `json:"data"`
 }
 
 type SchoolResp struct {
@@ -95,12 +83,6 @@ type School struct {
 	StateId      string `json:"state_id"`
 }
 
-type TeachersResp struct {
-	Links    []Link
-	Paging   Paging
-	Teachers []TeacherResp `json:"data"`
-}
-
 type TeacherResp struct {
 	Links   []Link
 	Teacher Teacher `json:"data"`
@@ -118,12 +100,6 @@ type Teacher struct {
 	SisId         string `json:"sis_id"`
 	TeacherNumber string `json:"teacher_number"`
 	Title         string
-}
-
-type StudentsResp struct {
-	Links    []Link
-	Paging   Paging
-	Students []StudentResp `json:"data"`
 }
 
 type StudentResp struct {
@@ -150,12 +126,6 @@ type Student struct {
 	SisId             string `json:"sis_id"`
 	StateId           string `json:"state_id"`
 	StudentNumber     string `json:"student_number"`
-}
-
-type SectionsResp struct {
-	Links    []Link
-	Paging   Paging
-	Sections []SectionResp `json:"data"`
 }
 
 type SectionResp struct {
@@ -200,14 +170,10 @@ type Term struct {
 	EndDate   string `json:"end_date"`
 }
 
-func (clever *Clever) Query(path string, params map[string]string, resp interface{}) error {
+func (clever *Clever) Query(path string, params url.Values, resp interface{}) error {
 	uri := fmt.Sprintf("%s%s", clever.Url, path)
 	if params != nil {
-		v := url.Values{}
-		for key, val := range params {
-			v.Set(key, val)
-		}
-		uri = fmt.Sprintf("%s%s?%s", clever.Url, path, v.Encode())
+		uri = fmt.Sprintf("%s%s?%s", clever.Url, path, params.Encode())
 	}
 	client := &http.Client{}
 	req, _ := http.NewRequest("GET", uri, nil)
@@ -251,7 +217,7 @@ type PagedResult struct {
 func (clever *Clever) QueryAll(path string, params url.Values) PagedResult {
 	paramString := ""
 	if params != nil {
-		paramString = "?" + v.Encode()
+		paramString = "?" + params.Encode()
 	}
 
 	return PagedResult{clever: *clever, nextPagePath: path + paramString, lastDataCursor: -1}

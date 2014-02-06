@@ -8,36 +8,46 @@ import (
 
 func TestQueryDistricts(t *testing.T) {
 	clever := NewMock("./data")
-	resp1 := &DistrictsResp{}
-	if err := clever.Query("/v1.1/districts", map[string]string{}, resp1); err != nil {
-		t.Error(fmt.Errorf("Error retrieving districts: %s\n", err))
+	results := clever.QueryAll("/v1.1/districts", nil)
+	if !results.Next() {
+		t.Error("Found no districts")
 	}
-	resp2 := &DistrictResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/districts/%s", resp1.Districts[0].District.Id), map[string]string{}, resp2); err != nil {
+	district0 := &District{}
+	if err := results.Scan(district0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving district: %s\n", err))
 	}
 
-	District0 := District{
+	resp := &DistrictResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/districts/%s", district0.Id), nil, resp); err != nil {
+		t.Error(fmt.Errorf("Error retrieving district: %s\n", err))
+	}
+
+	expectedDistrict0 := District{
 		Id:   "51a5a56312ec00cc5100007e",
 		Name: "test district",
 	}
-	if !reflect.DeepEqual(District0, resp1.Districts[0].District) {
+	if !reflect.DeepEqual(expectedDistrict0, *district0) {
 		t.Error(fmt.Errorf("District did not match expected."))
 	}
 }
 
 func TestQuerySchools(t *testing.T) {
 	clever := NewMock("./data")
-	resp1 := &SchoolsResp{}
-	if err := clever.Query("/v1.1/schools", map[string]string{}, resp1); err != nil {
-		t.Error(fmt.Errorf("Error retrieving schools: %s\n", err))
+	results := clever.QueryAll("/v1.1/schools", nil)
+	if !results.Next() {
+		t.Error("Found no schools")
 	}
-	resp2 := &SchoolResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/schools/%s", resp1.Schools[0].School.Id), map[string]string{}, resp2); err != nil {
+	school0 := &School{}
+	if err := results.Scan(school0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving school: %s\n", err))
 	}
 
-	School0 := School{
+	resp := &SchoolResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/schools/%s", school0.Id), nil, resp); err != nil {
+		t.Error(fmt.Errorf("Error retrieving school: %s\n", err))
+	}
+
+	expectedSchool0 := School{
 		Created:      "2012-11-06T00:00:00Z",
 		District:     "51a5a56312ec00cc5100007e",
 		HighGrade:    "8",
@@ -57,23 +67,28 @@ func TestQuerySchools(t *testing.T) {
 		SisId:        "2559",
 		StateId:      "23",
 	}
-	if !reflect.DeepEqual(School0, resp1.Schools[0].School) {
+	if !reflect.DeepEqual(expectedSchool0, *school0) {
 		t.Error(fmt.Errorf("School did not match expected."))
 	}
 }
 
 func TestQueryTeachers(t *testing.T) {
 	clever := NewMock("./data")
-	resp1 := &TeachersResp{}
-	if err := clever.Query("/v1.1/teachers", map[string]string{}, resp1); err != nil {
-		t.Error(fmt.Errorf("Error retrieving teachers: %s\n", err))
+	results := clever.QueryAll("/v1.1/teachers", nil)
+	if !results.Next() {
+		t.Error("Found no teachers")
 	}
-	resp2 := &TeacherResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/teachers/%s", resp1.Teachers[0].Teacher.Id), map[string]string{}, resp2); err != nil {
+	teacher0 := &Teacher{}
+	if err := results.Scan(teacher0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving teacher: %s\n", err))
 	}
 
-	Teacher0 := Teacher{
+	resp := &TeacherResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/teachers/%s", teacher0.Id), nil, resp); err != nil {
+		t.Error(fmt.Errorf("Error retrieving teachers: %s\n", err))
+	}
+
+	expectedTeacher0 := Teacher{
 		Created:      "2013-05-29T06:51:25.139Z",
 		District:     "51a5a56312ec00cc5100007e",
 		Email:        "t.teacher2@ga4edu.org",
@@ -89,23 +104,28 @@ func TestQueryTeachers(t *testing.T) {
 		TeacherNumber: "100",
 		Title:         "Math Teacher",
 	}
-	if !reflect.DeepEqual(Teacher0, resp1.Teachers[0].Teacher) {
-		t.Error(fmt.Errorf("Student did not match expected."))
+	if !reflect.DeepEqual(expectedTeacher0, *teacher0) {
+		t.Error(fmt.Errorf("Teacher did not match expected."))
 	}
 }
 
 func TestQueryStudents(t *testing.T) {
 	clever := NewMock("./data")
-	resp1 := &StudentsResp{}
-	if err := clever.Query("/v1.1/students", map[string]string{}, resp1); err != nil {
-		t.Error(fmt.Errorf("Error retrieving students: %s\n", err))
+	results := clever.QueryAll("/v1.1/students", nil)
+	if !results.Next() {
+		t.Error("Found no students")
 	}
-	resp2 := &StudentResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/students/%s", resp1.Students[0].Student.Id), map[string]string{}, resp2); err != nil {
+	student0 := &Student{}
+	if err := results.Scan(student0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving student: %s\n", err))
 	}
 
-	Student0 := Student{
+	resp := &StudentResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/students/%s", student0.Id), nil, resp); err != nil {
+		t.Error(fmt.Errorf("Error retrieving students: %s\n", err))
+	}
+
+	expectedStudent0 := Student{
 		District:          "51a5a56312ec00cc5100007e",
 		Dob:               "12/12/1998",
 		FrlStatus:         "Paid",
@@ -133,23 +153,28 @@ func TestQueryStudents(t *testing.T) {
 		Email:        "john.doe@ga4edu.org",
 		Id:           "51a5a56f4867bbdf51054054",
 	}
-	if !reflect.DeepEqual(Student0, resp1.Students[0].Student) {
+	if !reflect.DeepEqual(expectedStudent0, *student0) {
 		t.Error(fmt.Errorf("Student did not match expected."))
 	}
 }
 
 func TestQuerySections(t *testing.T) {
 	clever := NewMock("./data")
-	resp1 := &SectionsResp{}
-	if err := clever.Query("/v1.1/sections", map[string]string{}, resp1); err != nil {
-		t.Error(fmt.Errorf("Error retrieving sections: %s\n", err))
+	results := clever.QueryAll("/v1.1/sections", nil)
+	if !results.Next() {
+		t.Error("Found no sections")
 	}
-	resp2 := &SectionResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/sections/%s", resp1.Sections[0].Section.Id), map[string]string{}, resp2); err != nil {
+	section0 := &Section{}
+	if err := results.Scan(section0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving section: %s\n", err))
 	}
 
-	Section0 := Section{
+	resp := &SectionResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/sections/%s", section0.Id), nil, resp); err != nil {
+		t.Error(fmt.Errorf("Error retrieving sections: %s\n", err))
+	}
+
+	expectedSection0 := Section{
 		CourseName:   "test course",
 		CourseNumber: "12345",
 		Created:      "2013-05-29T06:51:27.997Z",
@@ -169,8 +194,8 @@ func TestQuerySections(t *testing.T) {
 			EndDate:   "",
 		},
 	}
-	if !reflect.DeepEqual(Section0, resp1.Sections[0].Section) {
-		t.Error(fmt.Errorf("Student did not match expected."))
+	if !reflect.DeepEqual(expectedSection0, *section0) {
+		t.Error(fmt.Errorf("Section did not match expected."))
 	}
 }
 
