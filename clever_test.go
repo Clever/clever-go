@@ -12,13 +12,13 @@ func TestQueryDistricts(t *testing.T) {
 	if !results.Next() {
 		t.Error("Found no districts")
 	}
-	district0 := &District{}
-	if err := results.Scan(district0); err != nil {
+	district0 := District{}
+	if err := results.Scan(&district0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving district: %s\n", err))
 	}
 
-	resp := &DistrictResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/districts/%s", district0.Id), nil, resp); err != nil {
+	resp := DistrictResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/districts/%s", district0.Id), nil, &resp); err != nil {
 		t.Error(fmt.Errorf("Error retrieving district: %s\n", err))
 	}
 
@@ -26,7 +26,7 @@ func TestQueryDistricts(t *testing.T) {
 		Id:   "51a5a56312ec00cc5100007e",
 		Name: "test district",
 	}
-	if !reflect.DeepEqual(expectedDistrict0, *district0) {
+	if !reflect.DeepEqual(expectedDistrict0, district0) {
 		t.Error(fmt.Errorf("District did not match expected."))
 	}
 }
@@ -37,13 +37,13 @@ func TestQuerySchools(t *testing.T) {
 	if !results.Next() {
 		t.Error("Found no schools")
 	}
-	school0 := &School{}
-	if err := results.Scan(school0); err != nil {
+	school0 := School{}
+	if err := results.Scan(&school0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving school: %s\n", err))
 	}
 
-	resp := &SchoolResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/schools/%s", school0.Id), nil, resp); err != nil {
+	resp := SchoolResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/schools/%s", school0.Id), nil, &resp); err != nil {
 		t.Error(fmt.Errorf("Error retrieving school: %s\n", err))
 	}
 
@@ -67,7 +67,7 @@ func TestQuerySchools(t *testing.T) {
 		SisId:        "2559",
 		StateId:      "23",
 	}
-	if !reflect.DeepEqual(expectedSchool0, *school0) {
+	if !reflect.DeepEqual(expectedSchool0, school0) {
 		t.Error(fmt.Errorf("School did not match expected."))
 	}
 }
@@ -78,13 +78,13 @@ func TestQueryTeachers(t *testing.T) {
 	if !results.Next() {
 		t.Error("Found no teachers")
 	}
-	teacher0 := &Teacher{}
-	if err := results.Scan(teacher0); err != nil {
+	teacher0 := Teacher{}
+	if err := results.Scan(&teacher0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving teacher: %s\n", err))
 	}
 
-	resp := &TeacherResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/teachers/%s", teacher0.Id), nil, resp); err != nil {
+	resp := TeacherResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/teachers/%s", teacher0.Id), nil, &resp); err != nil {
 		t.Error(fmt.Errorf("Error retrieving teachers: %s\n", err))
 	}
 
@@ -104,7 +104,7 @@ func TestQueryTeachers(t *testing.T) {
 		TeacherNumber: "100",
 		Title:         "Math Teacher",
 	}
-	if !reflect.DeepEqual(expectedTeacher0, *teacher0) {
+	if !reflect.DeepEqual(expectedTeacher0, teacher0) {
 		t.Error(fmt.Errorf("Teacher did not match expected."))
 	}
 }
@@ -115,13 +115,13 @@ func TestQueryStudents(t *testing.T) {
 	if !results.Next() {
 		t.Error("Found no students")
 	}
-	student0 := &Student{}
-	if err := results.Scan(student0); err != nil {
+	student0 := Student{}
+	if err := results.Scan(&student0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving student: %s\n", err))
 	}
 
-	resp := &StudentResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/students/%s", student0.Id), nil, resp); err != nil {
+	resp := StudentResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/students/%s", student0.Id), nil, &resp); err != nil {
 		t.Error(fmt.Errorf("Error retrieving students: %s\n", err))
 	}
 
@@ -153,7 +153,7 @@ func TestQueryStudents(t *testing.T) {
 		Email:        "john.doe@ga4edu.org",
 		Id:           "51a5a56f4867bbdf51054054",
 	}
-	if !reflect.DeepEqual(expectedStudent0, *student0) {
+	if !reflect.DeepEqual(expectedStudent0, student0) {
 		t.Error(fmt.Errorf("Student did not match expected."))
 	}
 }
@@ -164,13 +164,13 @@ func TestQuerySections(t *testing.T) {
 	if !results.Next() {
 		t.Error("Found no sections")
 	}
-	section0 := &Section{}
-	if err := results.Scan(section0); err != nil {
+	section0 := Section{}
+	if err := results.Scan(&section0); err != nil {
 		t.Error(fmt.Errorf("Error retrieving section: %s\n", err))
 	}
 
-	resp := &SectionResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/sections/%s", section0.Id), nil, resp); err != nil {
+	resp := SectionResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/sections/%s", section0.Id), nil, &resp); err != nil {
 		t.Error(fmt.Errorf("Error retrieving sections: %s\n", err))
 	}
 
@@ -194,7 +194,7 @@ func TestQuerySections(t *testing.T) {
 			EndDate:   "",
 		},
 	}
-	if !reflect.DeepEqual(expectedSection0, *section0) {
+	if !reflect.DeepEqual(expectedSection0, section0) {
 		t.Error(fmt.Errorf("Section did not match expected."))
 	}
 }
@@ -205,8 +205,8 @@ func TestQueryAll(t *testing.T) {
 
 	count := 0
 	for result.Next() {
-		section := &Section{}
-		result.Scan(section)
+		section := Section{}
+		result.Scan(&section)
 		count++
 	}
 
