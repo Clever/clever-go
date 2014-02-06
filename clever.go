@@ -248,13 +248,9 @@ type PagedResult struct {
 	lastError      error
 }
 
-func (clever *Clever) QueryAll(path string, params map[string]string) PagedResult {
+func (clever *Clever) QueryAll(path string, params url.Values) PagedResult {
 	paramString := ""
 	if params != nil {
-		v := url.Values{}
-		for key, val := range params {
-			v.Set(key, val)
-		}
 		paramString = "?" + v.Encode()
 	}
 
