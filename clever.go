@@ -50,12 +50,6 @@ type Link struct {
 	Uri string
 }
 
-type DistrictsResp struct {
-	Districts []DistrictResp `json:"data"`
-	Links     []Link
-	Paging
-}
-
 type DistrictResp struct {
 	District District `json:"data"`
 	Links    []Link
@@ -65,12 +59,6 @@ type DistrictResp struct {
 type District struct {
 	Id   string
 	Name string
-}
-
-type SchoolsResp struct {
-	Links []Link
-	Paging
-	Schools []SchoolResp `json:"data"`
 }
 
 type SchoolResp struct {
@@ -95,12 +83,6 @@ type School struct {
 	StateId      string `json:"state_id"`
 }
 
-type TeachersResp struct {
-	Links []Link
-	Paging
-	Teachers []TeacherResp `json:"data"`
-}
-
 type TeacherResp struct {
 	Links   []Link
 	Teacher Teacher `json:"data"`
@@ -118,12 +100,6 @@ type Teacher struct {
 	SisId         string `json:"sis_id"`
 	TeacherNumber string `json:"teacher_number"`
 	Title         string
-}
-
-type StudentsResp struct {
-	Links []Link
-	Paging
-	Students []StudentResp `json:"data"`
 }
 
 type StudentResp struct {
@@ -150,12 +126,6 @@ type Student struct {
 	SisId             string `json:"sis_id"`
 	StateId           string `json:"state_id"`
 	StudentNumber     string `json:"student_number"`
-}
-
-type SectionsResp struct {
-	Links []Link
-	Paging
-	Sections []SectionResp `json:"data"`
 }
 
 type SectionResp struct {
@@ -200,14 +170,13 @@ type Term struct {
 	EndDate   string `json:"end_date"`
 }
 
-func (clever *Clever) Query(path string, params map[string]string, resp interface{}) error {
-	v := url.Values{}
-	for key, val := range params {
-		v.Set(key, val)
+func (clever *Clever) Query(path string, params url.Values, resp interface{}) error {
+	uri := fmt.Sprintf("%s%s", clever.Url, path)
+	if params != nil {
+		uri = fmt.Sprintf("%s%s?%s", clever.Url, path, params.Encode())
 	}
-	url := fmt.Sprintf("%s%s?%s", clever.Url, path, v.Encode())
 	client := &http.Client{}
-	req, _ := http.NewRequest("GET", url, nil)
+	req, _ := http.NewRequest("GET", uri, nil)
 	if clever.Auth.Token != "" {
 		req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", clever.Auth.Token))
 	} else if clever.Auth.APIKey != "" {
@@ -216,7 +185,7 @@ func (clever *Clever) Query(path string, params map[string]string, resp interfac
 		return fmt.Errorf("Must provide either API key or bearer token")
 	}
 	if debug {
-		log.Printf("get { %v } -> {\n", url)
+		log.Printf("get { %v } -> {\n", uri)
 	}
 	r, err := client.Do(req)
 	if err != nil {
@@ -235,4 +204,64 @@ func (clever *Clever) Query(path string, params map[string]string, resp interfac
 	}
 	err = json.NewDecoder(r.Body).Decode(resp)
 	return err
+}
+
+type PagedResult struct {
+	clever         Clever
+	nextPagePath   string
+	lastData       []map[string]interface{}
+	lastDataCursor int
+	lastError      error
+}
+
+func (clever *Clever) QueryAll(path string, params url.Values) PagedResult {
+	paramString := ""
+	if params != nil {
+		paramString = "?" + params.Encode()
+	}
+
+	return PagedResult{clever: *clever, nextPagePath: path + paramString, lastDataCursor: -1}
+}
+
+func (r *PagedResult) Next() bool {
+	if r.lastDataCursor != -1 && r.lastDataCursor < len(r.lastData)-1 {
+		r.lastDataCursor++
+		return true
+	}
+
+	if r.nextPagePath == "" {
+		return false
+	}
+
+	resp := &struct {
+		Data   []map[string]interface{}
+		Links  []Link
+		Paging Paging
+	}{}
+	r.lastError = r.clever.Query(r.nextPagePath, nil, resp)
+	if r.lastError != nil {
+		return false
+	}
+	r.lastData = resp.Data
+	r.lastDataCursor = 0
+	r.nextPagePath = ""
+	for _, link := range resp.Links {
+		if link.Rel == "next" {
+			r.nextPagePath = link.Uri
+			break
+		}
+	}
+	return true
+}
+
+func (r *PagedResult) Scan(result interface{}) error {
+	data, err := json.Marshal(r.lastData[r.lastDataCursor]["data"])
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(data, result)
+}
+
+func (r *PagedResult) Error() error {
+	return r.lastError
 }
