@@ -251,7 +251,7 @@ func (r *PagedResult) Next() bool {
 			break
 		}
 	}
-	return true
+	return len(r.lastData) > 0
 }
 
 func (r *PagedResult) Scan(result interface{}) error {
