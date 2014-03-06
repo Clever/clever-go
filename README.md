@@ -1,27 +1,19 @@
 # clever-go
 
-[![Build Status](https://secure.travis-ci.org/Clever/clever-go.png)](http://travis-ci.org/Clever/clever-go)
+clever-go is a Go wrapper around the [Clever API](https://clever.com/developers/docs).
 
-# Usage
+## Documentation
 
-```go
-package main
+[![GoDoc](https://godoc.org/github.com/Clever/clever-go?status.png)](https://godoc.org/github.com/Clever/clever-go).
 
-import (
-	"fmt"
-	clevergo "github.com/Clever/clever-go"
-	"os"
-)
+## Developing
 
-func main() {
-	clever := clevergo.New(clevergo.Auth{"DEMO_KEY", ""}, "https://api.clever.com")
-	resp := &clevergo.DistrictsResp{}
-	if err := clever.Query("/v1.1/districts", map[string]string{}, resp); err != nil {
-		fmt.Fprintf(os.Stderr, "Error getting districts: %s \n", err)
-	}
+clever-go is built and tested against Go 1.2.
+Ensure this is the version of Go you're running with `go version`.
+Make sure your GOPATH is set, e.g. `export GOPATH=~/go`.
+Clone the repository to a location outside your GOPATH, and symlink it to `$GOPATH/src/github.com/Clever/clever-go`.
+If you have done all of the above, then you should be able to run
 
-	for _, dresp := range resp.Districts {
-		fmt.Println(dresp.District)
-	}
-}
+```
+make
 ```
