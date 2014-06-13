@@ -6,9 +6,43 @@ import (
 	"testing"
 )
 
+func TestEmptyAuthError(t *testing.T) {
+	clever := NewMock("./data")
+	clever.Auth = Auth{}
+	results := clever.QueryAll("/v1.1/districts", nil)
+	if results.Next(); results.lastError == nil {
+		t.Fatalf("Expected an error for request sent without authentication")
+	}
+}
+
+// helper function for TestBearerAuth and TestBasicAuth
+func testAuth(auth Auth, expectedAuthString string, t *testing.T) {
+	reqHeader := new(map[string][]string)
+	clever := NewMock("./data", reqHeader)
+	clever.Auth = auth
+	results := clever.QueryAll("/v1.1/districts", nil)
+	results.Next()
+	if header, ok := (*reqHeader)["Authorization"]; ok {
+		if len(header) == 0 || header[0] != expectedAuthString {
+			t.Fatalf("Incorrect auth request header")
+		}
+	} else {
+		t.Fatalf("Auth request header not present")
+	}
+}
+
+func TestBearerAuth(t *testing.T) {
+	testAuth(Auth{"", "TEST_TOKEN"}, "Bearer TEST_TOKEN", t)
+}
+
+func TestBasicAuth(t *testing.T) {
+	testAuth(Auth{"TEST_KEY", ""}, "Basic VEVTVF9LRVk6", t)
+}
+
 func TestQueryDistricts(t *testing.T) {
 	clever := NewMock("./data")
 	results := clever.QueryAll("/v1.1/districts", nil)
+
 	if !results.Next() {
 		t.Fatal("Found no districts")
 	}
@@ -209,7 +243,6 @@ func TestQueryAll(t *testing.T) {
 		result.Scan(&section)
 		count++
 	}
-
 	if count != 2 {
 		t.Fatalf("Did not get both section pages.")
 	}
