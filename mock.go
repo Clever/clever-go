@@ -14,7 +14,7 @@ import (
 )
 
 // Loads a directory with json files representing mock resources. See ./data for an example
-func NewMock(dir string) *Clever {
+func NewMock(dir string, lastRequestHeader ...*map[string][]string) *Clever {
 	router := urlrouter.Router{
 		Routes: []urlrouter.Route{
 			urlrouter.Route{
@@ -68,6 +68,9 @@ func NewMock(dir string) *Clever {
 		log.Println("mock server:", r.URL)
 		route, params := router.FindRouteFromURL(r.URL)
 		handler := route.Dest.(func(http.ResponseWriter, *http.Request, map[string]string))
+		if len(lastRequestHeader) > 0 {
+			*(lastRequestHeader[0]) = r.Header
+		}
 		handler(w, r, params)
 	}))
 
