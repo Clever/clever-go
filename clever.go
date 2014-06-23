@@ -313,12 +313,3 @@ func (r *PagedResult) Scan(result interface{}) error {
 func (r *PagedResult) Error() error {
 	return r.lastError
 }
-
-/*func newTooManyRequestsError(header map[string][]string) error {
-	var error CleverError
-	header["X-Ratelimit-Limit"] = append(header["X-Ratelimit-Limit"], "undefined")
-	header["X-Ratelimit-Reset"] = append(header["X-Ratelimit-Reset"], "undefined")
-	limit, reset := header["X-Ratelimit-Limit"][0], header["X-Ratelimit-Reset"][0]
-	error.Message = "Too many requests {limit: " + limit + ", reset: " + reset + "}"
-	return &error
-}*/
