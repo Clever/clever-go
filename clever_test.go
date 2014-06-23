@@ -3,6 +3,7 @@ package clever
 import (
 	"fmt"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -252,11 +253,11 @@ func TestQueryAll(t *testing.T) {
 
 func TestTooManyRequestsError(t *testing.T) {
 	clever := NewMock("./data")
-	results := clever.QueryAll("/mock/rate/limiter", nil)
-	results.Next()
-	if results.Error() == nil {
+	result := clever.QueryAll("/mock/rate/limiter", nil)
+	result.Next()
+	if result.Error() == nil {
 		t.Fatalf("Http response 429 (TooManyRequests) did not trigger an error as expected.")
-	} else if results.Error().Error() != "{message: 'Rate limit error', limit: 200, reset: 1394506274}" {
-		t.Fatalf("Http response 429 (TooManyRequests) did not expose the expected error.")
+	} else if !strings.Contains(result.Error().Error(), "Too Many Requests") {
+		t.Fatalf("Http response 429 (TooManyRequests) did not generate the expected error.")
 	}
 }

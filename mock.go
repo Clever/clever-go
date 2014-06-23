@@ -128,8 +128,14 @@ func MockResourceId(filename string) func(http.ResponseWriter, *http.Request, ma
 func MockResourceRateLimit() func(http.ResponseWriter, *http.Request, map[string]string) {
 	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
 		const statusTooManyRequests = 429
+		w.Header().Add("X-Ratelimit-Bucket", "testbucket_1")
 		w.Header().Add("X-Ratelimit-Limit", "200")
 		w.Header().Add("X-Ratelimit-Reset", "1394506274")
+		w.Header().Add("X-Ratelimit-Remaining", "0")
+		w.Header().Add("X-Ratelimit-Bucket", "testbucket_2")
+		w.Header().Add("X-Ratelimit-Limit", "1200")
+		w.Header().Add("X-Ratelimit-Reset", "never!!")
+		w.Header().Add("X-Ratelimit-Remaining", "0")
 		http.Error(w, "", statusTooManyRequests)
 	}
 }
