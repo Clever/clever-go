@@ -242,8 +242,7 @@ func (clever *Clever) Query(path string, params url.Values, resp interface{}) er
 		log.Printf("%v\n}\n", string(dump))
 	}
 	if r.StatusCode == 429 {
-		error := TooManyRequestsError{r.Header}
-		return &error
+		return &TooManyRequestsError{r.Header}
 	} else if r.StatusCode != 200 {
 		var error CleverError
 		json.NewDecoder(r.Body).Decode(&error)
