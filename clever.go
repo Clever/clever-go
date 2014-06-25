@@ -65,11 +65,11 @@ func (err *TooManyRequestsError) Error() string {
 	err_string := "Too Many Requests"
 	err_props := []string{"Remaining", "Limit", "Reset"}
 	for bucket_index, bucket_name := range err.Header["X-Ratelimit-Bucket"] {
-		err_string += "\nBucket: " + bucket_name
+		err_string += fmt.Sprintf("\nBucket: %s", bucket_name)
 		for _, prop := range err_props {
-			key := "X-Ratelimit-" + prop
-			if bucket_index < len(err.Header[key]) {
-				err_string += ", " + prop + ": " + err.Header[key][bucket_index]
+			headers_for_prop := err.Header["X-Ratelimit-"+prop]
+			if bucket_index < len(headers_for_prop) {
+				err_string += fmt.Sprintf(", %s: %s", prop, headers_for_prop[bucket_index])
 			}
 		}
 	}
