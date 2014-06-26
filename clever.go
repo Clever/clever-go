@@ -57,6 +57,24 @@ func (err *CleverError) Error() string {
 	return fmt.Sprintf("%s (%s)", err.Error, err.Code)
 }
 
+type TooManyRequestsError struct {
+	Header http.Header
+}
+
+func (err *TooManyRequestsError) Error() string {
+	err_string := "Too Many Requests"
+	for bucket_index, bucket_name := range err.Header[http.CanonicalHeaderKey("X-Ratelimit-Bucket")] {
+		err_string += fmt.Sprintf("\nBucket: %s", bucket_name)
+		for _, prop := range []string{"Remaining", "Limit", "Reset"} {
+			headers_for_prop := err.Header[http.CanonicalHeaderKey("X-Ratelimit-"+prop)]
+			if bucket_index < len(headers_for_prop) {
+				err_string += fmt.Sprintf(", %s: %s", prop, headers_for_prop[bucket_index])
+			}
+		}
+	}
+	return err_string
+}
+
 type Paging struct {
 	Count   int
 	Current int
@@ -222,7 +240,9 @@ func (clever *Clever) Query(path string, params url.Values, resp interface{}) er
 		log.Printf("response:\n")
 		log.Printf("%v\n}\n", string(dump))
 	}
-	if r.StatusCode != 200 {
+	if r.StatusCode == 429 {
+		return &TooManyRequestsError{r.Header}
+	} else if r.StatusCode != 200 {
 		var error CleverError
 		json.NewDecoder(r.Body).Decode(&error)
 		return &error

@@ -57,6 +57,10 @@ func NewMock(dir string, lastRequestHeader ...*map[string][]string) *Clever {
 				PathExp: "/v1.1/sections/:id",
 				Dest:    MockResourceId(fmt.Sprintf("%s/sections.json", dir)),
 			},
+			urlrouter.Route{
+				PathExp: "/mock/rate/limiter",
+				Dest:    MockResourceRateLimit(),
+			},
 		},
 	}
 
@@ -118,5 +122,20 @@ func MockResourceId(filename string) func(http.ResponseWriter, *http.Request, ma
 			}
 		}
 		http.Error(w, "", http.StatusNotFound)
+	}
+}
+
+func MockResourceRateLimit() func(http.ResponseWriter, *http.Request, map[string]string) {
+	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
+		const statusTooManyRequests = 429
+		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Bucket"), "testbucket_1")
+		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Limit"), "200")
+		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Reset"), "1394506274")
+		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Remaining"), "0")
+		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Bucket"), "testbucket_2")
+		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Limit"), "1200")
+		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Reset"), "never!!")
+		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Remaining"), "0")
+		http.Error(w, "", statusTooManyRequests)
 	}
 }

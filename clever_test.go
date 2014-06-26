@@ -249,3 +249,14 @@ func TestQueryAll(t *testing.T) {
 		t.Fatalf("Did not get both section pages.")
 	}
 }
+
+func TestTooManyRequestsError(t *testing.T) {
+	clever := NewMock("./data")
+	result := clever.QueryAll("/mock/rate/limiter", nil)
+	result.Next()
+	if result.Error() == nil {
+		t.Fatalf("Http response 429 (TooManyRequests) did not trigger an error as expected.")
+	} else if _, ok := result.Error().(*TooManyRequestsError); !ok {
+		t.Fatalf("Http response 429 (TooManyRequests) did not generate the expected error.")
+	}
+}
