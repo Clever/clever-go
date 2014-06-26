@@ -3,7 +3,6 @@ package clever
 import (
 	"fmt"
 	"reflect"
-	"strings"
 	"testing"
 )
 
@@ -257,7 +256,7 @@ func TestTooManyRequestsError(t *testing.T) {
 	result.Next()
 	if result.Error() == nil {
 		t.Fatalf("Http response 429 (TooManyRequests) did not trigger an error as expected.")
-	} else if !strings.Contains(result.Error().Error(), "Too Many Requests") {
+	} else if _, ok := result.Error().(*TooManyRequestsError); !ok {
 		t.Fatalf("Http response 429 (TooManyRequests) did not generate the expected error.")
 	}
 }

@@ -63,10 +63,9 @@ type TooManyRequestsError struct {
 
 func (err *TooManyRequestsError) Error() string {
 	err_string := "Too Many Requests"
-	err_props := []string{"Remaining", "Limit", "Reset"}
 	for bucket_index, bucket_name := range err.Header[http.CanonicalHeaderKey("X-Ratelimit-Bucket")] {
 		err_string += fmt.Sprintf("\nBucket: %s", bucket_name)
-		for _, prop := range err_props {
+		for _, prop := range []string{"Remaining", "Limit", "Reset"} {
 			headers_for_prop := err.Header[http.CanonicalHeaderKey("X-Ratelimit-"+prop)]
 			if bucket_index < len(headers_for_prop) {
 				err_string += fmt.Sprintf(", %s: %s", prop, headers_for_prop[bucket_index])
