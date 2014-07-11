@@ -13,22 +13,24 @@ import (
 
 const debug = false
 
-// API supports basic auth with an API key or bearer auth with a token
+// Auth holds credentials for access to the API: basic auth with an API key or bearer auth with a token
 type Auth struct {
 	APIKey, Token string
 }
 
+// Clever wraps the Clever API at the specified URL e.g. "https://api.clever.com"
 type Clever struct {
 	Auth
 	Url string
 }
 
-// Using the oauth Transport pattern with API keys
+// BasicAuthTransport contains a user's auth credentials. Clever uses the OAuth Transport pattern with API keys.
 type BasicAuthTransport struct {
 	Username string
 	Password string
 }
 
+// RoundTrip makes a request and returns the response
 func (bat BasicAuthTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req.Header.Set("Authorization", fmt.Sprintf("Basic %s",
 		base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s",
@@ -36,20 +38,23 @@ func (bat BasicAuthTransport) RoundTrip(req *http.Request) (*http.Response, erro
 	return http.DefaultTransport.RoundTrip(req)
 }
 
+// Client returns a new Client object for the specified BasicAuthTransport
 func (bat *BasicAuthTransport) Client() *http.Client {
 	return &http.Client{Transport: bat}
 }
 
-// Creates a new clever object to make requests with. URL must be a valid base url, e.g. "https://api.clever.com"
+// New returns a new Clever object to make requests with. URL must be a valid base url, e.g. "https://api.clever.com"
 func New(auth Auth, url string) *Clever {
 	return &Clever{auth, url}
 }
 
+// CleverError contains an error that occurred within the Clever API
 type CleverError struct {
 	Code    string
 	Message string `json:"error"`
 }
 
+// Error returns a string representation of a CleverError
 func (err *CleverError) Error() string {
 	if err.Code == "" {
 		return err.Message
@@ -57,52 +62,60 @@ func (err *CleverError) Error() string {
 	return fmt.Sprintf("%s (%s)", err.Error, err.Code)
 }
 
+// TooManyRequestsError indicates the number of requests has exceeded the rate limit
 type TooManyRequestsError struct {
 	Header http.Header
 }
 
+// TooManyRequestsError creates a TooManyRequestsError
 func (err *TooManyRequestsError) Error() string {
-	err_string := "Too Many Requests"
-	for bucket_index, bucket_name := range err.Header[http.CanonicalHeaderKey("X-Ratelimit-Bucket")] {
-		err_string += fmt.Sprintf("\nBucket: %s", bucket_name)
+	errString := "Too Many Requests"
+	for bucketIndex, bucketName := range err.Header[http.CanonicalHeaderKey("X-Ratelimit-Bucket")] {
+		errString += fmt.Sprintf("\nBucket: %s", bucketName)
 		for _, prop := range []string{"Remaining", "Limit", "Reset"} {
-			headers_for_prop := err.Header[http.CanonicalHeaderKey("X-Ratelimit-"+prop)]
-			if bucket_index < len(headers_for_prop) {
-				err_string += fmt.Sprintf(", %s: %s", prop, headers_for_prop[bucket_index])
+			headersForProp := err.Header[http.CanonicalHeaderKey("X-Ratelimit-"+prop)]
+			if bucketIndex < len(headersForProp) {
+				errString += fmt.Sprintf(", %s: %s", prop, headersForProp[bucketIndex])
 			}
 		}
 	}
-	return err_string
+	return errString
 }
 
+// Paging contains information for paging a response
 type Paging struct {
 	Count   int
 	Current int
 	Total   int
 }
 
+// Link represents a stable link for querying the API
 type Link struct {
 	Rel string
 	Uri string
 }
 
+// DistrictResp wraps the response given when the user queries for a District
 type DistrictResp struct {
 	District District `json:"data"`
 	Links    []Link
 	Uri      string
 }
 
+// District corresponds to the District resource in the Clever data schema: clever.com/schema
 type District struct {
 	Id   string
 	Name string
 }
 
+// SchoolResp wraps the response given when the user queries for a School
 type SchoolResp struct {
 	Links  []Link
 	School School `json:"data"`
 	Uri    string
 }
 
+// School corresponds to the School resource in the Clever data schema: clever.com/schema
 type School struct {
 	Created      string
 	District     string
@@ -119,12 +132,14 @@ type School struct {
 	StateId      string `json:"state_id"`
 }
 
+// TeacherResp wraps the response given when the user queries for a Teacher
 type TeacherResp struct {
 	Links   []Link
 	Teacher Teacher `json:"data"`
 	Uri     string
 }
 
+// Teacher corresponds to the Teacher resource in the Clever data schema: clever.com/schema
 type Teacher struct {
 	Created       string
 	District      string
@@ -138,12 +153,14 @@ type Teacher struct {
 	Title         string
 }
 
+// StudentResp wraps the response given when the user queries for a Student
 type StudentResp struct {
 	Links   []Link
 	Student Student `json:"data"`
 	Uri     string
 }
 
+// Student corresponds to the Student resource in the Clever data schema: clever.com/schema
 type Student struct {
 	Created           string
 	District          string
@@ -164,12 +181,14 @@ type Student struct {
 	StudentNumber     string `json:"student_number"`
 }
 
+// SectionResp wraps the response given when the user queries for a Section
 type SectionResp struct {
 	Links   []Link
 	Section Section `json:"data"`
 	Uri     string
 }
 
+// Section corresponds to the Section resource in the Clever data schema: clever.com/schema
 type Section struct {
 	CourseName   string `json:"course_name"`
 	CourseNumber string `json:"course_number"`
@@ -187,6 +206,7 @@ type Section struct {
 	Term
 }
 
+// Location represents a complete address for use with the Student and School resources
 type Location struct {
 	Address string
 	City    string
@@ -194,24 +214,32 @@ type Location struct {
 	Zip     string
 }
 
+// Name represents the full name of a Student or Teacher resource
 type Name struct {
 	First  string
 	Middle string
 	Last   string
 }
 
+// Term holds information about the duration of a school term
 type Term struct {
 	Name      string
 	StartDate string `json:"start_date"`
 	EndDate   string `json:"end_date"`
 }
 
+/*
+Query makes a request to Clever given a Clever object, endpoint path, and parameters
+(pass in nil for no parameters).
+*/
 func (clever *Clever) Query(path string, params url.Values, resp interface{}) error {
+	// Create request URI from Clever base, path, params
 	uri := fmt.Sprintf("%s%s", clever.Url, path)
 	if params != nil {
 		uri = fmt.Sprintf("%s%s?%s", clever.Url, path, params.Encode())
 	}
 
+	// Ensure authentication is provided
 	var client *http.Client
 	req, _ := http.NewRequest("GET", uri, nil)
 	if clever.Auth.Token != "" {
@@ -251,6 +279,7 @@ func (clever *Clever) Query(path string, params url.Values, resp interface{}) er
 	return err
 }
 
+// PagedResult wraps a response. It allows for paged reading of a response in conjunction with QueryAll() and Next()
 type PagedResult struct {
 	clever         Clever
 	nextPagePath   string
@@ -259,6 +288,7 @@ type PagedResult struct {
 	lastError      error
 }
 
+// QueryAll returns a PagedResult to allow for paged reading of large responses from the Clever API
 func (clever *Clever) QueryAll(path string, params url.Values) PagedResult {
 	paramString := ""
 	if params != nil {
@@ -268,6 +298,10 @@ func (clever *Clever) QueryAll(path string, params url.Values) PagedResult {
 	return PagedResult{clever: *clever, nextPagePath: path + paramString, lastDataCursor: -1}
 }
 
+/*
+Next returns true if a PagedResult contains additional data and false if the cursor has reached
+the end of the available data for this response.
+*/
 func (r *PagedResult) Next() bool {
 	if r.lastDataCursor != -1 && r.lastDataCursor < len(r.lastData)-1 {
 		r.lastDataCursor++
@@ -299,6 +333,7 @@ func (r *PagedResult) Next() bool {
 	return len(r.lastData) > 0
 }
 
+// Scan parses the next page of results in a PagedResult r into result. Scan throws an error if r is invalid JSON.
 func (r *PagedResult) Scan(result interface{}) error {
 	data, err := json.Marshal(r.lastData[r.lastDataCursor]["data"])
 	if err != nil {
@@ -307,6 +342,7 @@ func (r *PagedResult) Scan(result interface{}) error {
 	return json.Unmarshal(data, result)
 }
 
+// Error returns the error in a response, if there is one
 func (r *PagedResult) Error() error {
 	return r.lastError
 }
