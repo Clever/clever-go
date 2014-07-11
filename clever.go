@@ -13,7 +13,7 @@ import (
 
 const debug = false
 
-// API supports basic auth with an API key or bearer auth with a token
+// Auth holds credentials for access to the API: basic auth with an API key or bearer auth with a token
 type Auth struct {
 	APIKey, Token string
 }
