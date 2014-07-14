@@ -12,7 +12,7 @@ clever-go is built and tested against Go 1.2.
 Ensure this is the version of Go you're running with `go version`.
 Make sure your GOPATH is set, e.g. `export GOPATH=~/go`.
 Clone the repository to a location outside your GOPATH, and symlink it to `$GOPATH/src/github.com/Clever/clever-go`.
-The makefile requires [Mercurial](http://mercurial.selenic.com/downloads) to run.
+The makefile may require [Mercurial](http://mercurial.selenic.com/downloads) to run the first time.
 If you have done all of the above, then you should be able to run
 
 ```
