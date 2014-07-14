@@ -75,7 +75,7 @@ func (err *TooManyRequestsError) Error() string {
 		for _, prop := range []string{"Remaining", "Limit", "Reset"} {
 			headersForProp := err.Header[http.CanonicalHeaderKey("X-Ratelimit-"+prop)]
 			if bucketIndex < len(headersForProp) {
-				errString += fmt.Sprintf(", %s: %s", prop, headers_for_prop[bucketIndex])
+				errString += fmt.Sprintf(", %s: %s", prop, headersFoProp[bucketIndex])
 			}
 		}
 	}
@@ -229,7 +229,8 @@ type Term struct {
 }
 
 /*
-Query makes a request to Clever given a Clever object, endpoint path, and parameters (pass in nil for no parameters).
+Query makes a request to Clever given a Clever object, endpoint path, and parameters
+(pass in nil for no parameters).
 */
 func (clever *Clever) Query(path string, params url.Values, resp interface{}) error {
 	// Create request URI from Clever base, path, params
