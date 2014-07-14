@@ -69,17 +69,17 @@ type TooManyRequestsError struct {
 
 // TooManyRequestsError creates a TooManyRequestsError
 func (err *TooManyRequestsError) Error() string {
-	err_string := "Too Many Requests"
-	for bucket_index, bucket_name := range err.Header[http.CanonicalHeaderKey("X-Ratelimit-Bucket")] {
-		err_string += fmt.Sprintf("\nBucket: %s", bucket_name)
+	errString := "Too Many Requests"
+	for bucketIndex, bucketName := range err.Header[http.CanonicalHeaderKey("X-Ratelimit-Bucket")] {
+		errString += fmt.Sprintf("\nBucket: %s", bucketName)
 		for _, prop := range []string{"Remaining", "Limit", "Reset"} {
-			headers_for_prop := err.Header[http.CanonicalHeaderKey("X-Ratelimit-"+prop)]
-			if bucket_index < len(headers_for_prop) {
-				err_string += fmt.Sprintf(", %s: %s", prop, headers_for_prop[bucket_index])
+			headersForProp := err.Header[http.CanonicalHeaderKey("X-Ratelimit-"+prop)]
+			if bucketIndex < len(headersForProp) {
+				errString += fmt.Sprintf(", %s: %s", prop, headers_for_prop[bucketIndex])
 			}
 		}
 	}
-	return err_string
+	return errString
 }
 
 // Paging contains information for paging a response
