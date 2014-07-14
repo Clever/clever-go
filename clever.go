@@ -75,7 +75,7 @@ func (err *TooManyRequestsError) Error() string {
 		for _, prop := range []string{"Remaining", "Limit", "Reset"} {
 			headersForProp := err.Header[http.CanonicalHeaderKey("X-Ratelimit-"+prop)]
 			if bucketIndex < len(headersForProp) {
-				errString += fmt.Sprintf(", %s: %s", prop, headersFoProp[bucketIndex])
+				errString += fmt.Sprintf(", %s: %s", prop, headersForProp[bucketIndex])
 			}
 		}
 	}
