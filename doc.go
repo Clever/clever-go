@@ -7,7 +7,7 @@
 //
 //         import (
 //         	"code.google.com/p/goauth2/oauth"
-//         	clevergo "gopkg.in/Clever/clever-go.v1.0.0"
+//         	clevergo "gopkg.in/Clever/clever-go.v1"
 //         	"log"
 //         )
 //
