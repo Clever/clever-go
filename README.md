@@ -1,6 +1,6 @@
 # clever-go
 
-clever-go is a Go wrapper around the [Clever API](https://clever.com/developers/docs).
+clever-go is a Go library for the [Clever API](https://clever.com/developers/docs).
 
 ## Documentation
 
@@ -8,7 +8,7 @@ clever-go is a Go wrapper around the [Clever API](https://clever.com/developers/
 
 ## Developing
 
-clever-go is built and tested against Go 1.2.
+clever-go is built and tested against Go 1.3.
 Ensure this is the version of Go you're running with `go version`.
 Make sure your GOPATH is set, e.g. `export GOPATH=~/go`.
 Clone the repository to a location outside your GOPATH, and symlink it to `$GOPATH/src/github.com/Clever/clever-go`.

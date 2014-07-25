@@ -1,7 +1,6 @@
 package clever
 
 import (
-	"code.google.com/p/goauth2/oauth"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -13,18 +12,13 @@ import (
 
 const debug = false
 
-// Auth holds credentials for access to the API: basic auth with an API key or bearer auth with a token
-type Auth struct {
-	APIKey, Token string
-}
-
 // Clever wraps the Clever API at the specified URL e.g. "https://api.clever.com"
 type Clever struct {
-	Auth
-	Url string
+	client *http.Client
+	url    string
 }
 
-// BasicAuthTransport contains a user's auth credentials. Clever uses the OAuth Transport pattern with API keys.
+// BasicAuthTransport is an http.Transport that performs HTTP Basic Auth.
 type BasicAuthTransport struct {
 	Username string
 	Password string
@@ -44,8 +38,8 @@ func (bat *BasicAuthTransport) Client() *http.Client {
 }
 
 // New returns a new Clever object to make requests with. URL must be a valid base url, e.g. "https://api.clever.com"
-func New(auth Auth, url string) *Clever {
-	return &Clever{auth, url}
+func New(client *http.Client, url string) *Clever {
+	return &Clever{client, url}
 }
 
 // CleverError contains an error that occurred within the Clever API
@@ -234,31 +228,17 @@ Query makes a request to Clever given a Clever object, endpoint path, and parame
 */
 func (clever *Clever) Query(path string, params url.Values, resp interface{}) error {
 	// Create request URI from Clever base, path, params
-	uri := fmt.Sprintf("%s%s", clever.Url, path)
+	uri := fmt.Sprintf("%s%s", clever.url, path)
 	if params != nil {
-		uri = fmt.Sprintf("%s%s?%s", clever.Url, path, params.Encode())
+		uri = fmt.Sprintf("%s%s?%s", clever.url, path, params.Encode())
 	}
 
 	// Ensure authentication is provided
-	var client *http.Client
 	req, _ := http.NewRequest("GET", uri, nil)
-	if clever.Auth.Token != "" {
-		t := &oauth.Transport{
-			Token: &oauth.Token{AccessToken: clever.Auth.Token},
-		}
-		client = t.Client()
-	} else if clever.Auth.APIKey != "" {
-		t := &BasicAuthTransport{
-			Username: clever.Auth.APIKey,
-		}
-		client = t.Client()
-	} else {
-		return fmt.Errorf("Must provide either API key or bearer token")
-	}
 	if debug {
 		log.Printf("get { %v } -> {\n", uri)
 	}
-	r, err := client.Do(req)
+	r, err := clever.client.Do(req)
 	if err != nil {
 		return err
 	}
