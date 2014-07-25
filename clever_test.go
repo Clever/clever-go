@@ -6,22 +6,19 @@ import (
 	"testing"
 )
 
+var dummyauth Auth = Auth{Token: "doesntmatter"}
+
 func TestEmptyAuthError(t *testing.T) {
-	clever := NewMock("./data")
-	clever.Auth = Auth{}
-	results := clever.QueryAll("/v1.1/districts", nil)
-	if results.Next(); results.lastError == nil {
-		t.Fatalf("Empty auth credentials raised no error")
-	} else if fmt.Sprint(results.lastError) != "Must provide either API key or bearer token" {
-		t.Fatalf("Empty auth credentials raised incorrect error '" + fmt.Sprint(results.lastError) + "'")
+	_, err := New(Auth{}, "https://api.clever.com")
+	if err == nil || fmt.Sprint(err) != "Must provide either API key or bearer token" {
+		t.Fatalf("expected error, got, %s", err)
 	}
 }
 
 // helper function for TestBearerAuth and TestBasicAuth
 func verifyAuthHeader(auth Auth, expectedAuthString string, t *testing.T) {
 	reqHeader := new(map[string][]string)
-	clever := NewMock("./data", reqHeader)
-	clever.Auth = auth
+	clever := NewMock(auth, "./data", reqHeader)
 	results := clever.QueryAll("/v1.1/districts", nil)
 	results.Next()
 	if header, ok := (*reqHeader)["Authorization"]; ok {
@@ -42,7 +39,7 @@ func TestBasicAuth(t *testing.T) {
 }
 
 func TestQueryDistricts(t *testing.T) {
-	clever := NewMock("./data")
+	clever := NewMock(dummyauth, "./data")
 	results := clever.QueryAll("/v1.1/districts", nil)
 
 	if !results.Next() {
@@ -68,7 +65,7 @@ func TestQueryDistricts(t *testing.T) {
 }
 
 func TestQuerySchools(t *testing.T) {
-	clever := NewMock("./data")
+	clever := NewMock(dummyauth, "./data")
 	results := clever.QueryAll("/v1.1/schools", nil)
 	if !results.Next() {
 		t.Fatal("Found no schools")
@@ -109,7 +106,7 @@ func TestQuerySchools(t *testing.T) {
 }
 
 func TestQueryTeachers(t *testing.T) {
-	clever := NewMock("./data")
+	clever := NewMock(dummyauth, "./data")
 	results := clever.QueryAll("/v1.1/teachers", nil)
 	if !results.Next() {
 		t.Fatal("Found no teachers")
@@ -146,7 +143,7 @@ func TestQueryTeachers(t *testing.T) {
 }
 
 func TestQueryStudents(t *testing.T) {
-	clever := NewMock("./data")
+	clever := NewMock(dummyauth, "./data")
 	results := clever.QueryAll("/v1.1/students", nil)
 	if !results.Next() {
 		t.Fatal("Found no students")
@@ -195,7 +192,7 @@ func TestQueryStudents(t *testing.T) {
 }
 
 func TestQuerySections(t *testing.T) {
-	clever := NewMock("./data")
+	clever := NewMock(dummyauth, "./data")
 	results := clever.QueryAll("/v1.1/sections", nil)
 	if !results.Next() {
 		t.Fatal("Found no sections")
@@ -236,7 +233,7 @@ func TestQuerySections(t *testing.T) {
 }
 
 func TestQueryAll(t *testing.T) {
-	clever := NewMock("./data")
+	clever := NewMock(dummyauth, "./data")
 	result := clever.QueryAll("/v1.1/sections", nil)
 
 	count := 0
@@ -251,7 +248,7 @@ func TestQueryAll(t *testing.T) {
 }
 
 func TestTooManyRequestsError(t *testing.T) {
-	clever := NewMock("./data")
+	clever := NewMock(dummyauth, "./data")
 	result := clever.QueryAll("/mock/rate/limiter", nil)
 	result.Next()
 	if result.Error() == nil {
