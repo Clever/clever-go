@@ -1,6 +1,7 @@
 package clever
 
 import (
+	"code.google.com/p/goauth2/oauth"
 	"encoding/json"
 	"fmt"
 	"github.com/ant0ine/go-urlrouter"
@@ -78,7 +79,11 @@ func NewMock(dir string, lastRequestHeader ...*map[string][]string) *Clever {
 		handler(w, r, params)
 	}))
 
-	return &Clever{Auth{"doesntmatter", ""}, ts.URL}
+	t := &oauth.Transport{
+		Token: &oauth.Token{AccessToken: "doesntmatter"},
+	}
+
+	return New(t.Client(), ts.URL)
 }
 
 func MockResource(filenames ...string) func(http.ResponseWriter, *http.Request, map[string]string) {

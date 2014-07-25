@@ -1,44 +1,29 @@
 package clever
 
 import (
+	"code.google.com/p/goauth2/oauth"
 	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"reflect"
 	"testing"
 )
 
-func TestEmptyAuthError(t *testing.T) {
-	clever := NewMock("./data")
-	clever.Auth = Auth{}
-	results := clever.QueryAll("/v1.1/districts", nil)
-	if results.Next(); results.lastError == nil {
-		t.Fatalf("Empty auth credentials raised no error")
-	} else if fmt.Sprint(results.lastError) != "Must provide either API key or bearer token" {
-		t.Fatalf("Empty auth credentials raised incorrect error '" + fmt.Sprint(results.lastError) + "'")
-	}
+var dummytransport = &oauth.Transport{
+	Token: &oauth.Token{AccessToken: "doesntmatter"},
 }
 
-// helper function for TestBearerAuth and TestBasicAuth
-func verifyAuthHeader(auth Auth, expectedAuthString string, t *testing.T) {
-	reqHeader := new(map[string][]string)
-	clever := NewMock("./data", reqHeader)
-	clever.Auth = auth
-	results := clever.QueryAll("/v1.1/districts", nil)
-	results.Next()
-	if header, ok := (*reqHeader)["Authorization"]; ok {
-		if len(header) == 0 || header[0] != expectedAuthString {
-			t.Fatalf("Expected auth header '" + expectedAuthString + "'; found '" + header[0] + "'")
+func TestBasicAuthTransport(t *testing.T) {
+	bat := &BasicAuthTransport{"user", "pass"}
+	client := bat.Client()
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Header.Get("Authorization") != "Basic dXNlcjpwYXNz" {
+			t.Fatal("unexpected auth header")
 		}
-	} else {
-		t.Fatalf("Auth request header not present")
+	}))
+	if _, err := client.Get(ts.URL); err != nil {
+		t.Fatal(err)
 	}
-}
-
-func TestBearerAuth(t *testing.T) {
-	verifyAuthHeader(Auth{"", "TEST_TOKEN"}, "Bearer TEST_TOKEN", t)
-}
-
-func TestBasicAuth(t *testing.T) {
-	verifyAuthHeader(Auth{"TEST_KEY", ""}, "Basic VEVTVF9LRVk6", t)
 }
 
 func TestQueryDistricts(t *testing.T) {
