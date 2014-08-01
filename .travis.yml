@@ -1,9 +1,0 @@
-language: go
-go:
-    - 1.2
-    - tip
-script: make test
-
-notifications:
-  email:
-    - dev@clever.com
