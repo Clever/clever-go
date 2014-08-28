@@ -15,7 +15,7 @@ import (
 )
 
 // Loads a directory with json files representing mock resources. See ./data for an example
-func NewMock(dir string, lastRequestHeader ...*map[string][]string) *Clever {
+func NewMock(dir string, lastRequestHeader ...*map[string][]string) (*http.Client, string) {
 	router := urlrouter.Router{
 		Routes: []urlrouter.Route{
 			urlrouter.Route{
@@ -83,7 +83,7 @@ func NewMock(dir string, lastRequestHeader ...*map[string][]string) *Clever {
 		Token: &oauth.Token{AccessToken: "doesntmatter"},
 	}
 
-	return New(t.Client(), ts.URL)
+	return t.Client(), ts.URL
 }
 
 func MockResource(filenames ...string) func(http.ResponseWriter, *http.Request, map[string]string) {
