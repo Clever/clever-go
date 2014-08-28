@@ -62,6 +62,10 @@ func NewMock(dir string, lastRequestHeader ...*map[string][]string) (*http.Clien
 				PathExp: "/mock/rate/limiter",
 				Dest:    MockResourceRateLimit(),
 			},
+			urlrouter.Route{
+				PathExp: "/mock/error",
+				Dest:    MockError(),
+			},
 		},
 	}
 
@@ -142,5 +146,11 @@ func MockResourceRateLimit() func(http.ResponseWriter, *http.Request, map[string
 		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Reset"), "never!!")
 		w.Header().Add(http.CanonicalHeaderKey("X-Ratelimit-Remaining"), "0")
 		http.Error(w, "", statusTooManyRequests)
+	}
+}
+
+func MockError() func(http.ResponseWriter, *http.Request, map[string]string) {
+	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
+		http.Error(w, `{"code":1337,"error":"there was an error"}`, 500)
 	}
 }
