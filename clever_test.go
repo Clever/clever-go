@@ -3,6 +3,7 @@ package clever
 import (
 	"code.google.com/p/goauth2/oauth"
 	"fmt"
+	mock "github.com/Clever/clever-go/mock"
 	"net/http"
 	"net/http/httptest"
 	"reflect"
@@ -27,7 +28,7 @@ func TestBasicAuthTransport(t *testing.T) {
 }
 
 func TestQueryDistricts(t *testing.T) {
-	clever := NewMock("./data")
+	clever := New(mock.NewMock("./data"))
 	results := clever.QueryAll("/v1.1/districts", nil)
 
 	if !results.Next() {
@@ -53,7 +54,7 @@ func TestQueryDistricts(t *testing.T) {
 }
 
 func TestQuerySchools(t *testing.T) {
-	clever := NewMock("./data")
+	clever := New(mock.NewMock("./data"))
 	results := clever.QueryAll("/v1.1/schools", nil)
 	if !results.Next() {
 		t.Fatal("Found no schools")
@@ -94,7 +95,7 @@ func TestQuerySchools(t *testing.T) {
 }
 
 func TestQueryTeachers(t *testing.T) {
-	clever := NewMock("./data")
+	clever := New(mock.NewMock("./data"))
 	results := clever.QueryAll("/v1.1/teachers", nil)
 	if !results.Next() {
 		t.Fatal("Found no teachers")
@@ -131,7 +132,7 @@ func TestQueryTeachers(t *testing.T) {
 }
 
 func TestQueryStudents(t *testing.T) {
-	clever := NewMock("./data")
+	clever := New(mock.NewMock("./data"))
 	results := clever.QueryAll("/v1.1/students", nil)
 	if !results.Next() {
 		t.Fatal("Found no students")
@@ -180,7 +181,7 @@ func TestQueryStudents(t *testing.T) {
 }
 
 func TestQuerySections(t *testing.T) {
-	clever := NewMock("./data")
+	clever := New(mock.NewMock("./data"))
 	results := clever.QueryAll("/v1.1/sections", nil)
 	if !results.Next() {
 		t.Fatal("Found no sections")
@@ -221,7 +222,7 @@ func TestQuerySections(t *testing.T) {
 }
 
 func TestQueryAll(t *testing.T) {
-	clever := NewMock("./data")
+	clever := New(mock.NewMock("./data"))
 	result := clever.QueryAll("/v1.1/sections", nil)
 
 	count := 0
@@ -236,7 +237,7 @@ func TestQueryAll(t *testing.T) {
 }
 
 func TestTooManyRequestsError(t *testing.T) {
-	clever := NewMock("./data")
+	clever := New(mock.NewMock("./data"))
 	result := clever.QueryAll("/mock/rate/limiter", nil)
 	result.Next()
 	if result.Error() == nil {
