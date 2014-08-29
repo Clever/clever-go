@@ -44,16 +44,16 @@ func New(client *http.Client, url string) *Clever {
 
 // CleverError contains an error that occurred within the Clever API
 type CleverError struct {
-	Code    string
+	Code    int
 	Message string `json:"error"`
 }
 
 // Error returns a string representation of a CleverError
 func (err *CleverError) Error() string {
-	if err.Code == "" {
+	if err.Code == 0 {
 		return err.Message
 	}
-	return fmt.Sprintf("%s (%s)", err.Error, err.Code)
+	return fmt.Sprintf("%s (%d)", err.Message, err.Code)
 }
 
 // TooManyRequestsError indicates the number of requests has exceeded the rate limit
@@ -252,7 +252,9 @@ func (clever *Clever) Query(path string, params url.Values, resp interface{}) er
 		return &TooManyRequestsError{r.Header}
 	} else if r.StatusCode != 200 {
 		var error CleverError
-		json.NewDecoder(r.Body).Decode(&error)
+		if err := json.NewDecoder(r.Body).Decode(&error); err != nil {
+			return err
+		}
 		return &error
 	}
 	err = json.NewDecoder(r.Body).Decode(resp)

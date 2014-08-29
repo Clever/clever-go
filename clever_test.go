@@ -246,3 +246,14 @@ func TestTooManyRequestsError(t *testing.T) {
 		t.Fatalf("Http response 429 (TooManyRequests) did not generate the expected error.")
 	}
 }
+
+func TestHandlesErrors(t *testing.T) {
+	clever := New(mock.NewMock("./data"))
+	result := clever.QueryAll("/mock/error", nil)
+	result.Next()
+	if result.Error() == nil {
+		t.Fatalf("error endpoint did not trigger an error as expected")
+	} else if result.Error().Error() != "there was an error (1337)" {
+		t.Fatalf("error endpoint did not generate the expected error: %s", result.Error().Error())
+	}
+}
