@@ -234,7 +234,7 @@ func postDistrictTest(req *http.Request, params map[string]string) error {
 	return nil
 }
 
-func TestRequest(t *testing.T) {
+func TestPostRequest(t *testing.T) {
 	clever := New(mock.NewMock(postDistrictTest, "./data"))
 	resp := map[string]string{}
 	district1 := District{
