@@ -224,20 +224,14 @@ type Term struct {
 	EndDate   string `json:"end_date"`
 }
 
-/*
-Query makes a request to Clever given a Clever object, endpoint path, and parameters
-(pass in nil for no parameters).
-*/
+// Query makes a GET request to Clever using the Request function (see below)
 func (clever *Clever) Query(path string, params url.Values, resp interface{}) error {
 	return clever.Request("GET", path, params, nil, resp)
 }
 
-/*
-Request makes a request to Clever given a Clever object, http method, endpoint path, parameters, and a body
-(pass in nil for no parameters).
-*/
+// Request makes a request to Clever given a Clever object, http method,
+// endpoint path, parameters (pass in nil for no parameters), and a body .
 func (clever *Clever) Request(method string, path string, params url.Values, body interface{}, resp interface{}) error {
-	var bodyReader io.Reader
 
 	// Create request URI from Clever base, path, params
 	uri := fmt.Sprintf("%s%s", clever.url, path)
@@ -245,6 +239,7 @@ func (clever *Clever) Request(method string, path string, params url.Values, bod
 		uri = fmt.Sprintf("%s%s?%s", clever.url, path, params.Encode())
 	}
 
+	var bodyReader io.Reader
 	if body != nil {
 		rawBody, err := json.Marshal(body)
 		if err != nil {
@@ -300,10 +295,8 @@ func (clever *Clever) QueryAll(path string, params url.Values) PagedResult {
 	return PagedResult{clever: *clever, nextPagePath: path + paramString, lastDataCursor: -1}
 }
 
-/*
-Next returns true if a PagedResult contains additional data and false if the cursor has reached
-the end of the available data for this response.
-*/
+// Next returns true if a PagedResult contains additional data and false if the
+// cursor has reached the end of the available data for this response.
 func (r *PagedResult) Next() bool {
 	if r.lastDataCursor != -1 && r.lastDataCursor < len(r.lastData)-1 {
 		r.lastDataCursor++

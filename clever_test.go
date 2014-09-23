@@ -224,8 +224,7 @@ func TestQuerySections(t *testing.T) {
 
 func postDistrictTest(req *http.Request, params map[string]string) error {
 	district := District{}
-	err := json.NewDecoder(req.Body).Decode(&district)
-	if err != nil {
+	if err := json.NewDecoder(req.Body).Decode(&district); err != nil {
 		return fmt.Errorf("{\"error\":\"%s\"}", err.Error())
 	}
 	if district.Name != "new name district" {
@@ -240,8 +239,7 @@ func TestPostRequest(t *testing.T) {
 	district1 := District{
 		Name: "new name district",
 	}
-	err := clever.Request("POST", "/v1.1/districts", nil, district1, &resp)
-	if err != nil {
+	if err := clever.Request("POST", "/v1.1/districts", nil, district1, &resp); err != nil {
 		t.Fatalf("Error posting district: %s\n", err)
 	}
 }
