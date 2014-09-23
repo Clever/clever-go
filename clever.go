@@ -12,7 +12,7 @@ import (
 	"net/url"
 )
 
-const debug = true
+const debug = false
 
 // Clever wraps the Clever API at the specified URL e.g. "https://api.clever.com"
 type Clever struct {
