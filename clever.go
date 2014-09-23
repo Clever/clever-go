@@ -1,16 +1,18 @@
 package clever
 
 import (
+	"bytes"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
 )
 
-const debug = false
+const debug = true
 
 // Clever wraps the Clever API at the specified URL e.g. "https://api.clever.com"
 type Clever struct {
@@ -227,16 +229,34 @@ Query makes a request to Clever given a Clever object, endpoint path, and parame
 (pass in nil for no parameters).
 */
 func (clever *Clever) Query(path string, params url.Values, resp interface{}) error {
+	return clever.Request("GET", path, params, nil, resp)
+}
+
+/*
+Request makes a request to Clever given a Clever object, http method, endpoint path, parameters, and a body
+(pass in nil for no parameters).
+*/
+func (clever *Clever) Request(method string, path string, params url.Values, body interface{}, resp interface{}) error {
+	var bodyReader io.Reader
+
 	// Create request URI from Clever base, path, params
 	uri := fmt.Sprintf("%s%s", clever.url, path)
 	if params != nil {
 		uri = fmt.Sprintf("%s%s?%s", clever.url, path, params.Encode())
 	}
 
+	if body != nil {
+		rawBody, err := json.Marshal(body)
+		if err != nil {
+			return err
+		}
+		bodyReader = bytes.NewReader(rawBody)
+	}
+
 	// Ensure authentication is provided
-	req, _ := http.NewRequest("GET", uri, nil)
+	req, _ := http.NewRequest(method, uri, bodyReader)
 	if debug {
-		log.Printf("get { %v } -> {\n", uri)
+		log.Printf("%s { %v } -> {\n", method, uri)
 	}
 	r, err := clever.client.Do(req)
 	if err != nil {
