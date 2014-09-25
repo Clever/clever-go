@@ -227,8 +227,11 @@ func postDistrictTest(req *http.Request, params map[string]string) error {
 	if err := json.NewDecoder(req.Body).Decode(&district); err != nil {
 		return fmt.Errorf("{\"error\":\"%s\"}", err.Error())
 	}
+	if req.Header.Get("Content-Type") != "application/json" {
+		return fmt.Errorf("{\"error\":\"%s\"}", "Error formatting post request header")
+	}
 	if district.Name != "new name district" {
-		return fmt.Errorf("{\"error\":\"%s\"}", "Error formatting post request")
+		return fmt.Errorf("{\"error\":\"%s\"}", "Error formatting post request body")
 	}
 	return nil
 }
