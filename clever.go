@@ -250,8 +250,11 @@ func (clever *Clever) Request(method string, path string, params url.Values, bod
 
 	// Ensure authentication is provided
 	req, _ := http.NewRequest(method, uri, bodyReader)
+	req.Header.Add("Content-Type", "application/json")
 	if debug {
-		log.Printf("%s { %v } -> {\n", method, uri)
+		dump, _ := httputil.DumpRequestOut(req, true)
+		log.Printf("request:\n")
+		log.Printf("%v\n", string(dump))
 	}
 	r, err := clever.client.Do(req)
 	if err != nil {
@@ -261,7 +264,7 @@ func (clever *Clever) Request(method string, path string, params url.Values, bod
 	if debug {
 		dump, _ := httputil.DumpResponse(r, true)
 		log.Printf("response:\n")
-		log.Printf("%v\n}\n", string(dump))
+		log.Printf("%v\n", string(dump))
 	}
 	if r.StatusCode == 429 {
 		return &TooManyRequestsError{r.Header}
