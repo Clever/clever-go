@@ -2,6 +2,7 @@ package clever
 
 import (
 	"code.google.com/p/goauth2/oauth"
+	"encoding/json"
 	"fmt"
 	mock "github.com/Clever/clever-go/mock"
 	"net/http"
@@ -28,7 +29,7 @@ func TestBasicAuthTransport(t *testing.T) {
 }
 
 func TestQueryDistricts(t *testing.T) {
-	clever := New(mock.NewMock("./data"))
+	clever := New(mock.NewMock(nil, "./data"))
 	results := clever.QueryAll("/v1.1/districts", nil)
 
 	if !results.Next() {
@@ -54,7 +55,7 @@ func TestQueryDistricts(t *testing.T) {
 }
 
 func TestQuerySchools(t *testing.T) {
-	clever := New(mock.NewMock("./data"))
+	clever := New(mock.NewMock(nil, "./data"))
 	results := clever.QueryAll("/v1.1/schools", nil)
 	if !results.Next() {
 		t.Fatal("Found no schools")
@@ -95,7 +96,7 @@ func TestQuerySchools(t *testing.T) {
 }
 
 func TestQueryTeachers(t *testing.T) {
-	clever := New(mock.NewMock("./data"))
+	clever := New(mock.NewMock(nil, "./data"))
 	results := clever.QueryAll("/v1.1/teachers", nil)
 	if !results.Next() {
 		t.Fatal("Found no teachers")
@@ -132,7 +133,7 @@ func TestQueryTeachers(t *testing.T) {
 }
 
 func TestQueryStudents(t *testing.T) {
-	clever := New(mock.NewMock("./data"))
+	clever := New(mock.NewMock(nil, "./data"))
 	results := clever.QueryAll("/v1.1/students", nil)
 	if !results.Next() {
 		t.Fatal("Found no students")
@@ -181,7 +182,7 @@ func TestQueryStudents(t *testing.T) {
 }
 
 func TestQuerySections(t *testing.T) {
-	clever := New(mock.NewMock("./data"))
+	clever := New(mock.NewMock(nil, "./data"))
 	results := clever.QueryAll("/v1.1/sections", nil)
 	if !results.Next() {
 		t.Fatal("Found no sections")
@@ -221,8 +222,33 @@ func TestQuerySections(t *testing.T) {
 	}
 }
 
+func postDistrictTest(req *http.Request, params map[string]string) error {
+	district := District{}
+	if err := json.NewDecoder(req.Body).Decode(&district); err != nil {
+		return fmt.Errorf("{\"error\":\"%s\"}", err.Error())
+	}
+	if req.Header.Get("Content-Type") != "application/json" {
+		return fmt.Errorf("{\"error\":\"%s\"}", "Error formatting post request header")
+	}
+	if district.Name != "new name district" {
+		return fmt.Errorf("{\"error\":\"%s\"}", "Error formatting post request body")
+	}
+	return nil
+}
+
+func TestPostRequest(t *testing.T) {
+	clever := New(mock.NewMock(postDistrictTest, "./data"))
+	resp := map[string]string{}
+	district1 := District{
+		Name: "new name district",
+	}
+	if err := clever.Request("POST", "/v1.1/districts", nil, district1, &resp); err != nil {
+		t.Fatalf("Error posting district: %s\n", err)
+	}
+}
+
 func TestQueryAll(t *testing.T) {
-	clever := New(mock.NewMock("./data"))
+	clever := New(mock.NewMock(nil, "./data"))
 	result := clever.QueryAll("/v1.1/sections", nil)
 
 	count := 0
@@ -237,7 +263,7 @@ func TestQueryAll(t *testing.T) {
 }
 
 func TestTooManyRequestsError(t *testing.T) {
-	clever := New(mock.NewMock("./data"))
+	clever := New(mock.NewMock(nil, "./data"))
 	result := clever.QueryAll("/mock/rate/limiter", nil)
 	result.Next()
 	if result.Error() == nil {
@@ -248,7 +274,7 @@ func TestTooManyRequestsError(t *testing.T) {
 }
 
 func TestHandlesErrors(t *testing.T) {
-	clever := New(mock.NewMock("./data"))
+	clever := New(mock.NewMock(nil, "./data"))
 	result := clever.QueryAll("/mock/error", nil)
 	result.Next()
 	if result.Error() == nil {

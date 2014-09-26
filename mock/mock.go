@@ -14,13 +14,15 @@ import (
 	"strconv"
 )
 
+type PostHandler func(*http.Request, map[string]string) error
+
 // Loads a directory with json files representing mock resources. See ./data for an example
-func NewMock(dir string, lastRequestHeader ...*map[string][]string) (*http.Client, string) {
+func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[string][]string) (*http.Client, string) {
 	router := urlrouter.Router{
 		Routes: []urlrouter.Route{
 			urlrouter.Route{
 				PathExp: "/v1.1/districts",
-				Dest:    MockResource(fmt.Sprintf("%s/districts.json", dir)),
+				Dest:    MockResource(postHandler, fmt.Sprintf("%s/districts.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/districts/:id",
@@ -28,7 +30,7 @@ func NewMock(dir string, lastRequestHeader ...*map[string][]string) (*http.Clien
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/schools",
-				Dest:    MockResource(fmt.Sprintf("%s/schools.json", dir)),
+				Dest:    MockResource(postHandler, fmt.Sprintf("%s/schools.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/schools/:id",
@@ -36,7 +38,7 @@ func NewMock(dir string, lastRequestHeader ...*map[string][]string) (*http.Clien
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/teachers",
-				Dest:    MockResource(fmt.Sprintf("%s/teachers.json", dir)),
+				Dest:    MockResource(postHandler, fmt.Sprintf("%s/teachers.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/teachers/:id",
@@ -44,7 +46,7 @@ func NewMock(dir string, lastRequestHeader ...*map[string][]string) (*http.Clien
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/students",
-				Dest:    MockResource(fmt.Sprintf("%s/students.json", dir)),
+				Dest:    MockResource(postHandler, fmt.Sprintf("%s/students.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/students/:id",
@@ -52,7 +54,7 @@ func NewMock(dir string, lastRequestHeader ...*map[string][]string) (*http.Clien
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/sections",
-				Dest:    MockResource(fmt.Sprintf("%s/sections.json", dir), fmt.Sprintf("%s/sections2.json", dir)),
+				Dest:    MockResource(postHandler, fmt.Sprintf("%s/sections.json", dir), fmt.Sprintf("%s/sections2.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/sections/:id",
@@ -90,20 +92,33 @@ func NewMock(dir string, lastRequestHeader ...*map[string][]string) (*http.Clien
 	return t.Client(), ts.URL
 }
 
-func MockResource(filenames ...string) func(http.ResponseWriter, *http.Request, map[string]string) {
+func MockResource(postHandler PostHandler, filenames ...string) func(http.ResponseWriter, *http.Request, map[string]string) {
 	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
-		page := 1
-		u, _ := url.Parse(req.RequestURI)
-		query, _ := url.ParseQuery(u.RawQuery)
-		if _, ok := query["page"]; ok {
-			page, _ = strconv.Atoi(query["page"][0])
-		}
-		file, err := os.Open(filenames[page-1])
-		if err != nil {
-			http.Error(w, fmt.Sprintf("couldn't read %s", filenames[page-1]), http.StatusInternalServerError)
+		switch req.Method {
+		case "POST":
+			err := postHandler(req, params); if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+			w.Write([]byte("{}")) // Don't care what response is because we're not testing the API response
 			return
+		case "GET":
+			page := 1
+			u, _ := url.Parse(req.RequestURI)
+			query, _ := url.ParseQuery(u.RawQuery)
+			if _, ok := query["page"]; ok {
+				page, _ = strconv.Atoi(query["page"][0])
+			}
+			file, err := os.Open(filenames[page-1])
+			if err != nil {
+				http.Error(w, fmt.Sprintf("couldn't read %s", filenames[page-1]), http.StatusInternalServerError)
+				return
+			}
+			io.Copy(w, file)
+		default: 
+			http.Error(w, fmt.Sprintf("method not supported"), http.StatusMethodNotAllowed)
 		}
-		io.Copy(w, file)
+
 	}
 }
 

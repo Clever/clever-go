@@ -1,9 +1,11 @@
 package clever
 
 import (
+	"bytes"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -222,21 +224,37 @@ type Term struct {
 	EndDate   string `json:"end_date"`
 }
 
-/*
-Query makes a request to Clever given a Clever object, endpoint path, and parameters
-(pass in nil for no parameters).
-*/
+// Query makes a GET request to Clever using the Request function (see below)
 func (clever *Clever) Query(path string, params url.Values, resp interface{}) error {
+	return clever.Request("GET", path, params, nil, resp)
+}
+
+// Request makes a request to Clever given a Clever object, http method,
+// endpoint path, parameters (pass in nil for no parameters), and a body .
+func (clever *Clever) Request(method string, path string, params url.Values, body interface{}, resp interface{}) error {
+
 	// Create request URI from Clever base, path, params
 	uri := fmt.Sprintf("%s%s", clever.url, path)
 	if params != nil {
 		uri = fmt.Sprintf("%s%s?%s", clever.url, path, params.Encode())
 	}
 
+	var bodyReader io.Reader
+	if body != nil {
+		rawBody, err := json.Marshal(body)
+		if err != nil {
+			return err
+		}
+		bodyReader = bytes.NewReader(rawBody)
+	}
+
 	// Ensure authentication is provided
-	req, _ := http.NewRequest("GET", uri, nil)
+	req, _ := http.NewRequest(method, uri, bodyReader)
+	req.Header.Add("Content-Type", "application/json")
 	if debug {
-		log.Printf("get { %v } -> {\n", uri)
+		dump, _ := httputil.DumpRequestOut(req, true)
+		log.Printf("request:\n")
+		log.Printf("%v\n", string(dump))
 	}
 	r, err := clever.client.Do(req)
 	if err != nil {
@@ -246,7 +264,7 @@ func (clever *Clever) Query(path string, params url.Values, resp interface{}) er
 	if debug {
 		dump, _ := httputil.DumpResponse(r, true)
 		log.Printf("response:\n")
-		log.Printf("%v\n}\n", string(dump))
+		log.Printf("%v\n", string(dump))
 	}
 	if r.StatusCode == 429 {
 		return &TooManyRequestsError{r.Header}
@@ -280,10 +298,8 @@ func (clever *Clever) QueryAll(path string, params url.Values) PagedResult {
 	return PagedResult{clever: *clever, nextPagePath: path + paramString, lastDataCursor: -1}
 }
 
-/*
-Next returns true if a PagedResult contains additional data and false if the cursor has reached
-the end of the available data for this response.
-*/
+// Next returns true if a PagedResult contains additional data and false if the
+// cursor has reached the end of the available data for this response.
 func (r *PagedResult) Next() bool {
 	if r.lastDataCursor != -1 && r.lastDataCursor < len(r.lastData)-1 {
 		r.lastDataCursor++
