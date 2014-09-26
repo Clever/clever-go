@@ -6,6 +6,14 @@ clever-go is a Go library for the [Clever API](https://clever.com/developers/doc
 
 [![GoDoc](https://godoc.org/github.com/Clever/clever-go?status.png)](https://godoc.org/github.com/Clever/clever-go).
 
+## Releasing a new version
+
+`clever-go` is versioned with `gopkg.in`.
+To release a new version of the library, you should increment the version in the `VERSION` file according to [the semver spec](http://semver.org/) and create a tag with the corresponding version.
+
+You can use [gitsem](https://github.com/clever/gitsem) to accomplish this all with one command.
+For example, to release a new minor version, you can just run `gitsem minor && git push && git push --tag` from the repository.
+
 ## Developing
 
 clever-go is built and tested against Go 1.3.
