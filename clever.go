@@ -10,9 +10,13 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"os/exec"
+	"runtime"
 )
 
 const debug = false
+
+var unameCache []byte
 
 // Clever wraps the Clever API at the specified URL e.g. "https://api.clever.com"
 type Clever struct {
@@ -26,11 +30,29 @@ type BasicAuthTransport struct {
 	Password string
 }
 
+func setTrackingHeaders(req *http.Request) {
+	// Want to swallow errors here because desired behavior is nil --> blank string if value doesn't exist
+	if unameCache == nil {
+		unameCache, _ = exec.Command("uname", "-a").Output()
+	}
+	customUA, _ := json.Marshal(map[string]string{
+		"lang":             "go",
+		"lang_version":     runtime.Version(),
+		"platform":         runtime.GOOS,
+		"uname":            fmt.Sprintf("%s", unameCache),
+		"publisher":        "clever",
+		"bindings_version": Version,
+	})
+	req.Header.Add("User-Agent", "Clever/GoBindings/"+Version)
+	req.Header.Add("X-Clever-Client-User-Agent", string(customUA))
+}
+
 // RoundTrip makes a request and returns the response
 func (bat BasicAuthTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req.Header.Set("Authorization", fmt.Sprintf("Basic %s",
 		base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s",
 			bat.Username, bat.Password)))))
+	setTrackingHeaders(req)
 	return http.DefaultTransport.RoundTrip(req)
 }
 
@@ -251,6 +273,7 @@ func (clever *Clever) Request(method string, path string, params url.Values, bod
 	// Ensure authentication is provided
 	req, _ := http.NewRequest(method, uri, bodyReader)
 	req.Header.Add("Content-Type", "application/json")
+	setTrackingHeaders(req)
 	if debug {
 		dump, _ := httputil.DumpRequestOut(req, true)
 		log.Printf("request:\n")

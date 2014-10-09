@@ -262,6 +262,37 @@ func TestQueryAll(t *testing.T) {
 	}
 }
 
+func TestQueryHeaders(t *testing.T) {
+	req, _ := http.NewRequest("get", "request/headers", nil)
+	setTrackingHeaders(req)
+	if len(req.Header.Get("User-Agent")) <= 0 {
+		t.Fatalf("User-Agent header not set")
+	}
+	var customUa map[string]string
+	if err := json.Unmarshal([]byte(req.Header.Get("X-Clever-Client-User-Agent")), &customUa); err != nil {
+		t.Fatalf("Could not read the 'X-Clever-Client-User-Agent' header")
+	}
+	var ok bool
+	if _, ok = customUa["lang"]; !ok {
+		t.Fatalf("lang not set in custom user agent header")
+	}
+	if _, ok = customUa["lang_version"]; !ok {
+		t.Fatalf("lang version not set in custom user agent header")
+	}
+	if _, ok = customUa["platform"]; !ok {
+		t.Fatalf("platform not set in custom user agent header")
+	}
+	if _, ok = customUa["uname"]; !ok {
+		t.Fatalf("uname not set in custom user agent header")
+	}
+	if _, ok = customUa["publisher"]; !ok {
+		t.Fatalf("publisher not set in custom user agent header")
+	}
+	if _, ok = customUa["bindings_version"]; !ok {
+		t.Fatalf("bindings version not set in custom user agent header")
+	}
+}
+
 func TestTooManyRequestsError(t *testing.T) {
 	clever := New(mock.NewMock(nil, "./data"))
 	result := clever.QueryAll("/mock/rate/limiter", nil)
