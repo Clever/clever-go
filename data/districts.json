@@ -1,9 +1,21 @@
 {
+  "paging": {
+    "current": 1,
+    "total": 1,
+    "count": 1
+  },
+  "links": [
+    {
+      "rel": "self",
+      "uri": "/v1.1/districts"
+    }
+  ],
   "data": [
     {
       "data": {
         "id": "51a5a56312ec00cc5100007e",
-        "name": "test district"
+        "name": "test district",
+        "mdr_number": "123"
       }
     }
   ]
