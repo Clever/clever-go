@@ -122,8 +122,9 @@ type DistrictResp struct {
 
 // District corresponds to the District resource in the Clever data schema: clever.com/schema
 type District struct {
-	Id   string
-	Name string
+	Id        string
+	Name      string
+	MdrNumber string `json:"mdr_number"`
 }
 
 // SchoolResp wraps the response given when the user queries for a School
@@ -213,7 +214,7 @@ type Section struct {
 	Created      string
 	District     string
 	Grade        string
-	Id           string `json:"id"`
+	Id           string
 	LastModified string `json:"last_modified"`
 	Name         string
 	School       string

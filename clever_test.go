@@ -46,8 +46,9 @@ func TestQueryDistricts(t *testing.T) {
 	}
 
 	expectedDistrict0 := District{
-		Id:   "51a5a56312ec00cc5100007e",
-		Name: "test district",
+		Id:        "51a5a56312ec00cc5100007e",
+		Name:      "test district",
+		MdrNumber: "123",
 	}
 	if !reflect.DeepEqual(expectedDistrict0, district0) {
 		t.Fatal("District did not match expected.")
