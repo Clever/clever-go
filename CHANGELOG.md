@@ -1,3 +1,6 @@
+## v1.3.0 (January 13, 2015)
+  * Support MdrNumber for District struct
+
 ## v1.2.0 (October 9, 2014)
   * Add user agent tracking headers to requests
 
