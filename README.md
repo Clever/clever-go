@@ -4,7 +4,7 @@ clever-go is a Go library for the [Clever API](https://clever.com/developers/doc
 
 ## Documentation
 
-[![GoDoc](https://godoc.org/github.com/Clever/clever-go?status.png)](https://godoc.org/github.com/Clever/clever-go).
+[![GoDoc](https://godoc.org/github.com/Clever/clever-go?status.png)](https://godoc.org/github.com/Clever/clever-go)
 
 ## Releasing a new version
 
