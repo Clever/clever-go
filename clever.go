@@ -16,7 +16,7 @@ import (
 
 const debug = false
 
-var unameCache []byte
+var unameCache *string
 
 // Clever wraps the Clever API at the specified URL e.g. "https://api.clever.com"
 type Clever struct {
@@ -33,13 +33,15 @@ type BasicAuthTransport struct {
 func setTrackingHeaders(req *http.Request) {
 	// Want to swallow errors here because desired behavior is nil --> blank string if value doesn't exist
 	if unameCache == nil {
-		unameCache, _ = exec.Command("uname", "-a").Output()
+		unameBytes, _ := exec.Command("uname", "-a").Output()
+		unameString := fmt.Sprintf("%s", string(unameBytes))
+		unameCache = &unameString
 	}
 	customUA, _ := json.Marshal(map[string]string{
 		"lang":             "go",
 		"lang_version":     runtime.Version(),
 		"platform":         runtime.GOOS,
-		"uname":            fmt.Sprintf("%s", unameCache),
+		"uname":            *unameCache,
 		"publisher":        "clever",
 		"bindings_version": Version,
 	})
