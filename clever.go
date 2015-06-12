@@ -170,6 +170,7 @@ type Teacher struct {
 	SisId         string `json:"sis_id"`
 	TeacherNumber string `json:"teacher_number"`
 	Title         string
+	Credentials		Credentials
 }
 
 // StudentResp wraps the response given when the user queries for a Student
@@ -198,6 +199,7 @@ type Student struct {
 	SisId             string `json:"sis_id"`
 	StateId           string `json:"state_id"`
 	StudentNumber     string `json:"student_number"`
+	Credentials				Credentials
 }
 
 // SectionResp wraps the response given when the user queries for a Section
@@ -222,6 +224,7 @@ type Section struct {
 	Students     []string
 	Subject      string
 	Teacher      string
+	Teachers     []string
 	Term
 }
 
@@ -245,6 +248,11 @@ type Term struct {
 	Name      string
 	StartDate string `json:"start_date"`
 	EndDate   string `json:"end_date"`
+}
+
+type Credentials struct {
+	DistrictUsername string `json:"district_username"`
+	DistrictPassword string `json:"district_password"`
 }
 
 // Query makes a GET request to Clever using the Request function (see below)
