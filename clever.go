@@ -170,7 +170,7 @@ type Teacher struct {
 	SisId         string `json:"sis_id"`
 	TeacherNumber string `json:"teacher_number"`
 	Title         string
-	Credentials		Credentials
+	Credentials   Credentials
 }
 
 // StudentResp wraps the response given when the user queries for a Student
@@ -199,7 +199,7 @@ type Student struct {
 	SisId             string `json:"sis_id"`
 	StateId           string `json:"state_id"`
 	StudentNumber     string `json:"student_number"`
-	Credentials				Credentials
+	Credentials	  Credentials
 }
 
 // SectionResp wraps the response given when the user queries for a Section
