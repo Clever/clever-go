@@ -133,6 +133,55 @@ func TestQueryTeachers(t *testing.T) {
 	}
 }
 
+func TestQueryEvents(t *testing.T) {
+	clever := New(mock.NewMock(nil, "./data"))
+	results := clever.QueryAll("/v1.1/events", nil)
+	if !results.Next() {
+		t.Fatal("Found no events")
+	}
+	event := Event{}
+	if err := results.Scan(&event); err != nil {
+		t.Fatalf("Error retrieving event: %s\n", err)
+	}
+
+	resp := EventResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/events/%s", event.Id), nil, &resp); err != nil {
+		t.Fatalf("Error retrieving event: %s\n", err)
+	}
+	expectedEvent := Event{
+		Type:    "teachers.deleted",
+		Created: "2015-07-27T19:38:24.919Z",
+		Id:      "55b688b1cd921d4a081c4ec3",
+		Data: struct {
+			Object map[string]interface{}
+		}{
+			Object: map[string]interface{}{
+				"email": "manuel.purdy@example.com",
+				"title": "Grade 8 Mathematics Teacher",
+				"name": map[string]interface{}{
+					"first":  "Manuel",
+					"last":   "Purdy",
+					"middle": "S",
+				},
+				"created":        "2012-12-07T15:00:07.732Z",
+				"district":       "4fd43cc56d11340000000005",
+				"last_modified":  "2014-02-26T21:15:01.296Z",
+				"teacher_number": "731037",
+				"credentials": map[string]interface{}{
+					"district_password": "ae9IShie0im",
+					"district_username": "manuel_purdy",
+				},
+				"school": "530e595026403103360ff9ff",
+				"sis_id": "39",
+				"id":     "50c20477987eda0d3d02d30e",
+			},
+		},
+	}
+	if !reflect.DeepEqual(expectedEvent, event) || !reflect.DeepEqual(expectedEvent, resp.Event) {
+		t.Fatalf("Event did not match expected.")
+	}
+}
+
 func TestQueryStudents(t *testing.T) {
 	clever := New(mock.NewMock(nil, "./data"))
 	results := clever.QueryAll("/v1.1/students", nil)
