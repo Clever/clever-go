@@ -231,11 +231,15 @@ type EventResp struct {
 	Uri   string
 }
 
+type EventData struct {
+	Object map[string]interface{}
+}
+
 type Event struct {
 	Type    string
 	Created string
 	Id      string
-	Data    map[string]interface{}
+	Data    EventData
 }
 
 // Location represents a complete address for use with the Student and School resources
