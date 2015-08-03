@@ -152,7 +152,9 @@ func TestQueryEvents(t *testing.T) {
 		Type:    "teachers.deleted",
 		Created: "2015-07-27T19:38:24.919Z",
 		Id:      "55b688b1cd921d4a081c4ec3",
-		Data: EventData{
+		Data: struct {
+			Object map[string]interface{}
+		}{
 			Object: map[string]interface{}{
 				"email": "manuel.purdy@example.com",
 				"title": "Grade 8 Mathematics Teacher",
