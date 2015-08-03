@@ -225,6 +225,19 @@ type Section struct {
 	Term
 }
 
+type EventResp struct {
+	Links []Link
+	Event Event `json:"data"`
+	Uri   string
+}
+
+type Event struct {
+	Type    string
+	Created string
+	Id      string
+	Data    map[string]interface{}
+}
+
 // Location represents a complete address for use with the Student and School resources
 type Location struct {
 	Address string

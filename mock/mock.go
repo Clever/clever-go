@@ -61,6 +61,14 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 				Dest:    MockResourceId(fmt.Sprintf("%s/sections.json", dir)),
 			},
 			urlrouter.Route{
+				PathExp: "/v1.1/events",
+				Dest:    MockResource(postHandler, fmt.Sprintf("%s/events.json", dir)),
+			},
+			urlrouter.Route{
+				PathExp: "/v1.1/events/:id",
+				Dest:    MockResourceId(fmt.Sprintf("%s/events.json", dir)),
+			},
+			urlrouter.Route{
 				PathExp: "/mock/rate/limiter",
 				Dest:    MockResourceRateLimit(),
 			},
@@ -96,7 +104,8 @@ func MockResource(postHandler PostHandler, filenames ...string) func(http.Respon
 	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
 		switch req.Method {
 		case "POST":
-			err := postHandler(req, params); if err != nil {
+			err := postHandler(req, params)
+			if err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
@@ -115,7 +124,7 @@ func MockResource(postHandler PostHandler, filenames ...string) func(http.Respon
 				return
 			}
 			io.Copy(w, file)
-		default: 
+		default:
 			http.Error(w, fmt.Sprintf("method not supported"), http.StatusMethodNotAllowed)
 		}
 
