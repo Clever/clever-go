@@ -1,3 +1,6 @@
+## v1.4.0 (August 4, 2015)
+  * Add Event and EventResp struct
+
 ## v1.3.0 (January 13, 2015)
   * Support MdrNumber for District struct
 
