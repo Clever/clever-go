@@ -1,7 +1,6 @@
 package clever
 
 import (
-	"code.google.com/p/goauth2/oauth"
 	"encoding/json"
 	"fmt"
 	mock "github.com/Clever/clever-go/mock"
@@ -10,10 +9,6 @@ import (
 	"reflect"
 	"testing"
 )
-
-var dummytransport = &oauth.Transport{
-	Token: &oauth.Token{AccessToken: "doesntmatter"},
-}
 
 func TestBasicAuthTransport(t *testing.T) {
 	bat := &BasicAuthTransport{"user", "pass"}
