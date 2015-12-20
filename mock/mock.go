@@ -14,9 +14,10 @@ import (
 	"strconv"
 )
 
+// PostHandler is a function that handles POST requests.
 type PostHandler func(*http.Request, map[string]string) error
 
-// Loads a directory with json files representing mock resources. See ./data for an example
+// NewMock loads a directory with json files representing mock resources. See ./data for an example
 func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[string][]string) (*http.Client, string) {
 	router := urlrouter.Router{
 		Routes: []urlrouter.Route{
@@ -26,7 +27,7 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/districts/:id",
-				Dest:    MockResourceId(fmt.Sprintf("%s/districts.json", dir)),
+				Dest:    MockResourceID(fmt.Sprintf("%s/districts.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/schools",
@@ -34,7 +35,7 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/schools/:id",
-				Dest:    MockResourceId(fmt.Sprintf("%s/schools.json", dir)),
+				Dest:    MockResourceID(fmt.Sprintf("%s/schools.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/teachers",
@@ -42,7 +43,7 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/teachers/:id",
-				Dest:    MockResourceId(fmt.Sprintf("%s/teachers.json", dir)),
+				Dest:    MockResourceID(fmt.Sprintf("%s/teachers.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/students",
@@ -50,7 +51,7 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/students/:id",
-				Dest:    MockResourceId(fmt.Sprintf("%s/students.json", dir)),
+				Dest:    MockResourceID(fmt.Sprintf("%s/students.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/sections",
@@ -58,7 +59,7 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/sections/:id",
-				Dest:    MockResourceId(fmt.Sprintf("%s/sections.json", dir)),
+				Dest:    MockResourceID(fmt.Sprintf("%s/sections.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/events",
@@ -66,7 +67,7 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 			},
 			urlrouter.Route{
 				PathExp: "/v1.1/events/:id",
-				Dest:    MockResourceId(fmt.Sprintf("%s/events.json", dir)),
+				Dest:    MockResourceID(fmt.Sprintf("%s/events.json", dir)),
 			},
 			urlrouter.Route{
 				PathExp: "/mock/rate/limiter",
@@ -101,6 +102,7 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 	return client, ts.URL
 }
 
+// MockResource returns a response with mock data from a resource file in the data/ directory.
 func MockResource(postHandler PostHandler, filenames ...string) func(http.ResponseWriter, *http.Request, map[string]string) {
 	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
 		switch req.Method {
@@ -132,7 +134,11 @@ func MockResource(postHandler PostHandler, filenames ...string) func(http.Respon
 	}
 }
 
-func MockResourceId(filename string) func(http.ResponseWriter, *http.Request, map[string]string) {
+// MockResourceID returns data for the document with a specific ID.
+// It takes a filename and reads the corresponding file in data/,
+// then returns the data for the object that has a matching ID,
+// or an error if there is no object in that file with the ID.
+func MockResourceID(filename string) func(http.ResponseWriter, *http.Request, map[string]string) {
 	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
 		file, err := os.Open(filename)
 		if err != nil {
@@ -159,6 +165,7 @@ func MockResourceId(filename string) func(http.ResponseWriter, *http.Request, ma
 	}
 }
 
+// MockResourceRateLimit sets mock rate-limiting header values on a response.
 func MockResourceRateLimit() func(http.ResponseWriter, *http.Request, map[string]string) {
 	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
 		const statusTooManyRequests = 429
@@ -174,6 +181,7 @@ func MockResourceRateLimit() func(http.ResponseWriter, *http.Request, map[string
 	}
 }
 
+// MockError returns a mock error response for a request.
 func MockError() func(http.ResponseWriter, *http.Request, map[string]string) {
 	return func(w http.ResponseWriter, req *http.Request, params map[string]string) {
 		http.Error(w, `{"code":1337,"error":"there was an error"}`, 500)

@@ -36,12 +36,12 @@ func TestQueryDistricts(t *testing.T) {
 	}
 
 	resp := DistrictResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/districts/%s", district0.Id), nil, &resp); err != nil {
+	if err := clever.Query(fmt.Sprintf("/v1.1/districts/%s", district0.ID), nil, &resp); err != nil {
 		t.Fatalf("Error retrieving district: %s\n", err)
 	}
 
 	expectedDistrict0 := District{
-		Id:        "51a5a56312ec00cc5100007e",
+		ID:        "51a5a56312ec00cc5100007e",
 		Name:      "test district",
 		MdrNumber: "123",
 	}
@@ -62,7 +62,7 @@ func TestQuerySchools(t *testing.T) {
 	}
 
 	resp := SchoolResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/schools/%s", school0.Id), nil, &resp); err != nil {
+	if err := clever.Query(fmt.Sprintf("/v1.1/schools/%s", school0.ID), nil, &resp); err != nil {
 		t.Fatalf("Error retrieving school: %s\n", err)
 	}
 
@@ -70,7 +70,7 @@ func TestQuerySchools(t *testing.T) {
 		Created:      "2012-11-06T00:00:00Z",
 		District:     "51a5a56312ec00cc5100007e",
 		HighGrade:    "8",
-		Id:           "4fee004cca2e43cf27000002",
+		ID:           "4fee004cca2e43cf27000002",
 		LastModified: "2012-11-07T00:44:53.079Z",
 		Location: Location{
 			Address: "42139 Fadel Mountains",
@@ -80,11 +80,11 @@ func TestQuerySchools(t *testing.T) {
 		},
 		LowGrade:     "6",
 		Name:         "Clever Preparatory",
-		NcesId:       "94755881",
+		NcesID:       "94755881",
 		Phone:        "(527) 825-2248",
 		SchoolNumber: "2559",
-		SisId:        "2559",
-		StateId:      "23",
+		SisID:        "2559",
+		StateID:      "23",
 	}
 	if !reflect.DeepEqual(expectedSchool0, school0) {
 		t.Fatalf("School did not match expected.")
@@ -103,7 +103,7 @@ func TestQueryTeachers(t *testing.T) {
 	}
 
 	resp := TeacherResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/teachers/%s", teacher0.Id), nil, &resp); err != nil {
+	if err := clever.Query(fmt.Sprintf("/v1.1/teachers/%s", teacher0.ID), nil, &resp); err != nil {
 		t.Fatalf("Error retrieving teachers: %s\n", err)
 	}
 
@@ -111,7 +111,7 @@ func TestQueryTeachers(t *testing.T) {
 		Created:      "2013-05-29T06:51:25.139Z",
 		District:     "51a5a56312ec00cc5100007e",
 		Email:        "t.teacher2@ga4edu.org",
-		Id:           "51a5a56d4867bbdf51053c34",
+		ID:           "51a5a56d4867bbdf51053c34",
 		LastModified: "2013-05-29T06:51:25.145Z",
 		Name: Name{
 			First:  "Test",
@@ -119,7 +119,7 @@ func TestQueryTeachers(t *testing.T) {
 			Last:   "Teacher",
 		},
 		School:        "4fee004cca2e43cf27000002",
-		SisId:         "56",
+		SisID:         "56",
 		TeacherNumber: "100",
 		Title:         "Math Teacher",
 	}
@@ -140,13 +140,13 @@ func TestQueryEvents(t *testing.T) {
 	}
 
 	resp := EventResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/events/%s", event.Id), nil, &resp); err != nil {
+	if err := clever.Query(fmt.Sprintf("/v1.1/events/%s", event.ID), nil, &resp); err != nil {
 		t.Fatalf("Error retrieving event: %s\n", err)
 	}
 	expectedEvent := Event{
 		Type:    "teachers.deleted",
 		Created: "2015-07-27T19:38:24.919Z",
-		Id:      "55b688b1cd921d4a081c4ec3",
+		ID:      "55b688b1cd921d4a081c4ec3",
 		Data: struct {
 			Object map[string]interface{}
 		}{
@@ -189,7 +189,7 @@ func TestQueryStudents(t *testing.T) {
 	}
 
 	resp := StudentResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/students/%s", student0.Id), nil, &resp); err != nil {
+	if err := clever.Query(fmt.Sprintf("/v1.1/students/%s", student0.ID), nil, &resp); err != nil {
 		t.Fatalf("Error retrieving students: %s\n", err)
 	}
 
@@ -202,8 +202,8 @@ func TestQueryStudents(t *testing.T) {
 		HispanicEthnicity: "N",
 		Race:              "Caucasian",
 		School:            "4fee004cca2e43cf27000002",
-		SisId:             "1",
-		StateId:           "2237504",
+		SisID:             "1",
+		StateID:           "2237504",
 		StudentNumber:     "24772",
 		Location: Location{
 			Address: "",
@@ -219,7 +219,7 @@ func TestQueryStudents(t *testing.T) {
 		LastModified: "2013-05-29T06:51:28.006Z",
 		Created:      "2013-05-29T06:51:27.997Z",
 		Email:        "john.doe@ga4edu.org",
-		Id:           "51a5a56f4867bbdf51054054",
+		ID:           "51a5a56f4867bbdf51054054",
 	}
 	if !reflect.DeepEqual(expectedStudent0, student0) {
 		t.Fatalf("Student did not match expected.")
@@ -238,7 +238,7 @@ func TestQuerySections(t *testing.T) {
 	}
 
 	resp := SectionResp{}
-	if err := clever.Query(fmt.Sprintf("/v1.1/sections/%s", section0.Id), nil, &resp); err != nil {
+	if err := clever.Query(fmt.Sprintf("/v1.1/sections/%s", section0.ID), nil, &resp); err != nil {
 		t.Fatalf("Error retrieving sections: %s\n", err)
 	}
 
@@ -248,11 +248,11 @@ func TestQuerySections(t *testing.T) {
 		Created:      "2013-05-29T06:51:27.997Z",
 		District:     "51a5a56312ec00cc5100007e",
 		Grade:        "K",
-		Id:           "51a5a56f4867bbdf51054054",
+		ID:           "51a5a56f4867bbdf51054054",
 		LastModified: "2013-05-29T06:51:28.006Z",
 		Name:         "test section",
 		School:       "4fee004cca2e43cf27000002",
-		SisId:        "1",
+		SisID:        "1",
 		Students:     []string{"51a5a56f4867bbdf51054054"},
 		Subject:      "math",
 		Teacher:      "51a5a56d4867bbdf51053c34",
