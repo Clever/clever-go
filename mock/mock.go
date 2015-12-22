@@ -1,10 +1,10 @@
 package clever
 
 import (
-	"code.google.com/p/goauth2/oauth"
 	"encoding/json"
 	"fmt"
 	"github.com/ant0ine/go-urlrouter"
+	"golang.org/x/oauth2"
 	"io"
 	"log"
 	"net/http"
@@ -93,11 +93,12 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 		handler(w, r, params)
 	}))
 
-	t := &oauth.Transport{
-		Token: &oauth.Token{AccessToken: "doesntmatter"},
+	client := &http.Client{
+		Transport: &oauth2.Transport{
+			Source: oauth2.StaticTokenSource(&oauth2.Token{AccessToken: "doesntmatter"}),
+		},
 	}
-
-	return t.Client(), ts.URL
+	return client, ts.URL
 }
 
 func MockResource(postHandler PostHandler, filenames ...string) func(http.ResponseWriter, *http.Request, map[string]string) {
