@@ -110,19 +110,19 @@ type Paging struct {
 // Link represents a stable link for querying the API
 type Link struct {
 	Rel string
-	Uri string
+	URI string
 }
 
 // DistrictResp wraps the response given when the user queries for a District
 type DistrictResp struct {
 	District District `json:"data"`
 	Links    []Link
-	Uri      string
+	URI      string
 }
 
 // District corresponds to the District resource in the Clever data schema: clever.com/schema
 type District struct {
-	Id        string
+	ID        string
 	Name      string
 	MdrNumber string `json:"mdr_number"`
 }
@@ -131,7 +131,7 @@ type District struct {
 type SchoolResp struct {
 	Links  []Link
 	School School `json:"data"`
-	Uri    string
+	URI    string
 }
 
 // School corresponds to the School resource in the Clever data schema: clever.com/schema
@@ -139,23 +139,23 @@ type School struct {
 	Created      string
 	District     string
 	HighGrade    string `json:"high_grade"`
-	Id           string
+	ID           string
 	LastModified string `json:"last_modified"`
 	Location     Location
 	LowGrade     string `json:"low_grade"`
 	Name         string
-	NcesId       string `json:"nces_id"`
+	NcesID       string `json:"nces_id"`
 	Phone        string
 	SchoolNumber string `json:"school_number"`
-	SisId        string `json:"sis_id"`
-	StateId      string `json:"state_id"`
+	SisID        string `json:"sis_id"`
+	StateID      string `json:"state_id"`
 }
 
 // TeacherResp wraps the response given when the user queries for a Teacher
 type TeacherResp struct {
 	Links   []Link
 	Teacher Teacher `json:"data"`
-	Uri     string
+	URI     string
 }
 
 // Teacher corresponds to the Teacher resource in the Clever data schema: clever.com/schema
@@ -163,11 +163,11 @@ type Teacher struct {
 	Created       string
 	District      string
 	Email         string
-	Id            string
+	ID            string
 	LastModified  string `json:"last_modified"`
 	Name          Name
 	School        string
-	SisId         string `json:"sis_id"`
+	SisID         string `json:"sis_id"`
 	TeacherNumber string `json:"teacher_number"`
 	Title         string
 }
@@ -176,7 +176,7 @@ type Teacher struct {
 type StudentResp struct {
 	Links   []Link
 	Student Student `json:"data"`
-	Uri     string
+	URI     string
 }
 
 // Student corresponds to the Student resource in the Clever data schema: clever.com/schema
@@ -189,14 +189,14 @@ type Student struct {
 	Gender            string
 	Grade             string
 	HispanicEthnicity string `json:"hispanic_ethnicity"`
-	Id                string
+	ID                string
 	LastModified      string `json:"last_modified"`
 	Location          Location
 	Name              Name
 	Race              string
 	School            string
-	SisId             string `json:"sis_id"`
-	StateId           string `json:"state_id"`
+	SisID             string `json:"sis_id"`
+	StateID           string `json:"state_id"`
 	StudentNumber     string `json:"student_number"`
 }
 
@@ -204,7 +204,7 @@ type Student struct {
 type SectionResp struct {
 	Links   []Link
 	Section Section `json:"data"`
-	Uri     string
+	URI     string
 }
 
 // Section corresponds to the Section resource in the Clever data schema: clever.com/schema
@@ -214,27 +214,30 @@ type Section struct {
 	Created      string
 	District     string
 	Grade        string
-	Id           string
+	ID           string
 	LastModified string `json:"last_modified"`
 	Name         string
 	School       string
-	SisId        string `json:"sis_id"`
+	SisID        string `json:"sis_id"`
 	Students     []string
 	Subject      string
 	Teacher      string
 	Term
 }
 
+// EventResp represents an HTTP response returning data on one Event.
 type EventResp struct {
 	Links []Link
 	Event Event `json:"data"`
-	Uri   string
+	URI   string
 }
 
+// Event represents a data change on an underlying collection.
+// Example types include students.created and teachers.deleted.
 type Event struct {
 	Type    string
 	Created string
-	Id      string
+	ID      string
 	Data    struct {
 		Object map[string]interface{}
 	}
@@ -363,7 +366,7 @@ func (r *PagedResult) Next() bool {
 	r.nextPagePath = ""
 	for _, link := range resp.Links {
 		if link.Rel == "next" {
-			r.nextPagePath = link.Uri
+			r.nextPagePath = link.URI
 			break
 		}
 	}
