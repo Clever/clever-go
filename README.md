@@ -6,6 +6,12 @@ clever-go is a Go library for the [Clever API](https://clever.com/developers/doc
 
 [![GoDoc](https://godoc.org/github.com/Clever/clever-go?status.png)](https://godoc.org/github.com/Clever/clever-go)
 
+## Usage
+
+```
+import "gopkg.in/Clever/clever-go.v2"
+```
+
 ## Releasing a new version
 
 `clever-go` is versioned with `gopkg.in`.
