@@ -7,7 +7,7 @@
 //
 //			import (
 //				"golang.org/x/oauth2"
-//				clevergo "gopkg.in/Clever/clever-go.v1"
+//				clevergo "gopkg.in/Clever/clever-go.v2"
 //				"log"
 //			)
 //
