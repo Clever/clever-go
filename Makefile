@@ -1,31 +1,16 @@
-VERSION := $(shell cat VERSION)
-SHELL := /bin/bash
-PKG = github.com/Clever/clever-go
-SUBPKGS =
-PKGS = $(PKG) $(SUBPKGS)
+include golang.mk
+.DEFAULT_GOAL := test # override default goal set in library makefile
 
 .PHONY: test $(PKGS)
+VERSION := $(shell cat VERSION)
+SHELL := /bin/bash
+PKGS := $(shell go list ./...)
+$(eval $(call golang-version-check,1.5))
 
-GOVERSION := $(shell go version | grep 1.5)
-ifeq "$(GOVERSION)" ""
-  $(error must be running Go version 1.5)
-endif
-
-export GO15VENDOREXPERIMENT = 1
-
-test: $(PKG)
+test: $(PKGS)
+$(PKGS): golang-test-all-deps
+	go get -t $@
+	$(call golang-test-all,$@)
 
 version.go:
 	echo -e 'package clever\n\nconst Version = "$(VERSION)"' > version.go
-
-$(PKG):
-ifeq ($(LINT),1)
-	golint $(GOPATH)/src/$@*/**.go
-endif
-	go get -d -t $@
-ifeq ($(COVERAGE),1)
-	go test -cover -coverprofile=$(GOPATH)/src/$@/c.out $@ -test.v
-	go tool cover -html=$(GOPATH)/src/$@/c.out
-else
-	go test $@ -test.v
-endif
