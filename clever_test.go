@@ -85,6 +85,7 @@ func TestQuerySchools(t *testing.T) {
 		SchoolNumber: "2559",
 		SisID:        "2559",
 		StateID:      "23",
+		MdrNumber:    "456",
 	}
 	if !reflect.DeepEqual(expectedSchool0, school0) {
 		t.Fatalf("School did not match expected.")
