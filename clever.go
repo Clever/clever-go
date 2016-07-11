@@ -149,6 +149,7 @@ type School struct {
 	SchoolNumber string `json:"school_number"`
 	SisID        string `json:"sis_id"`
 	StateID      string `json:"state_id"`
+	MdrNumber    string `json:"mdr_number"`
 }
 
 // TeacherResp wraps the response given when the user queries for a Teacher
