@@ -150,6 +150,13 @@ type School struct {
 	SisID        string `json:"sis_id"`
 	StateID      string `json:"state_id"`
 	MdrNumber    string `json:"mdr_number"`
+	Principal    Principal
+}
+
+// Principal represents a principal for a school
+type Principal struct {
+	Name  string
+	Email string
 }
 
 // TeacherResp wraps the response given when the user queries for a Teacher
@@ -171,6 +178,13 @@ type Teacher struct {
 	SisID         string `json:"sis_id"`
 	TeacherNumber string `json:"teacher_number"`
 	Title         string
+	StateID       string `json:"state_id"`
+	Credentials   Credentials
+}
+
+// Credentials corresponds to credentials for a Student or Teacher
+type Credentials struct {
+	DistrictUsername string `json:"district_username"`
 }
 
 // StudentResp wraps the response given when the user queries for a Student
@@ -199,6 +213,8 @@ type Student struct {
 	SisID             string `json:"sis_id"`
 	StateID           string `json:"state_id"`
 	StudentNumber     string `json:"student_number"`
+	EllStatus         string `json:"ell_status"`
+	Credentials       Credentials
 }
 
 // SectionResp wraps the response given when the user queries for a Section
@@ -210,20 +226,24 @@ type SectionResp struct {
 
 // Section corresponds to the Section resource in the Clever data schema: clever.com/schema
 type Section struct {
-	CourseName   string `json:"course_name"`
-	CourseNumber string `json:"course_number"`
-	Created      string
-	District     string
-	Grade        string
-	ID           string
-	LastModified string `json:"last_modified"`
-	Name         string
-	School       string
-	SisID        string `json:"sis_id"`
-	Students     []string
-	Subject      string
-	Teacher      string
-	Term
+	CourseName        string `json:"course_name"`
+	CourseNumber      string `json:"course_number"`
+	Created           string
+	District          string
+	Grade             string
+	ID                string
+	LastModified      string `json:"last_modified"`
+	Name              string
+	School            string
+	SisID             string `json:"sis_id"`
+	Students          []string
+	Subject           string
+	Teacher           string
+	Term              Term
+	Teachers          []string
+	CourseDescription string `json:"course_description"`
+	Period            string
+	SectionNumber     string `json:"section_number"`
 }
 
 // EventResp represents an HTTP response returning data on one Event.
@@ -250,6 +270,8 @@ type Location struct {
 	City    string
 	State   string
 	Zip     string
+	Lon     string
+	Lat     string
 }
 
 // Name represents the full name of a Student or Teacher resource
@@ -264,6 +286,57 @@ type Term struct {
 	Name      string
 	StartDate string `json:"start_date"`
 	EndDate   string `json:"end_date"`
+}
+
+// SchoolAdminResp wraps the response given when the user queries for a SchoolAdmin
+type SchoolAdminResp struct {
+	Links       []Link
+	SchoolAdmin SchoolAdmin `json:"data"`
+}
+
+// SchoolAdmin corresponds to the SchoolAdmin resource in the Clever data schema: clever.com/schema
+type SchoolAdmin struct {
+	ID       string
+	District string
+	Name     Name
+	Title    string
+	Email    string
+	Schools  []string
+	StaffID  string `json:"staff_id"`
+}
+
+// DistrictAdminResp wraps the response given when the user queries for a DistrictAdmin
+type DistrictAdminResp struct {
+	Links         []Link
+	DistrictAdmin DistrictAdmin `json:"data"`
+}
+
+// DistrictAdmin corresponds to the DistrictAdmin resource in the Clever data schema: clever.com/schema
+type DistrictAdmin struct {
+	ID       string
+	District string
+	Name     Name
+	Title    string
+	Email    string
+}
+
+// ContactResp wraps the response given when the user queries for a Contact
+type ContactResp struct {
+	Links   []Link
+	Contact Contact `json:"data"`
+}
+
+// Contact corresponds to the Contact resource in the Clever data schema: clever.com/schema
+type Contact struct {
+	ID           string
+	Student      string
+	Type         string
+	Name         string
+	Relationship string
+	Phone        string
+	PhoneType    string `json:"phone_type"`
+	Email        string
+	District     string
 }
 
 // Query makes a GET request to Clever using the Request function (see below)
