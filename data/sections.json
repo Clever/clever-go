@@ -27,7 +27,19 @@
           "51a5a56f4867bbdf51054054"
         ],
         "subject": "math",
-        "teacher": "51a5a56d4867bbdf51053c34"
+        "teacher": "51a5a56d4867bbdf51053c34",
+        "term": {
+          "name": "Term1",
+          "start_date": "2012-06-01",
+          "end_date": "2013-01-15"
+        },
+        "teachers": [
+          "51a5a56d4867bbdf51053c34",
+          "51a5a56d4867bbdf51053c35"
+        ],
+        "course_description": "a test course",
+        "period": "5(A)",
+        "section_number": "104"
       }
     }
   ]
