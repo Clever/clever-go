@@ -28,7 +28,11 @@
         "created": "2013-05-29T06:51:27.997Z",
         "email": "john.doe@ga4edu.org",
         "credentials": {},
-        "id": "51a5a56f4867bbdf51054054"
+        "id": "51a5a56f4867bbdf51054054",
+        "ell_status": "Y",
+        "credentials": {
+          "district_username": "jdoe"
+        }
       }
     }
   ]

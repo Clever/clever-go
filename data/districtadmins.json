@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "data": {
+        "id": "519edecb58b876b018000652",
+        "district": "4fd43cc56d11340000000005",
+        "email": "demoaccount@demoaccount.com",
+        "name": {
+          "first": "Demo",
+          "last": "Account"
+        }
+      },
+      "uri": "/v1.1/district_admins/519edecb58b876b018000652"
+    }
+  ],
+  "paging": {
+    "current": 1,
+    "total": 1,
+    "count": 1
+  },
+  "links": [
+    {
+      "rel": "self",
+      "uri": "/v1.1/district_admins"
+    }
+  ]
+}

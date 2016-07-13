@@ -16,7 +16,11 @@
         "last_modified": "2013-05-29T06:51:25.145Z",
         "created": "2013-05-29T06:51:25.139Z",
         "credentials": {},
-        "id": "51a5a56d4867bbdf51053c34"
+        "id": "51a5a56d4867bbdf51053c34",
+        "state_id": "78",
+        "credentials": {
+          "district_username": "test_teacher"
+        }
       }
     }
   ]

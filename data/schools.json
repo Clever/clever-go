@@ -11,7 +11,9 @@
           "address": "42139 Fadel Mountains",
           "city": "Thomasfort",
           "state": "AP",
-          "zip": "61397-3760"
+          "zip": "61397-3760",
+          "lat": "lat-value",
+          "lon": "lon-value"
         },
         "low_grade": "6",
         "name": "Clever Preparatory",

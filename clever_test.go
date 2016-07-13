@@ -6,6 +6,7 @@ import (
 	mock "github.com/Clever/clever-go/mock"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"reflect"
 	"testing"
 )
@@ -77,6 +78,8 @@ func TestQuerySchools(t *testing.T) {
 			City:    "Thomasfort",
 			State:   "AP",
 			Zip:     "61397-3760",
+			Lat:     "lat-value",
+			Lon:     "lon-value",
 		},
 		LowGrade:     "6",
 		Name:         "Clever Preparatory",
@@ -86,6 +89,10 @@ func TestQuerySchools(t *testing.T) {
 		SisID:        "2559",
 		StateID:      "23",
 		MdrNumber:    "456",
+		Principal: Principal{
+			Email: "nikolas@mailinator.com",
+			Name:  "Rudolph Howe",
+		},
 	}
 	if !reflect.DeepEqual(expectedSchool0, school0) {
 		t.Fatalf("School did not match expected.")
@@ -123,6 +130,10 @@ func TestQueryTeachers(t *testing.T) {
 		SisID:         "56",
 		TeacherNumber: "100",
 		Title:         "Math Teacher",
+		StateID:       "78",
+		Credentials: Credentials{
+			DistrictUsername: "test_teacher",
+		},
 	}
 	if !reflect.DeepEqual(expectedTeacher0, teacher0) {
 		t.Fatalf("Teacher did not match expected.")
@@ -221,6 +232,10 @@ func TestQueryStudents(t *testing.T) {
 		Created:      "2013-05-29T06:51:27.997Z",
 		Email:        "john.doe@ga4edu.org",
 		ID:           "51a5a56f4867bbdf51054054",
+		EllStatus:    "Y",
+		Credentials: Credentials{
+			DistrictUsername: "jdoe",
+		},
 	}
 	if !reflect.DeepEqual(expectedStudent0, student0) {
 		t.Fatalf("Student did not match expected.")
@@ -258,13 +273,120 @@ func TestQuerySections(t *testing.T) {
 		Subject:      "math",
 		Teacher:      "51a5a56d4867bbdf51053c34",
 		Term: Term{
-			Name:      "",
-			StartDate: "",
-			EndDate:   "",
+			Name:      "Term1",
+			StartDate: "2012-06-01",
+			EndDate:   "2013-01-15",
 		},
+		Teachers:          []string{"51a5a56d4867bbdf51053c34", "51a5a56d4867bbdf51053c35"},
+		CourseDescription: "a test course",
+		Period:            "5(A)",
+		SectionNumber:     "104",
 	}
 	if !reflect.DeepEqual(expectedSection0, section0) {
 		t.Fatalf("Section did not match expected.")
+	}
+}
+
+func TestQuerySchoolAdmins(t *testing.T) {
+	clever := New(mock.NewMock(nil, "./data"))
+	results := clever.QueryAll("/v1.1/school_admins", nil)
+	if !results.Next() {
+		t.Fatal("Found no school admins")
+	}
+	schoolAdmin0 := SchoolAdmin{}
+	if err := results.Scan(&schoolAdmin0); err != nil {
+		t.Fatalf("Error retrieving school admin: %s\n", err)
+	}
+
+	resp := SchoolAdminResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/school_admins/%s", schoolAdmin0.ID), nil, &resp); err != nil {
+		t.Fatalf("Error retrieving school admin: %s\n", err)
+	}
+
+	expectedSchoolAdmin0 := SchoolAdmin{
+		District: "4fd43cc56d11340000000005",
+		Email:    "tdkhan@mailinator.com",
+		Name: Name{
+			First: "Theodora",
+			Last:  "Khan",
+		},
+		Schools: []string{"530e595026403103360ff9fd"},
+		StaffID: "1234",
+		Title:   "Principal",
+		ID:      "5600a2281c29fa0001000002",
+	}
+	if !reflect.DeepEqual(expectedSchoolAdmin0, schoolAdmin0) {
+		t.Fatalf("School Admin did not match expected.")
+	}
+}
+
+func TestQueryDistrictAdmins(t *testing.T) {
+	clever := New(mock.NewMock(nil, "./data"))
+
+	// Uses non-standard format in response, so should return no district admins
+	results := clever.QueryAll("/v1.1/district_admins", nil)
+	if results.Next() {
+		t.Fatal("Expected no district admins")
+	}
+
+	// NOTE the use of show_links=true here to format response in the standard way
+	params := url.Values{}
+	params.Set("show_links", "true")
+	results = clever.QueryAll("/v1.1/district_admins", params)
+	if !results.Next() {
+		t.Fatal("Found no district admins")
+	}
+	districtAdmin0 := DistrictAdmin{}
+	if err := results.Scan(&districtAdmin0); err != nil {
+		t.Fatalf("Error retrieving district admin: %s\n", err)
+	}
+
+	resp := DistrictAdminResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/district_admins/%s", districtAdmin0.ID), nil, &resp); err != nil {
+		t.Fatalf("Error retrieving district admin: %s\n", err)
+	}
+
+	expectedDistrictAdmin0 := DistrictAdmin{
+		ID:       "519edecb58b876b018000652",
+		District: "4fd43cc56d11340000000005",
+		Email:    "demoaccount@demoaccount.com",
+		Name: Name{
+			First: "Demo",
+			Last:  "Account",
+		},
+	}
+	if !reflect.DeepEqual(expectedDistrictAdmin0, districtAdmin0) {
+		t.Fatalf("District Admin did not match expected.")
+	}
+}
+
+func TestQueryContacts(t *testing.T) {
+	clever := New(mock.NewMock(nil, "./data"))
+	results := clever.QueryAll("/v1.1/contacts", nil)
+	if !results.Next() {
+		t.Fatal("Found no contacts")
+	}
+	contact0 := Contact{}
+	if err := results.Scan(&contact0); err != nil {
+		t.Fatalf("Error retrieving conact: %s\n", err)
+	}
+
+	resp := ContactResp{}
+	if err := clever.Query(fmt.Sprintf("/v1.1/contacts/%s", contact0.ID), nil, &resp); err != nil {
+		t.Fatalf("Error retrieving contact: %s\n", err)
+	}
+
+	expectedContact0 := Contact{
+		District: "4fd43cc56d11340000000005",
+		Email:    "conner_wisoky@example.net",
+		Name:     "Conner Wisoky",
+		Phone:    "1234567890",
+		Student:  "530e5960049e75a9262cff1e",
+		Type:     "Great Uncle",
+		ID:       "530e598b049e75a9262d1c13",
+	}
+	if !reflect.DeepEqual(expectedContact0, contact0) {
+		t.Fatalf("Contact did not match expected.")
 	}
 }
 

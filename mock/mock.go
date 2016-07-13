@@ -70,6 +70,30 @@ func NewMock(postHandler PostHandler, dir string, lastRequestHeader ...*map[stri
 				Dest:    MockResourceID(fmt.Sprintf("%s/events.json", dir)),
 			},
 			urlrouter.Route{
+				PathExp: "/v1.1/school_admins",
+				Dest:    MockResource(postHandler, fmt.Sprintf("%s/schooladmins.json", dir)),
+			},
+			urlrouter.Route{
+				PathExp: "/v1.1/school_admins/:id",
+				Dest:    MockResourceID(fmt.Sprintf("%s/schooladmins.json", dir)),
+			},
+			urlrouter.Route{
+				PathExp: "/v1.1/district_admins",
+				Dest:    MockResource(postHandler, fmt.Sprintf("%s/districtadmins_nolinks.json", dir), fmt.Sprintf("%s/districtadmins.json", dir)),
+			},
+			urlrouter.Route{
+				PathExp: "/v1.1/district_admins/:id",
+				Dest:    MockResourceID(fmt.Sprintf("%s/districtadmins.json", dir)),
+			},
+			urlrouter.Route{
+				PathExp: "/v1.1/contacts",
+				Dest:    MockResource(postHandler, fmt.Sprintf("%s/contacts.json", dir)),
+			},
+			urlrouter.Route{
+				PathExp: "/v1.1/contacts/:id",
+				Dest:    MockResourceID(fmt.Sprintf("%s/contacts.json", dir)),
+			},
+			urlrouter.Route{
 				PathExp: "/mock/rate/limiter",
 				Dest:    MockResourceRateLimit(),
 			},
@@ -120,6 +144,12 @@ func MockResource(postHandler PostHandler, filenames ...string) func(http.Respon
 			query, _ := url.ParseQuery(u.RawQuery)
 			if _, ok := query["page"]; ok {
 				page, _ = strconv.Atoi(query["page"][0])
+			}
+
+			// DistrictAdmins with show_links=true - use second file
+			// This means we can't use show_links and page params together in tests
+			if val, ok := query["show_links"]; ok && val[0] == "true" {
+				page = 2
 			}
 			file, err := os.Open(filenames[page-1])
 			if err != nil {
