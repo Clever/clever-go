@@ -5,7 +5,7 @@ include golang.mk
 VERSION := $(shell cat VERSION)
 SHELL := /bin/bash
 PKGS := $(shell go list ./...)
-$(eval $(call golang-version-check,1.6))
+$(eval $(call golang-version-check,1.7))
 
 test: $(PKGS)
 $(PKGS): golang-test-all-deps
