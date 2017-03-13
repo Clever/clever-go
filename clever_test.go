@@ -3,26 +3,13 @@ package clever
 import (
 	"encoding/json"
 	"fmt"
-	mock "github.com/Clever/clever-go/mock"
 	"net/http"
-	"net/http/httptest"
 	"net/url"
 	"reflect"
 	"testing"
-)
 
-func TestBasicAuthTransport(t *testing.T) {
-	bat := &BasicAuthTransport{"user", "pass"}
-	client := bat.Client()
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Header.Get("Authorization") != "Basic dXNlcjpwYXNz" {
-			t.Fatal("unexpected auth header")
-		}
-	}))
-	if _, err := client.Get(ts.URL); err != nil {
-		t.Fatal(err)
-	}
-}
+	mock "github.com/Clever/clever-go/mock"
+)
 
 func TestQueryDistricts(t *testing.T) {
 	clever := New(mock.NewMock(nil, "./data"))

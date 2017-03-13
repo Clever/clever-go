@@ -2,7 +2,6 @@ package clever
 
 import (
 	"bytes"
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -24,12 +23,6 @@ type Clever struct {
 	url    string
 }
 
-// BasicAuthTransport is an http.Transport that performs HTTP Basic Auth.
-type BasicAuthTransport struct {
-	Username string
-	Password string
-}
-
 func setTrackingHeaders(req *http.Request) {
 	// Want to swallow errors here because desired behavior is nil --> blank string if value doesn't exist
 	if unameCache == nil {
@@ -45,20 +38,6 @@ func setTrackingHeaders(req *http.Request) {
 	})
 	req.Header.Add("User-Agent", "Clever/GoBindings/"+Version)
 	req.Header.Add("X-Clever-Client-User-Agent", string(customUA))
-}
-
-// RoundTrip makes a request and returns the response
-func (bat BasicAuthTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	req.Header.Set("Authorization", fmt.Sprintf("Basic %s",
-		base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s",
-			bat.Username, bat.Password)))))
-	setTrackingHeaders(req)
-	return http.DefaultTransport.RoundTrip(req)
-}
-
-// Client returns a new Client object for the specified BasicAuthTransport
-func (bat *BasicAuthTransport) Client() *http.Client {
-	return &http.Client{Transport: bat}
 }
 
 // New returns a new Clever object to make requests with. URL must be a valid base url, e.g. "https://api.clever.com"
