@@ -5,7 +5,7 @@ include golang.mk
 VERSION := $(shell cat VERSION)
 SHELL := /bin/bash
 PKGS := $(shell go list ./...)
-$(eval $(call golang-version-check,1.8))
+$(eval $(call golang-version-check,1.9))
 
 test: $(PKGS)
 $(PKGS): golang-test-all-deps
@@ -14,3 +14,7 @@ $(PKGS): golang-test-all-deps
 
 version.go:
 	echo -e 'package clever\n\nconst Version = "$(VERSION)"' > version.go
+
+
+install_deps: golang-dep-vendor-deps
+	$(call golang-dep-vendor)
