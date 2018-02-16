@@ -22,10 +22,6 @@
 
 
 [[constraint]]
-  name = "github.com/Clever/clever-go"
-  version = "2.2.0"
-
-[[constraint]]
   branch = "master"
   name = "github.com/ant0ine/go-urlrouter"
 

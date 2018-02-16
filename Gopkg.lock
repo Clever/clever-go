@@ -2,12 +2,6 @@
 
 
 [[projects]]
-  name = "github.com/Clever/clever-go"
-  packages = ["mock"]
-  revision = "5c2fccc841c39fd141ed4fa06b01e34c596288fa"
-  version = "v2.2.0"
-
-[[projects]]
   branch = "master"
   name = "github.com/ant0ine/go-urlrouter"
   packages = [".","trie"]
@@ -40,6 +34,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f2e705132250a810e13d1d66cc09dca80f0dcdef2bc1a086d4e17712e23f10bf"
+  inputs-digest = "ba9a2d6b1260679712c7d6c58272b000110203169e68d4a0a35d37091e45ad7c"
   solver-name = "gps-cdcl"
   solver-version = 1
