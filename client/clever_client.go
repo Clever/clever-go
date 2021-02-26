@@ -10,14 +10,14 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/Clever/go-clever/client/courses"
-	"github.com/Clever/go-clever/client/districts"
-	"github.com/Clever/go-clever/client/events"
-	"github.com/Clever/go-clever/client/resources"
-	"github.com/Clever/go-clever/client/schools"
-	"github.com/Clever/go-clever/client/sections"
-	"github.com/Clever/go-clever/client/terms"
-	"github.com/Clever/go-clever/client/users"
+	"github.com/Clever/clever-go/client/courses"
+	"github.com/Clever/clever-go/client/districts"
+	"github.com/Clever/clever-go/client/events"
+	"github.com/Clever/clever-go/client/resources"
+	"github.com/Clever/clever-go/client/schools"
+	"github.com/Clever/clever-go/client/sections"
+	"github.com/Clever/clever-go/client/terms"
+	"github.com/Clever/clever-go/client/users"
 )
 
 // Default clever HTTP client.

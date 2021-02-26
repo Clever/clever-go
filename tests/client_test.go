@@ -4,11 +4,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/Clever/go-clever/client"
-	"github.com/Clever/go-clever/client/sections"
-	httptransport "github.com/go-openapi/runtime/client"
+	"github.com/Clever/clever-go/client"
+	"github.com/Clever/clever-go/client/sections"
 	"github.com/go-openapi/strfmt"
 	"github.com/stretchr/testify/assert"
+
+	httptransport "github.com/go-openapi/runtime/client"
 )
 
 // TestGetSections API Client

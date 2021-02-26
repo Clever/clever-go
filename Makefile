@@ -1,6 +1,8 @@
-PKG := "github.com/Clever/go-clever/client"
+PKG := "github.com/Clever/clever-go/"
 PWD := $(shell pwd)
-PKG_NAME := "client"
+PKG_NAME := ${PKG}
+UNAME := $(shell uname | tr '[:upper:]' '[:lower:]')
+SWAGGER_URL := $(shell curl -s https://api.github.com/repos/go-swagger/go-swagger/releases/latest | jq -r '.assets[] | select(.name | contains("'"${UNAME}"'_amd64")) | .browser_download_url')
 .PHONY: all 
 
 all: deps test ## Make all
@@ -8,14 +10,19 @@ all: deps test ## Make all
 deps: ## Go modules download
 	@go mod download
 
-generate: ## Generate client from swagger.yml 
+generate: ## Generate client and mock server from swagger.yml 
 	@swagger generate client -f swagger.yml -A clever
+	@swagger generate server -f swagger.yml -A clever
 
 gdoc:  ## View Go Docs
 	@echo "==> Running Local Go Docs"
 	@echo ""
 	@echo "Browse to: http://localhost:8181/pkg/${PKG}"
 	@godoc -http=:8181
+
+getswagger: ## Download go-swagger
+	@curl -o /usr/local/bin/swagger -L'#' "${SWAGGER_URL}"
+	@chmod +x /usr/local/bin/swagger
 
 swaggerdoc:  ## View Swagger Docs
 	@echo "==> Running Swagger Docs"

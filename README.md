@@ -24,7 +24,11 @@ For example, to release a new minor version, you can just run `gitsem minor && g
 
 ## Developing
 
-clever-go is generated using go-swagger tools
+clever-go is generated using go-swagger tools:
 ```
 make generate
+```
+for help:
+```
+make help
 ```

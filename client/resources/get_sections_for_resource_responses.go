@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/Clever/go-clever/models"
+	"github.com/Clever/clever-go/models"
 )
 
 // GetSectionsForResourceReader is a Reader for the GetSectionsForResource structure.
