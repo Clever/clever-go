@@ -1,4 +1,9 @@
+## v3.4.0 (February 26, 2021)
+  * Add support for client auto generation
+  * Add support for mock auto generation
+  * Support for v3.0 API
 ## v1.4.0 (August 4, 2015)
+  * Add Event and EventResp struct
   * Add Event and EventResp struct
 
 ## v1.3.0 (January 13, 2015)
