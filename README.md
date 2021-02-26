@@ -10,8 +10,39 @@ clever-go is a Go library for the [Clever API](https://clever.com/developers/doc
 
 ## Usage
 
+Client
+```go
+import (
+    "github.com/Clever/clever-go/client"
+	"github.com/Clever/go-clever/client/sections"
+	"github.com/go-openapi/strfmt"
+
+	httptransport "github.com/go-openapi/runtime/client"
+)
+
+func main() {
+    cfg := client.DefaultTransportConfig()
+
+	c := client.NewHTTPClientWithConfig(strfmt.NewFormats(), cfg)
+
+	sectionsParams := sections.NewGetSectionsParams()
+	auth := httptransport.BearerToken(getTokenFromEnv(assert))
+
+	sections, err := c.Sections.GetSections(sectionsParams, auth)
+}
 ```
-import "github.com/Clever/clever-go"
+
+Auth
+```go
+import (
+    "github.com/Clever/clever-go/auth"
+)
+
+func main() {
+    ctx := context.Background()
+
+	tokens, err := GetTokens(ctx, "CLEINT_ID", "CLEINT_SECRET")
+}
 ```
 
 ## Releasing a new version
