@@ -26,7 +26,7 @@ func main() {
 	c := client.NewHTTPClientWithConfig(strfmt.NewFormats(), cfg)
 
 	sectionsParams := sections.NewGetSectionsParams()
-	auth := httptransport.BearerToken(getTokenFromEnv(assert))
+	auth := httptransport.BearerToken("BEARER_TOKEN")
 
 	sections, err := c.Sections.GetSections(sectionsParams, auth)
 }
@@ -41,7 +41,7 @@ import (
 func main() {
     ctx := context.Background()
 
-	tokens, err := GetTokens(ctx, "CLEINT_ID", "CLEINT_SECRET")
+	tokens, err := GetTokens(ctx, "CLIENT_ID", "CLIENT_SECRET")
 }
 ```
 
