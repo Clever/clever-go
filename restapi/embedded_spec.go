@@ -2567,7 +2567,7 @@ func init() {
         },
         "dob": {
           "type": "string",
-          "format": "datetime",
+          "format": "date",
           "x-nullable": true,
           "x-validation": true
         },
@@ -6044,7 +6044,7 @@ func init() {
         },
         "dob": {
           "type": "string",
-          "format": "datetime",
+          "format": "date",
           "x-nullable": true,
           "x-validation": true
         },

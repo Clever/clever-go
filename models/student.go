@@ -29,8 +29,8 @@ type Student struct {
 	Credentials *Credentials `json:"credentials,omitempty"`
 
 	// dob
-	// Format: datetime
-	Dob *strfmt.DateTime `json:"dob,omitempty"`
+	// Format: date
+	Dob *strfmt.Date `json:"dob,omitempty"`
 
 	// ell status
 	// Enum: [Y N ]
@@ -192,7 +192,7 @@ func (m *Student) validateDob(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("dob", "body", "datetime", m.Dob.String(), formats); err != nil {
+	if err := validate.FormatOf("dob", "body", "date", m.Dob.String(), formats); err != nil {
 		return err
 	}
 

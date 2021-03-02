@@ -1797,7 +1797,7 @@ definitions:
         $ref: "#/definitions/Credentials"
       dob:
         type: string
-        format: datetime
+        format: date
         x-nullable: true
         x-validation: true
       ell_status:
