@@ -2567,7 +2567,7 @@ func init() {
         },
         "dob": {
           "type": "string",
-          "format": "date",
+          "pattern": "(?:[0-9]{1,2})/([0-9]{1,2})/([0-9]{4})",
           "x-nullable": true,
           "x-validation": true
         },
@@ -6044,7 +6044,7 @@ func init() {
         },
         "dob": {
           "type": "string",
-          "format": "date",
+          "pattern": "(?:[0-9]{1,2})/([0-9]{1,2})/([0-9]{4})",
           "x-nullable": true,
           "x-validation": true
         },
