@@ -74,6 +74,37 @@ func GetTokens(ctx context.Context, clientID, clientSecret string) (*TokenRespon
 	return tr, nil
 }
 
+// GetDistrictTokens - takes a client id and a client secret and returns bearer tokens
+func GetDistrictTokens(ctx context.Context, clientID, clientSecret, district string) (*TokenResponse, error) {
+	if clientID == "" || clientSecret == "" {
+		return nil, fmt.Errorf("error client id and client secret are required")
+	}
+
+	c := &http.Client{}
+
+	url := getAuthURL() + "&district=" + district
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", getAuthEncoding(clientID, clientSecret))
+
+	resp, err := c.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error making auth call: %s", err)
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, getErrorFromBody(resp.Body)
+	}
+
+	tr, err := getTokenResponseFromBody(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	return tr, nil
+}
+
 // getAuthURL - builds the auth url from the libraries constants
 func getAuthURL() string {
 	return "https://" + DefaultHost + DefaultBasePath + "tokens?owner_type=" + DefaultOwnerType

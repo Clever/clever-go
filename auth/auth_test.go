@@ -14,7 +14,6 @@ func TestGetAuthTokens(t *testing.T) {
 	assert := assert.New(t)
 
 	ctx := context.Background()
-
 	tokens, err := GetTokens(ctx, getClientIDFromEnv(assert), getClientSecretFromEnv(assert))
 
 	assert.Nil(err)
