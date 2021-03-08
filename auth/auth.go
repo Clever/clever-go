@@ -18,6 +18,8 @@ var (
 	// DefaultOwnerType is the default owner type
 	// - district is the only supported value
 	DefaultOwnerType string = "district"
+
+	defaultProto string = "https"
 )
 
 // AuthenticationError represents an auth api call error
@@ -107,7 +109,7 @@ func GetDistrictTokens(ctx context.Context, clientID, clientSecret, district str
 
 // getAuthURL - builds the auth url from the libraries constants
 func getAuthURL() string {
-	return "https://" + DefaultHost + DefaultBasePath + "tokens?owner_type=" + DefaultOwnerType
+	return defaultProto + "://" + DefaultHost + DefaultBasePath + "tokens?owner_type=" + DefaultOwnerType
 }
 
 // getAuthEncoding - base64 encodes the client id and client secret as expected by the oauth api
