@@ -1351,7 +1351,7 @@ definitions:
       launch_date:
         type: string
         x-validation: true
-        format: datetime
+        format: date
       portal_url:
         type: string
       login_methods:
@@ -1360,8 +1360,8 @@ definitions:
         items:
           type: string
       district_contact:
-        type: string
-        x-validation: true
+        type: object
+        $ref: "#/definitions/DistrictContact"
 
   Location:
     type: object
@@ -2030,6 +2030,25 @@ definitions:
         $ref: "#/definitions/Name"
       roles:
         $ref: "#/definitions/Roles"
+
+  DistrictContact:
+    type: object
+    properties:
+      id:
+        type: string
+        x-validation: true
+      title:
+        type: string
+        x-validation: true
+      district:
+        type: string
+        x-validation: true
+      email:
+        type: string
+        x-nullable: true
+      name:
+        $ref: "#/definitions/Name"
+
 
   CourseObject:
     type: object

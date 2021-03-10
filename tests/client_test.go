@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/Clever/clever-go/client"
+	"github.com/Clever/clever-go/client/districts"
 	"github.com/Clever/clever-go/client/sections"
 	"github.com/Clever/clever-go/client/users"
 	"github.com/go-openapi/runtime"
@@ -31,6 +32,11 @@ func (s *SyncTestSuite) SetupTest() {
 	// setup mock api server
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case "/districts":
+			districts, err := ioutil.ReadFile("mocks/districts.json")
+			s.Suite.Assert().Nil(err)
+			w.Header().Add("Content-Type", "application/json; charset=utf-8")
+			w.Write(districts)
 		case "/sections":
 			sections, err := ioutil.ReadFile("mocks/sections.json")
 			s.Suite.Assert().Nil(err)
@@ -104,6 +110,24 @@ func (s *SyncTestSuite) TestGetUsers() {
 	data := ok.GetPayload().Data
 	assert.NotNil(data)
 	assert.Equal("5a0c91b95c7cc000010d417c", data[0].Data.District)
+
+}
+
+// TestGetDistricts GET API /users
+func (s *SyncTestSuite) TestGetDistricts() {
+	assert := s.Suite.Assert()
+
+	ctx := context.Background()
+	params := &districts.GetDistrictsParams{
+		Context: ctx,
+	}
+
+	ok, err := s.cleverClient.Districts.GetDistricts(params, s.auth)
+	assert.Nil(err)
+	assert.NotNil(ok)
+	data := ok.GetPayload().Data
+	assert.NotNil(data)
+	assert.Equal("5a0c91b95c7cc000010d417c", data[0].Data.ID)
 
 }
 

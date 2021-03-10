@@ -21,7 +21,7 @@ import (
 type District struct {
 
 	// district contact
-	DistrictContact string `json:"district_contact,omitempty"`
+	DistrictContact *DistrictContact `json:"district_contact,omitempty"`
 
 	// error
 	Error string `json:"error,omitempty"`
@@ -34,8 +34,8 @@ type District struct {
 	LastSync *strfmt.DateTime `json:"last_sync,omitempty"`
 
 	// launch date
-	// Format: datetime
-	LaunchDate strfmt.DateTime `json:"launch_date,omitempty"`
+	// Format: date
+	LaunchDate strfmt.Date `json:"launch_date,omitempty"`
 
 	// login methods
 	LoginMethods []string `json:"login_methods"`
@@ -72,6 +72,10 @@ type District struct {
 func (m *District) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDistrictContact(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLastSync(formats); err != nil {
 		res = append(res, err)
 	}
@@ -98,6 +102,23 @@ func (m *District) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *District) validateDistrictContact(formats strfmt.Registry) error {
+	if swag.IsZero(m.DistrictContact) { // not required
+		return nil
+	}
+
+	if m.DistrictContact != nil {
+		if err := m.DistrictContact.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("district_contact")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *District) validateLastSync(formats strfmt.Registry) error {
 	if swag.IsZero(m.LastSync) { // not required
 		return nil
@@ -115,7 +136,7 @@ func (m *District) validateLaunchDate(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("launch_date", "body", "datetime", m.LaunchDate.String(), formats); err != nil {
+	if err := validate.FormatOf("launch_date", "body", "date", m.LaunchDate.String(), formats); err != nil {
 		return err
 	}
 
@@ -200,8 +221,31 @@ func (m *District) validateState(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validates this district based on context it is used
+// ContextValidate validate this district based on the context it is used
 func (m *District) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDistrictContact(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *District) contextValidateDistrictContact(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DistrictContact != nil {
+		if err := m.DistrictContact.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("district_contact")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 

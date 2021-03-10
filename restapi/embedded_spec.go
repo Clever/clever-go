@@ -1843,8 +1843,8 @@ func init() {
       "type": "object",
       "properties": {
         "district_contact": {
-          "type": "string",
-          "x-validation": true
+          "type": "object",
+          "$ref": "#/definitions/DistrictContact"
         },
         "error": {
           "type": "string"
@@ -1861,7 +1861,7 @@ func init() {
         },
         "launch_date": {
           "type": "string",
-          "format": "datetime",
+          "format": "date",
           "x-validation": true
         },
         "login_methods": {
@@ -1926,6 +1926,30 @@ func init() {
         "title": {
           "type": "string",
           "x-nullable": true
+        }
+      }
+    },
+    "DistrictContact": {
+      "type": "object",
+      "properties": {
+        "district": {
+          "type": "string",
+          "x-validation": true
+        },
+        "email": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "x-validation": true
+        },
+        "name": {
+          "$ref": "#/definitions/Name"
+        },
+        "title": {
+          "type": "string",
+          "x-validation": true
         }
       }
     },
@@ -5320,8 +5344,8 @@ func init() {
       "type": "object",
       "properties": {
         "district_contact": {
-          "type": "string",
-          "x-validation": true
+          "type": "object",
+          "$ref": "#/definitions/DistrictContact"
         },
         "error": {
           "type": "string"
@@ -5338,7 +5362,7 @@ func init() {
         },
         "launch_date": {
           "type": "string",
-          "format": "datetime",
+          "format": "date",
           "x-validation": true
         },
         "login_methods": {
@@ -5403,6 +5427,30 @@ func init() {
         "title": {
           "type": "string",
           "x-nullable": true
+        }
+      }
+    },
+    "DistrictContact": {
+      "type": "object",
+      "properties": {
+        "district": {
+          "type": "string",
+          "x-validation": true
+        },
+        "email": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "x-validation": true
+        },
+        "name": {
+          "$ref": "#/definitions/Name"
+        },
+        "title": {
+          "type": "string",
+          "x-validation": true
         }
       }
     },
