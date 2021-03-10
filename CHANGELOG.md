@@ -1,4 +1,4 @@
-## v3.4.0 (February 26, 2021)
+## v3.0.0 (February 26, 2021)
   * Add support for client auto generation
   * Add support for mock auto generation
   * Support for v3.0 API
