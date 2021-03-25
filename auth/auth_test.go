@@ -38,10 +38,6 @@ func (s *AuthTestSuite) SetupTest() {
 	defaultProto = "http"
 }
 
-func (s *AuthTestSuite) TearDownSuite() {
-	s.mockClever.Close()
-}
-
 // TestGetTokens GET API /tokens
 func (s *AuthTestSuite) TestGetTokens() {
 	assert := s.Suite.Assert()
@@ -52,6 +48,26 @@ func (s *AuthTestSuite) TestGetTokens() {
 	assert.Nil(err)
 	assert.NotNil(tokens)
 	assert.Equal("12345fcabb18e535b594ed2096c5c8e242362be5", tokens.Data[0].AccessToken)
+
+}
+
+// TestGetTokensByOwner get a token from the response by owner id
+func (s *AuthTestSuite) TestGetTokenByOwner() {
+	assert := s.Suite.Assert()
+
+	ctx := context.Background()
+	tokens, err := GetTokens(ctx, "CLIENT_ID", "CLIENT_SECRET")
+	assert.Nil(err)
+	assert.NotNil(tokens)
+	assert.Equal("12345fcabb18e535b594ed2096c5c8e242362be5", tokens.Data[0].AccessToken)
+
+	token, err := tokens.GetTokenByOwner("12341b95c7cc000010d417c")
+	assert.Nil(err)
+	assert.Equal("12345fcabb18e535b594ed2096c5c8e242362be5", token.AccessToken)
+
+	token, err = tokens.GetTokenByOwner("test")
+	assert.Nil(token)
+	assert.NotNil(err)
 
 }
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -18,6 +19,8 @@ var (
 	// DefaultOwnerType is the default owner type
 	// - district is the only supported value
 	DefaultOwnerType string = "district"
+	// ErrTokenNotFound is returned when we can't get the token
+	ErrTokenNotFound = errors.New("no token was found")
 
 	defaultProto string = "https"
 )
@@ -30,20 +33,23 @@ type AuthenticationError struct {
 
 // TokenResponse reprents the token response form an auth api call
 type TokenResponse struct {
-	Data []struct {
-		ID      string    `json:"id"`
-		Created time.Time `json:"created"`
-		Owner   struct {
-			Type string `json:"type"`
-			ID   string `json:"id"`
-		} `json:"owner"`
-		AccessToken string   `json:"access_token"`
-		Scopes      []string `json:"scopes"`
-	} `json:"data"`
+	Data  []*Token `json:"data"`
 	Links []struct {
 		Rel string `json:"rel"`
 		URI string `json:"uri"`
 	} `json:"links"`
+}
+
+// Token represents a single token from the auth api
+type Token struct {
+	ID      string    `json:"id"`
+	Created time.Time `json:"created"`
+	Owner   struct {
+		Type string `json:"type"`
+		ID   string `json:"id"`
+	} `json:"owner"`
+	AccessToken string   `json:"access_token"`
+	Scopes      []string `json:"scopes"`
 }
 
 // GetTokens - takes a client id and a client secret and returns bearer tokens
@@ -142,4 +148,14 @@ func getTokenResponseFromBody(body io.ReadCloser) (*TokenResponse, error) {
 	}
 
 	return tr, nil
+}
+
+// GetTokenByOwner takes an id and returns the associated token that is in the token response
+func (tr *TokenResponse) GetTokenByOwner(id string) (*Token, error) {
+	for _, token := range tr.Data {
+		if token.Owner.ID == id {
+			return token, nil
+		}
+	}
+	return nil, ErrTokenNotFound
 }
