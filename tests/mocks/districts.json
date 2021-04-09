@@ -1,0 +1,37 @@
+{
+    "data": [
+        {
+            "data": {
+                "name": "#DEMO_DISTRICT",
+                "portal_url": "https://clever.com/in/demo-district95c7cc0123410d417c",
+                "sis_type": "sftp",
+                "error": "",
+                "launch_date": "2021-03-10",
+                "district_contact": {
+                    "title": "",
+                    "district": "5a0c91b95c7cc000010d417c",
+                    "email": "bob.ross@example.com",
+                    "name": {
+                        "first": "Bob",
+                        "last": "Ross"
+                    },
+                    "id": "5a0c91b96296d60001fe053e"
+                },
+                "state": "running",
+                "last_sync": "2021-03-02T22:25:23.709Z",
+                "login_methods": [
+                    "Clever Badges",
+                    "Clever Passwords"
+                ],
+                "id": "5a0c91b95c7cc000010d417c"
+            },
+            "uri": "/v3.0/districts/5a0c91b95c7cc000010d417c"
+        }
+    ],
+    "links": [
+        {
+            "rel": "self",
+            "uri": "/v3.0/districts"
+        }
+    ]
+}
