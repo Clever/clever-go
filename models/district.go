@@ -50,12 +50,12 @@ type District struct {
 	NcesID *string `json:"nces_id,omitempty"`
 
 	// pause end
-	// Format: datetime
-	PauseEnd *strfmt.DateTime `json:"pause_end,omitempty"`
+	// Format: date
+	PauseEnd *strfmt.Date `json:"pause_end,omitempty"`
 
 	// pause start
-	// Format: datetime
-	PauseStart *strfmt.DateTime `json:"pause_start,omitempty"`
+	// Format: date
+	PauseStart *strfmt.Date `json:"pause_start,omitempty"`
 
 	// portal url
 	PortalURL string `json:"portal_url,omitempty"`
@@ -148,7 +148,7 @@ func (m *District) validatePauseEnd(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("pause_end", "body", "datetime", m.PauseEnd.String(), formats); err != nil {
+	if err := validate.FormatOf("pause_end", "body", "date", m.PauseEnd.String(), formats); err != nil {
 		return err
 	}
 
@@ -160,7 +160,7 @@ func (m *District) validatePauseStart(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("pause_start", "body", "datetime", m.PauseStart.String(), formats); err != nil {
+	if err := validate.FormatOf("pause_start", "body", "date", m.PauseStart.String(), formats); err != nil {
 		return err
 	}
 

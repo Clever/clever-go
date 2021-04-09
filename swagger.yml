@@ -1342,12 +1342,12 @@ definitions:
         type: string
         x-validation: true
         x-nullable: true
-        format: datetime
+        format: date
       pause_end:
         type: string
         x-validation: true
         x-nullable: true
-        format: datetime
+        format: date
       launch_date:
         type: string
         x-validation: true

@@ -1884,13 +1884,13 @@ func init() {
         },
         "pause_end": {
           "type": "string",
-          "format": "datetime",
+          "format": "date",
           "x-nullable": true,
           "x-validation": true
         },
         "pause_start": {
           "type": "string",
-          "format": "datetime",
+          "format": "date",
           "x-nullable": true,
           "x-validation": true
         },
@@ -5385,13 +5385,13 @@ func init() {
         },
         "pause_end": {
           "type": "string",
-          "format": "datetime",
+          "format": "date",
           "x-nullable": true,
           "x-validation": true
         },
         "pause_start": {
           "type": "string",
-          "format": "datetime",
+          "format": "date",
           "x-nullable": true,
           "x-validation": true
         },
