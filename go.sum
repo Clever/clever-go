@@ -1,0 +1,12 @@
+github.com/ant0ine/go-urlrouter v0.0.0-20161106000400-8cda547fbee3 h1:slkFjjBvRZ7h79SUtVAzBA2quk3CYm7OM8THF9zFC/U=
+github.com/ant0ine/go-urlrouter v0.0.0-20161106000400-8cda547fbee3/go.mod h1:Wq2NqmY8O3scx5b2Q2kIkYzW9qFnPaxsjQaiqxFVCWM=
+github.com/golang/protobuf v0.0.0-20171021043952-1643683e1b54 h1:nRNJXiJvemchkOTn0V4U11TZkvacB94gTzbTZbSA7Rw=
+github.com/golang/protobuf v0.0.0-20171021043952-1643683e1b54/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
+golang.org/x/net v0.0.0-20171107184841-a337091b0525 h1:KtEW9ll78DlakrUaoIv2p6oozE+wN/abax8yB4Y8+Fs=
+golang.org/x/net v0.0.0-20171107184841-a337091b0525/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+golang.org/x/oauth2 v0.0.0-20171106152852-9ff8ebcc8e24 h1:nP0LlV1P7+z/qtbjHygz+Bba7QsbB4MqdhGJmAyicuI=
+golang.org/x/oauth2 v0.0.0-20171106152852-9ff8ebcc8e24/go.mod h1:N/0e6XlmueqKjAGxoOufVs8QHGRruUQn6yWY3a++T0U=
+golang.org/x/sync v0.0.0-20210220032951-036812b2e83c h1:5KslGYwFpkhGh+Q16bwMP3cOontH8FOep7tGV86Y7SQ=
+golang.org/x/sync v0.0.0-20210220032951-036812b2e83c/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
+google.golang.org/appengine v1.0.0 h1:dN4LljjBKVChsv0XCSI+zbyzdqrkEwX5LQFUMRSGqOc=
+google.golang.org/appengine v1.0.0/go.mod h1:EbEs0AVv82hx2wNQdGPgUI5lhzA/G0D9YwlJXL52JkM=
