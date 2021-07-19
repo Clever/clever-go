@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"testing"
 
-	mock "github.com/Clever/clever-go/mock"
+	mock "github.com/Clever/clever-go/v3/mock"
 )
 
 func TestQueryDistricts(t *testing.T) {
