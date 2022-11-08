@@ -15,7 +15,7 @@ import (
 
 const debug = false
 
-var unameCache []byte
+var unameCache *string
 
 // Clever wraps the Clever API at the specified URL e.g. "https://api.clever.com"
 type Clever struct {
@@ -26,13 +26,15 @@ type Clever struct {
 func setTrackingHeaders(req *http.Request) {
 	// Want to swallow errors here because desired behavior is nil --> blank string if value doesn't exist
 	if unameCache == nil {
-		unameCache, _ = exec.Command("uname", "-a").Output()
+		unameBytes, _ := exec.Command("uname", "-a").Output()
+		unameString := fmt.Sprintf("%s", string(unameBytes))
+		unameCache = &unameString
 	}
 	customUA, _ := json.Marshal(map[string]string{
 		"lang":             "go",
 		"lang_version":     runtime.Version(),
 		"platform":         runtime.GOOS,
-		"uname":            fmt.Sprintf("%s", unameCache),
+		"uname":            *unameCache,
 		"publisher":        "clever",
 		"bindings_version": Version,
 	})
@@ -330,7 +332,8 @@ func (clever *Clever) Request(method string, path string, params url.Values, bod
 	// Create request URI from Clever base, path, params
 	uri := fmt.Sprintf("%s%s", clever.url, path)
 	if params != nil {
-		uri = fmt.Sprintf("%s%s?%s", clever.url, path, params.Encode())
+		// Append params to already-built uri
+		uri = fmt.Sprintf("%s?%s", uri, params.Encode())
 	}
 
 	var bodyReader io.Reader
@@ -361,24 +364,26 @@ func (clever *Clever) Request(method string, path string, params url.Values, bod
 		log.Printf("response:\n")
 		log.Printf("%v\n", string(dump))
 	}
-	if r.StatusCode == 429 {
+	switch r.StatusCode {
+	case 429:
 		return &TooManyRequestsError{r.Header}
-	} else if r.StatusCode != 200 {
+	case 200:
+		err = json.NewDecoder(r.Body).Decode(resp)
+		return err
+	default:
 		var error CleverError
 		if err := json.NewDecoder(r.Body).Decode(&error); err != nil {
 			return err
 		}
 		return &error
 	}
-	err = json.NewDecoder(r.Body).Decode(resp)
-	return err
 }
 
 // PagedResult wraps a response. It allows for paged reading of a response in conjunction with QueryAll() and Next()
 type PagedResult struct {
 	clever         Clever
 	nextPagePath   string
-	lastData       []map[string]interface{}
+	lastData       []map[string]json.RawMessage
 	lastDataCursor int
 	lastError      error
 }
@@ -406,7 +411,7 @@ func (r *PagedResult) Next() bool {
 	}
 
 	resp := &struct {
-		Data   []map[string]interface{}
+		Data   []map[string]json.RawMessage
 		Links  []Link
 		Paging Paging
 	}{}
@@ -428,11 +433,7 @@ func (r *PagedResult) Next() bool {
 
 // Scan parses the next page of results in a PagedResult r into result. Scan throws an error if r is invalid JSON.
 func (r *PagedResult) Scan(result interface{}) error {
-	data, err := json.Marshal(r.lastData[r.lastDataCursor]["data"])
-	if err != nil {
-		return err
-	}
-	return json.Unmarshal(data, result)
+	return json.Unmarshal(r.lastData[r.lastDataCursor]["data"], result)
 }
 
 // Error returns the error in a response, if there is one
