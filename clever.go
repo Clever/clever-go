@@ -64,7 +64,7 @@ type TooManyRequestsError struct {
 	Header http.Header
 }
 
-// TooManyRequestsError creates a TooManyRequestsError
+// Error creates a TooManyRequestsError
 func (err *TooManyRequestsError) Error() string {
 	errString := "Too Many Requests"
 	for bucketIndex, bucketName := range err.Header[http.CanonicalHeaderKey("X-Ratelimit-Bucket")] {
