@@ -23,6 +23,9 @@ type Section struct {
 	// course
 	Course *string `json:"course,omitempty"`
 
+	// course name
+	CourseName *string `json:"course_name,omitempty"`
+
 	// created
 	// Format: datetime
 	Created strfmt.DateTime `json:"created,omitempty"`
@@ -74,6 +77,9 @@ type Section struct {
 
 	// term id
 	TermID *string `json:"term_id,omitempty"`
+
+	// term name
+	TermName *string `json:"term_name,omitempty"`
 }
 
 // Validate validates this section

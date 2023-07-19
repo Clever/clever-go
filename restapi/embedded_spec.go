@@ -28,7 +28,7 @@ func init() {
   "info": {
     "description": "Serves the Clever Data API",
     "title": "Data API",
-    "version": "3.0.0"
+    "version": "3.0.1"
   },
   "host": "api.clever.com",
   "paths": {
@@ -2392,6 +2392,10 @@ func init() {
           "x-nullable": true,
           "x-validation": true
         },
+        "course_name": {
+          "type": "string",
+          "x-nullable": true
+        },
         "created": {
           "type": "string",
           "format": "datetime",
@@ -2502,6 +2506,10 @@ func init() {
           "type": "string",
           "x-nullable": true,
           "x-validation": true
+        },
+        "term_name": {
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -3418,7 +3426,7 @@ func init() {
   "info": {
     "description": "Serves the Clever Data API",
     "title": "Data API",
-    "version": "3.0.0"
+    "version": "3.0.1"
   },
   "host": "api.clever.com",
   "paths": {
@@ -5893,6 +5901,10 @@ func init() {
           "x-nullable": true,
           "x-validation": true
         },
+        "course_name": {
+          "type": "string",
+          "x-nullable": true
+        },
         "created": {
           "type": "string",
           "format": "datetime",
@@ -6003,6 +6015,10 @@ func init() {
           "type": "string",
           "x-nullable": true,
           "x-validation": true
+        },
+        "term_name": {
+          "type": "string",
+          "x-nullable": true
         }
       }
     },

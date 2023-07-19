@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Data API
   description: Serves the Clever Data API
-  version: 3.0.0
+  version: 3.0.1
 schemes:
   - https
 produces:
@@ -1573,6 +1573,9 @@ definitions:
         type: string
         x-validation: true
         x-nullable: true
+      course_name:
+        type: string
+        x-nullable: true
       created:
         type: string
         format: datetime
@@ -1658,6 +1661,9 @@ definitions:
       term_id:
         type: string
         x-validation: true
+        x-nullable: true
+      term_name:
+        type: string
         x-nullable: true
       ext:
         type: object
