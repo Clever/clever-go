@@ -50,7 +50,7 @@ type ClientService interface {
 }
 
 /*
-  GetCourseForSection Returns the course for a section
+GetCourseForSection Returns the course for a section
 */
 func (a *Client) GetCourseForSection(params *GetCourseForSectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCourseForSectionOK, error) {
 	// TODO: Validate the params before sending
@@ -89,7 +89,7 @@ func (a *Client) GetCourseForSection(params *GetCourseForSectionParams, authInfo
 }
 
 /*
-  GetDistrictForSection Returns the district for a section
+GetDistrictForSection Returns the district for a section
 */
 func (a *Client) GetDistrictForSection(params *GetDistrictForSectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictForSectionOK, error) {
 	// TODO: Validate the params before sending
@@ -128,7 +128,7 @@ func (a *Client) GetDistrictForSection(params *GetDistrictForSectionParams, auth
 }
 
 /*
-  GetResourcesForSection Returns the resources for a section
+GetResourcesForSection Returns the resources for a section
 */
 func (a *Client) GetResourcesForSection(params *GetResourcesForSectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourcesForSectionOK, error) {
 	// TODO: Validate the params before sending
@@ -167,7 +167,7 @@ func (a *Client) GetResourcesForSection(params *GetResourcesForSectionParams, au
 }
 
 /*
-  GetSchoolForSection Returns the school for a section
+GetSchoolForSection Returns the school for a section
 */
 func (a *Client) GetSchoolForSection(params *GetSchoolForSectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchoolForSectionOK, error) {
 	// TODO: Validate the params before sending
@@ -206,7 +206,7 @@ func (a *Client) GetSchoolForSection(params *GetSchoolForSectionParams, authInfo
 }
 
 /*
-  GetSection Returns a specific section
+GetSection Returns a specific section
 */
 func (a *Client) GetSection(params *GetSectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSectionOK, error) {
 	// TODO: Validate the params before sending
@@ -245,7 +245,7 @@ func (a *Client) GetSection(params *GetSectionParams, authInfo runtime.ClientAut
 }
 
 /*
-  GetSections Returns a list of sections
+GetSections Returns a list of sections
 */
 func (a *Client) GetSections(params *GetSectionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSectionsOK, error) {
 	// TODO: Validate the params before sending
@@ -284,7 +284,7 @@ func (a *Client) GetSections(params *GetSectionsParams, authInfo runtime.ClientA
 }
 
 /*
-  GetTermForSection Returns the term for a section
+GetTermForSection Returns the term for a section
 */
 func (a *Client) GetTermForSection(params *GetTermForSectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTermForSectionOK, error) {
 	// TODO: Validate the params before sending
@@ -323,7 +323,7 @@ func (a *Client) GetTermForSection(params *GetTermForSectionParams, authInfo run
 }
 
 /*
-  GetUsersForSection Returns the student and/or teacher users for a section
+GetUsersForSection Returns the student and/or teacher users for a section
 */
 func (a *Client) GetUsersForSection(params *GetUsersForSectionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsersForSectionOK, error) {
 	// TODO: Validate the params before sending

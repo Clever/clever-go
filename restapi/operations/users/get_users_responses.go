@@ -16,7 +16,8 @@ import (
 // GetUsersOKCode is the HTTP code returned for type GetUsersOK
 const GetUsersOKCode int = 200
 
-/*GetUsersOK OK Response
+/*
+GetUsersOK OK Response
 
 swagger:response getUsersOK
 */

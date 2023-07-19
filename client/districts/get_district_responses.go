@@ -36,7 +36,7 @@ func (o *GetDistrictReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /districts/{id}] getDistrict", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetDistrictOK() *GetDistrictOK {
 	return &GetDistrictOK{}
 }
 
-/* GetDistrictOK describes a response with status code 200, with default header values.
+/*
+GetDistrictOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetDistrictOK struct {
 	Payload *models.DistrictResponse
 }
 
+// IsSuccess returns true when this get district o k response has a 2xx status code
+func (o *GetDistrictOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get district o k response has a 3xx status code
+func (o *GetDistrictOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get district o k response has a 4xx status code
+func (o *GetDistrictOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get district o k response has a 5xx status code
+func (o *GetDistrictOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get district o k response a status code equal to that given
+func (o *GetDistrictOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get district o k response
+func (o *GetDistrictOK) Code() int {
+	return 200
+}
+
 func (o *GetDistrictOK) Error() string {
 	return fmt.Sprintf("[GET /districts/{id}][%d] getDistrictOK  %+v", 200, o.Payload)
 }
+
+func (o *GetDistrictOK) String() string {
+	return fmt.Sprintf("[GET /districts/{id}][%d] getDistrictOK  %+v", 200, o.Payload)
+}
+
 func (o *GetDistrictOK) GetPayload() *models.DistrictResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetDistrictNotFound() *GetDistrictNotFound {
 	return &GetDistrictNotFound{}
 }
 
-/* GetDistrictNotFound describes a response with status code 404, with default header values.
+/*
+GetDistrictNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetDistrictNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get district not found response has a 2xx status code
+func (o *GetDistrictNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get district not found response has a 3xx status code
+func (o *GetDistrictNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get district not found response has a 4xx status code
+func (o *GetDistrictNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get district not found response has a 5xx status code
+func (o *GetDistrictNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get district not found response a status code equal to that given
+func (o *GetDistrictNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get district not found response
+func (o *GetDistrictNotFound) Code() int {
+	return 404
+}
+
 func (o *GetDistrictNotFound) Error() string {
 	return fmt.Sprintf("[GET /districts/{id}][%d] getDistrictNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetDistrictNotFound) String() string {
+	return fmt.Sprintf("[GET /districts/{id}][%d] getDistrictNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetDistrictNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

@@ -36,7 +36,7 @@ func (o *GetResourceReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /resources/{id}] getResource", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetResourceOK() *GetResourceOK {
 	return &GetResourceOK{}
 }
 
-/* GetResourceOK describes a response with status code 200, with default header values.
+/*
+GetResourceOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetResourceOK struct {
 	Payload *models.ResourceResponse
 }
 
+// IsSuccess returns true when this get resource o k response has a 2xx status code
+func (o *GetResourceOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get resource o k response has a 3xx status code
+func (o *GetResourceOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get resource o k response has a 4xx status code
+func (o *GetResourceOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get resource o k response has a 5xx status code
+func (o *GetResourceOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get resource o k response a status code equal to that given
+func (o *GetResourceOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get resource o k response
+func (o *GetResourceOK) Code() int {
+	return 200
+}
+
 func (o *GetResourceOK) Error() string {
 	return fmt.Sprintf("[GET /resources/{id}][%d] getResourceOK  %+v", 200, o.Payload)
 }
+
+func (o *GetResourceOK) String() string {
+	return fmt.Sprintf("[GET /resources/{id}][%d] getResourceOK  %+v", 200, o.Payload)
+}
+
 func (o *GetResourceOK) GetPayload() *models.ResourceResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetResourceNotFound() *GetResourceNotFound {
 	return &GetResourceNotFound{}
 }
 
-/* GetResourceNotFound describes a response with status code 404, with default header values.
+/*
+GetResourceNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetResourceNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get resource not found response has a 2xx status code
+func (o *GetResourceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get resource not found response has a 3xx status code
+func (o *GetResourceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get resource not found response has a 4xx status code
+func (o *GetResourceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get resource not found response has a 5xx status code
+func (o *GetResourceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get resource not found response a status code equal to that given
+func (o *GetResourceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get resource not found response
+func (o *GetResourceNotFound) Code() int {
+	return 404
+}
+
 func (o *GetResourceNotFound) Error() string {
 	return fmt.Sprintf("[GET /resources/{id}][%d] getResourceNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetResourceNotFound) String() string {
+	return fmt.Sprintf("[GET /resources/{id}][%d] getResourceNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetResourceNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

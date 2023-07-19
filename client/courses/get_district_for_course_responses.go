@@ -36,7 +36,7 @@ func (o *GetDistrictForCourseReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /courses/{id}/district] getDistrictForCourse", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetDistrictForCourseOK() *GetDistrictForCourseOK {
 	return &GetDistrictForCourseOK{}
 }
 
-/* GetDistrictForCourseOK describes a response with status code 200, with default header values.
+/*
+GetDistrictForCourseOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetDistrictForCourseOK struct {
 	Payload *models.DistrictResponse
 }
 
+// IsSuccess returns true when this get district for course o k response has a 2xx status code
+func (o *GetDistrictForCourseOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get district for course o k response has a 3xx status code
+func (o *GetDistrictForCourseOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get district for course o k response has a 4xx status code
+func (o *GetDistrictForCourseOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get district for course o k response has a 5xx status code
+func (o *GetDistrictForCourseOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get district for course o k response a status code equal to that given
+func (o *GetDistrictForCourseOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get district for course o k response
+func (o *GetDistrictForCourseOK) Code() int {
+	return 200
+}
+
 func (o *GetDistrictForCourseOK) Error() string {
 	return fmt.Sprintf("[GET /courses/{id}/district][%d] getDistrictForCourseOK  %+v", 200, o.Payload)
 }
+
+func (o *GetDistrictForCourseOK) String() string {
+	return fmt.Sprintf("[GET /courses/{id}/district][%d] getDistrictForCourseOK  %+v", 200, o.Payload)
+}
+
 func (o *GetDistrictForCourseOK) GetPayload() *models.DistrictResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetDistrictForCourseNotFound() *GetDistrictForCourseNotFound {
 	return &GetDistrictForCourseNotFound{}
 }
 
-/* GetDistrictForCourseNotFound describes a response with status code 404, with default header values.
+/*
+GetDistrictForCourseNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetDistrictForCourseNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get district for course not found response has a 2xx status code
+func (o *GetDistrictForCourseNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get district for course not found response has a 3xx status code
+func (o *GetDistrictForCourseNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get district for course not found response has a 4xx status code
+func (o *GetDistrictForCourseNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get district for course not found response has a 5xx status code
+func (o *GetDistrictForCourseNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get district for course not found response a status code equal to that given
+func (o *GetDistrictForCourseNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get district for course not found response
+func (o *GetDistrictForCourseNotFound) Code() int {
+	return 404
+}
+
 func (o *GetDistrictForCourseNotFound) Error() string {
 	return fmt.Sprintf("[GET /courses/{id}/district][%d] getDistrictForCourseNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetDistrictForCourseNotFound) String() string {
+	return fmt.Sprintf("[GET /courses/{id}/district][%d] getDistrictForCourseNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetDistrictForCourseNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

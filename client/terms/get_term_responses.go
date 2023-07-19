@@ -36,7 +36,7 @@ func (o *GetTermReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /terms/{id}] getTerm", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetTermOK() *GetTermOK {
 	return &GetTermOK{}
 }
 
-/* GetTermOK describes a response with status code 200, with default header values.
+/*
+GetTermOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetTermOK struct {
 	Payload *models.TermResponse
 }
 
+// IsSuccess returns true when this get term o k response has a 2xx status code
+func (o *GetTermOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get term o k response has a 3xx status code
+func (o *GetTermOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get term o k response has a 4xx status code
+func (o *GetTermOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get term o k response has a 5xx status code
+func (o *GetTermOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get term o k response a status code equal to that given
+func (o *GetTermOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get term o k response
+func (o *GetTermOK) Code() int {
+	return 200
+}
+
 func (o *GetTermOK) Error() string {
 	return fmt.Sprintf("[GET /terms/{id}][%d] getTermOK  %+v", 200, o.Payload)
 }
+
+func (o *GetTermOK) String() string {
+	return fmt.Sprintf("[GET /terms/{id}][%d] getTermOK  %+v", 200, o.Payload)
+}
+
 func (o *GetTermOK) GetPayload() *models.TermResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetTermNotFound() *GetTermNotFound {
 	return &GetTermNotFound{}
 }
 
-/* GetTermNotFound describes a response with status code 404, with default header values.
+/*
+GetTermNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetTermNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get term not found response has a 2xx status code
+func (o *GetTermNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get term not found response has a 3xx status code
+func (o *GetTermNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get term not found response has a 4xx status code
+func (o *GetTermNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get term not found response has a 5xx status code
+func (o *GetTermNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get term not found response a status code equal to that given
+func (o *GetTermNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get term not found response
+func (o *GetTermNotFound) Code() int {
+	return 404
+}
+
 func (o *GetTermNotFound) Error() string {
 	return fmt.Sprintf("[GET /terms/{id}][%d] getTermNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetTermNotFound) String() string {
+	return fmt.Sprintf("[GET /terms/{id}][%d] getTermNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetTermNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

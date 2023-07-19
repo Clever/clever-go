@@ -29,10 +29,10 @@ func NewGetSectionsForResource(ctx *middleware.Context, handler GetSectionsForRe
 	return &GetSectionsForResource{Context: ctx, Handler: handler}
 }
 
-/* GetSectionsForResource swagger:route GET /resources/{id}/sections Resources getSectionsForResource
+/*
+	GetSectionsForResource swagger:route GET /resources/{id}/sections Resources getSectionsForResource
 
 Returns the sections for a resource
-
 */
 type GetSectionsForResource struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetSectionsForResource struct {
 func (o *GetSectionsForResource) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetSectionsForResourceParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetSectionsForResource) ServeHTTP(rw http.ResponseWriter, r *http.Reque
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

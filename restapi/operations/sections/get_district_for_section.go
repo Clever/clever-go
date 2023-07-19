@@ -29,10 +29,10 @@ func NewGetDistrictForSection(ctx *middleware.Context, handler GetDistrictForSec
 	return &GetDistrictForSection{Context: ctx, Handler: handler}
 }
 
-/* GetDistrictForSection swagger:route GET /sections/{id}/district Sections getDistrictForSection
+/*
+	GetDistrictForSection swagger:route GET /sections/{id}/district Sections getDistrictForSection
 
 Returns the district for a section
-
 */
 type GetDistrictForSection struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetDistrictForSection struct {
 func (o *GetDistrictForSection) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetDistrictForSectionParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetDistrictForSection) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

@@ -73,6 +73,8 @@ func (m *Roles) validateContact(formats strfmt.Registry) error {
 		if err := m.Contact.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("contact")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("contact")
 			}
 			return err
 		}
@@ -90,6 +92,8 @@ func (m *Roles) validateDistrictadmin(formats strfmt.Registry) error {
 		if err := m.Districtadmin.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("districtadmin")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("districtadmin")
 			}
 			return err
 		}
@@ -107,6 +111,8 @@ func (m *Roles) validateStaff(formats strfmt.Registry) error {
 		if err := m.Staff.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("staff")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("staff")
 			}
 			return err
 		}
@@ -124,6 +130,8 @@ func (m *Roles) validateStudent(formats strfmt.Registry) error {
 		if err := m.Student.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("student")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("student")
 			}
 			return err
 		}
@@ -141,6 +149,8 @@ func (m *Roles) validateTeacher(formats strfmt.Registry) error {
 		if err := m.Teacher.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("teacher")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("teacher")
 			}
 			return err
 		}
@@ -182,9 +192,16 @@ func (m *Roles) ContextValidate(ctx context.Context, formats strfmt.Registry) er
 func (m *Roles) contextValidateContact(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Contact != nil {
+
+		if swag.IsZero(m.Contact) { // not required
+			return nil
+		}
+
 		if err := m.Contact.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("contact")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("contact")
 			}
 			return err
 		}
@@ -196,9 +213,16 @@ func (m *Roles) contextValidateContact(ctx context.Context, formats strfmt.Regis
 func (m *Roles) contextValidateDistrictadmin(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Districtadmin != nil {
+
+		if swag.IsZero(m.Districtadmin) { // not required
+			return nil
+		}
+
 		if err := m.Districtadmin.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("districtadmin")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("districtadmin")
 			}
 			return err
 		}
@@ -210,9 +234,16 @@ func (m *Roles) contextValidateDistrictadmin(ctx context.Context, formats strfmt
 func (m *Roles) contextValidateStaff(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Staff != nil {
+
+		if swag.IsZero(m.Staff) { // not required
+			return nil
+		}
+
 		if err := m.Staff.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("staff")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("staff")
 			}
 			return err
 		}
@@ -224,9 +255,16 @@ func (m *Roles) contextValidateStaff(ctx context.Context, formats strfmt.Registr
 func (m *Roles) contextValidateStudent(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Student != nil {
+
+		if swag.IsZero(m.Student) { // not required
+			return nil
+		}
+
 		if err := m.Student.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("student")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("student")
 			}
 			return err
 		}
@@ -238,9 +276,16 @@ func (m *Roles) contextValidateStudent(ctx context.Context, formats strfmt.Regis
 func (m *Roles) contextValidateTeacher(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Teacher != nil {
+
+		if swag.IsZero(m.Teacher) { // not required
+			return nil
+		}
+
 		if err := m.Teacher.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("teacher")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("teacher")
 			}
 			return err
 		}

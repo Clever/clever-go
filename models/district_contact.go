@@ -57,6 +57,8 @@ func (m *DistrictContact) validateName(formats strfmt.Registry) error {
 		if err := m.Name.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("name")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("name")
 			}
 			return err
 		}
@@ -82,9 +84,16 @@ func (m *DistrictContact) ContextValidate(ctx context.Context, formats strfmt.Re
 func (m *DistrictContact) contextValidateName(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Name != nil {
+
+		if swag.IsZero(m.Name) { // not required
+			return nil
+		}
+
 		if err := m.Name.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("name")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("name")
 			}
 			return err
 		}

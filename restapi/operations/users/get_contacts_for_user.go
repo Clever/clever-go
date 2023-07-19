@@ -29,10 +29,10 @@ func NewGetContactsForUser(ctx *middleware.Context, handler GetContactsForUserHa
 	return &GetContactsForUser{Context: ctx, Handler: handler}
 }
 
-/* GetContactsForUser swagger:route GET /users/{id}/mycontacts Users getContactsForUser
+/*
+	GetContactsForUser swagger:route GET /users/{id}/mycontacts Users getContactsForUser
 
 Returns the contact users for a student user
-
 */
 type GetContactsForUser struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetContactsForUser struct {
 func (o *GetContactsForUser) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetContactsForUserParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetContactsForUser) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

@@ -36,7 +36,7 @@ func (o *GetSectionsForUserReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/{id}/sections] getSectionsForUser", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetSectionsForUserOK() *GetSectionsForUserOK {
 	return &GetSectionsForUserOK{}
 }
 
-/* GetSectionsForUserOK describes a response with status code 200, with default header values.
+/*
+GetSectionsForUserOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetSectionsForUserOK struct {
 	Payload *models.SectionsResponse
 }
 
+// IsSuccess returns true when this get sections for user o k response has a 2xx status code
+func (o *GetSectionsForUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get sections for user o k response has a 3xx status code
+func (o *GetSectionsForUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get sections for user o k response has a 4xx status code
+func (o *GetSectionsForUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get sections for user o k response has a 5xx status code
+func (o *GetSectionsForUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get sections for user o k response a status code equal to that given
+func (o *GetSectionsForUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get sections for user o k response
+func (o *GetSectionsForUserOK) Code() int {
+	return 200
+}
+
 func (o *GetSectionsForUserOK) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/sections][%d] getSectionsForUserOK  %+v", 200, o.Payload)
 }
+
+func (o *GetSectionsForUserOK) String() string {
+	return fmt.Sprintf("[GET /users/{id}/sections][%d] getSectionsForUserOK  %+v", 200, o.Payload)
+}
+
 func (o *GetSectionsForUserOK) GetPayload() *models.SectionsResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetSectionsForUserNotFound() *GetSectionsForUserNotFound {
 	return &GetSectionsForUserNotFound{}
 }
 
-/* GetSectionsForUserNotFound describes a response with status code 404, with default header values.
+/*
+GetSectionsForUserNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetSectionsForUserNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get sections for user not found response has a 2xx status code
+func (o *GetSectionsForUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get sections for user not found response has a 3xx status code
+func (o *GetSectionsForUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get sections for user not found response has a 4xx status code
+func (o *GetSectionsForUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get sections for user not found response has a 5xx status code
+func (o *GetSectionsForUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get sections for user not found response a status code equal to that given
+func (o *GetSectionsForUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get sections for user not found response
+func (o *GetSectionsForUserNotFound) Code() int {
+	return 404
+}
+
 func (o *GetSectionsForUserNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/sections][%d] getSectionsForUserNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetSectionsForUserNotFound) String() string {
+	return fmt.Sprintf("[GET /users/{id}/sections][%d] getSectionsForUserNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetSectionsForUserNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

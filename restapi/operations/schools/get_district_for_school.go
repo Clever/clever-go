@@ -29,10 +29,10 @@ func NewGetDistrictForSchool(ctx *middleware.Context, handler GetDistrictForScho
 	return &GetDistrictForSchool{Context: ctx, Handler: handler}
 }
 
-/* GetDistrictForSchool swagger:route GET /schools/{id}/district Schools getDistrictForSchool
+/*
+	GetDistrictForSchool swagger:route GET /schools/{id}/district Schools getDistrictForSchool
 
 Returns the district for a school
-
 */
 type GetDistrictForSchool struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetDistrictForSchool struct {
 func (o *GetDistrictForSchool) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetDistrictForSchoolParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetDistrictForSchool) ServeHTTP(rw http.ResponseWriter, r *http.Request
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

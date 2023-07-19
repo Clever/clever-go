@@ -30,7 +30,7 @@ func (o *GetUsersReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users] getUsers", response, response.Code())
 	}
 }
 
@@ -39,7 +39,8 @@ func NewGetUsersOK() *GetUsersOK {
 	return &GetUsersOK{}
 }
 
-/* GetUsersOK describes a response with status code 200, with default header values.
+/*
+GetUsersOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -47,9 +48,44 @@ type GetUsersOK struct {
 	Payload *models.UsersResponse
 }
 
+// IsSuccess returns true when this get users o k response has a 2xx status code
+func (o *GetUsersOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get users o k response has a 3xx status code
+func (o *GetUsersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get users o k response has a 4xx status code
+func (o *GetUsersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get users o k response has a 5xx status code
+func (o *GetUsersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get users o k response a status code equal to that given
+func (o *GetUsersOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get users o k response
+func (o *GetUsersOK) Code() int {
+	return 200
+}
+
 func (o *GetUsersOK) Error() string {
 	return fmt.Sprintf("[GET /users][%d] getUsersOK  %+v", 200, o.Payload)
 }
+
+func (o *GetUsersOK) String() string {
+	return fmt.Sprintf("[GET /users][%d] getUsersOK  %+v", 200, o.Payload)
+}
+
 func (o *GetUsersOK) GetPayload() *models.UsersResponse {
 	return o.Payload
 }

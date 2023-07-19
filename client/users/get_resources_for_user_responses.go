@@ -36,7 +36,7 @@ func (o *GetResourcesForUserReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/{id}/resources] getResourcesForUser", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetResourcesForUserOK() *GetResourcesForUserOK {
 	return &GetResourcesForUserOK{}
 }
 
-/* GetResourcesForUserOK describes a response with status code 200, with default header values.
+/*
+GetResourcesForUserOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetResourcesForUserOK struct {
 	Payload *models.ResourcesResponse
 }
 
+// IsSuccess returns true when this get resources for user o k response has a 2xx status code
+func (o *GetResourcesForUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get resources for user o k response has a 3xx status code
+func (o *GetResourcesForUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get resources for user o k response has a 4xx status code
+func (o *GetResourcesForUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get resources for user o k response has a 5xx status code
+func (o *GetResourcesForUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get resources for user o k response a status code equal to that given
+func (o *GetResourcesForUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get resources for user o k response
+func (o *GetResourcesForUserOK) Code() int {
+	return 200
+}
+
 func (o *GetResourcesForUserOK) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/resources][%d] getResourcesForUserOK  %+v", 200, o.Payload)
 }
+
+func (o *GetResourcesForUserOK) String() string {
+	return fmt.Sprintf("[GET /users/{id}/resources][%d] getResourcesForUserOK  %+v", 200, o.Payload)
+}
+
 func (o *GetResourcesForUserOK) GetPayload() *models.ResourcesResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetResourcesForUserNotFound() *GetResourcesForUserNotFound {
 	return &GetResourcesForUserNotFound{}
 }
 
-/* GetResourcesForUserNotFound describes a response with status code 404, with default header values.
+/*
+GetResourcesForUserNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetResourcesForUserNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get resources for user not found response has a 2xx status code
+func (o *GetResourcesForUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get resources for user not found response has a 3xx status code
+func (o *GetResourcesForUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get resources for user not found response has a 4xx status code
+func (o *GetResourcesForUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get resources for user not found response has a 5xx status code
+func (o *GetResourcesForUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get resources for user not found response a status code equal to that given
+func (o *GetResourcesForUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get resources for user not found response
+func (o *GetResourcesForUserNotFound) Code() int {
+	return 404
+}
+
 func (o *GetResourcesForUserNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/resources][%d] getResourcesForUserNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetResourcesForUserNotFound) String() string {
+	return fmt.Sprintf("[GET /users/{id}/resources][%d] getResourcesForUserNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetResourcesForUserNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

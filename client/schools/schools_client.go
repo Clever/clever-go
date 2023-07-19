@@ -48,7 +48,7 @@ type ClientService interface {
 }
 
 /*
-  GetCoursesForSchool Returns the courses for a school
+GetCoursesForSchool Returns the courses for a school
 */
 func (a *Client) GetCoursesForSchool(params *GetCoursesForSchoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCoursesForSchoolOK, error) {
 	// TODO: Validate the params before sending
@@ -87,7 +87,7 @@ func (a *Client) GetCoursesForSchool(params *GetCoursesForSchoolParams, authInfo
 }
 
 /*
-  GetDistrictForSchool Returns the district for a school
+GetDistrictForSchool Returns the district for a school
 */
 func (a *Client) GetDistrictForSchool(params *GetDistrictForSchoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictForSchoolOK, error) {
 	// TODO: Validate the params before sending
@@ -126,7 +126,7 @@ func (a *Client) GetDistrictForSchool(params *GetDistrictForSchoolParams, authIn
 }
 
 /*
-  GetSchool Returns a specific school
+GetSchool Returns a specific school
 */
 func (a *Client) GetSchool(params *GetSchoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchoolOK, error) {
 	// TODO: Validate the params before sending
@@ -165,7 +165,7 @@ func (a *Client) GetSchool(params *GetSchoolParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  GetSchools Returns a list of schools
+GetSchools Returns a list of schools
 */
 func (a *Client) GetSchools(params *GetSchoolsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchoolsOK, error) {
 	// TODO: Validate the params before sending
@@ -204,7 +204,7 @@ func (a *Client) GetSchools(params *GetSchoolsParams, authInfo runtime.ClientAut
 }
 
 /*
-  GetSectionsForSchool Returns the sections for a school
+GetSectionsForSchool Returns the sections for a school
 */
 func (a *Client) GetSectionsForSchool(params *GetSectionsForSchoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSectionsForSchoolOK, error) {
 	// TODO: Validate the params before sending
@@ -243,7 +243,7 @@ func (a *Client) GetSectionsForSchool(params *GetSectionsForSchoolParams, authIn
 }
 
 /*
-  GetTermsForSchool Returns the terms for a school
+GetTermsForSchool Returns the terms for a school
 */
 func (a *Client) GetTermsForSchool(params *GetTermsForSchoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTermsForSchoolOK, error) {
 	// TODO: Validate the params before sending
@@ -282,7 +282,7 @@ func (a *Client) GetTermsForSchool(params *GetTermsForSchoolParams, authInfo run
 }
 
 /*
-  GetUsersForSchool Returns the staff, student, and/or teacher users for a school
+GetUsersForSchool Returns the staff, student, and/or teacher users for a school
 */
 func (a *Client) GetUsersForSchool(params *GetUsersForSchoolParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsersForSchoolOK, error) {
 	// TODO: Validate the params before sending

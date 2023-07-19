@@ -29,10 +29,10 @@ func NewGetDistricts(ctx *middleware.Context, handler GetDistrictsHandler) *GetD
 	return &GetDistricts{Context: ctx, Handler: handler}
 }
 
-/* GetDistricts swagger:route GET /districts Districts getDistricts
+/*
+	GetDistricts swagger:route GET /districts Districts getDistricts
 
 Returns a list of districts
-
 */
 type GetDistricts struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetDistricts struct {
 func (o *GetDistricts) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetDistrictsParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetDistricts) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

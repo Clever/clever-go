@@ -38,7 +38,7 @@ type ClientService interface {
 }
 
 /*
-  GetDistrict Returns a specific district
+GetDistrict Returns a specific district
 */
 func (a *Client) GetDistrict(params *GetDistrictParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictOK, error) {
 	// TODO: Validate the params before sending
@@ -77,7 +77,7 @@ func (a *Client) GetDistrict(params *GetDistrictParams, authInfo runtime.ClientA
 }
 
 /*
-  GetDistricts Returns a list of districts
+GetDistricts Returns a list of districts
 */
 func (a *Client) GetDistricts(params *GetDistrictsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictsOK, error) {
 	// TODO: Validate the params before sending

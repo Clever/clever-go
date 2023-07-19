@@ -36,7 +36,7 @@ func (o *GetCoursesForSchoolReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /schools/{id}/courses] getCoursesForSchool", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetCoursesForSchoolOK() *GetCoursesForSchoolOK {
 	return &GetCoursesForSchoolOK{}
 }
 
-/* GetCoursesForSchoolOK describes a response with status code 200, with default header values.
+/*
+GetCoursesForSchoolOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetCoursesForSchoolOK struct {
 	Payload *models.CoursesResponse
 }
 
+// IsSuccess returns true when this get courses for school o k response has a 2xx status code
+func (o *GetCoursesForSchoolOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get courses for school o k response has a 3xx status code
+func (o *GetCoursesForSchoolOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get courses for school o k response has a 4xx status code
+func (o *GetCoursesForSchoolOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get courses for school o k response has a 5xx status code
+func (o *GetCoursesForSchoolOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get courses for school o k response a status code equal to that given
+func (o *GetCoursesForSchoolOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get courses for school o k response
+func (o *GetCoursesForSchoolOK) Code() int {
+	return 200
+}
+
 func (o *GetCoursesForSchoolOK) Error() string {
 	return fmt.Sprintf("[GET /schools/{id}/courses][%d] getCoursesForSchoolOK  %+v", 200, o.Payload)
 }
+
+func (o *GetCoursesForSchoolOK) String() string {
+	return fmt.Sprintf("[GET /schools/{id}/courses][%d] getCoursesForSchoolOK  %+v", 200, o.Payload)
+}
+
 func (o *GetCoursesForSchoolOK) GetPayload() *models.CoursesResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetCoursesForSchoolNotFound() *GetCoursesForSchoolNotFound {
 	return &GetCoursesForSchoolNotFound{}
 }
 
-/* GetCoursesForSchoolNotFound describes a response with status code 404, with default header values.
+/*
+GetCoursesForSchoolNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetCoursesForSchoolNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get courses for school not found response has a 2xx status code
+func (o *GetCoursesForSchoolNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get courses for school not found response has a 3xx status code
+func (o *GetCoursesForSchoolNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get courses for school not found response has a 4xx status code
+func (o *GetCoursesForSchoolNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get courses for school not found response has a 5xx status code
+func (o *GetCoursesForSchoolNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get courses for school not found response a status code equal to that given
+func (o *GetCoursesForSchoolNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get courses for school not found response
+func (o *GetCoursesForSchoolNotFound) Code() int {
+	return 404
+}
+
 func (o *GetCoursesForSchoolNotFound) Error() string {
 	return fmt.Sprintf("[GET /schools/{id}/courses][%d] getCoursesForSchoolNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetCoursesForSchoolNotFound) String() string {
+	return fmt.Sprintf("[GET /schools/{id}/courses][%d] getCoursesForSchoolNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetCoursesForSchoolNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

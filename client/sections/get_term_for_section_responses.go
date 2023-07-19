@@ -36,7 +36,7 @@ func (o *GetTermForSectionReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /sections/{id}/term] getTermForSection", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetTermForSectionOK() *GetTermForSectionOK {
 	return &GetTermForSectionOK{}
 }
 
-/* GetTermForSectionOK describes a response with status code 200, with default header values.
+/*
+GetTermForSectionOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetTermForSectionOK struct {
 	Payload *models.TermResponse
 }
 
+// IsSuccess returns true when this get term for section o k response has a 2xx status code
+func (o *GetTermForSectionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get term for section o k response has a 3xx status code
+func (o *GetTermForSectionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get term for section o k response has a 4xx status code
+func (o *GetTermForSectionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get term for section o k response has a 5xx status code
+func (o *GetTermForSectionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get term for section o k response a status code equal to that given
+func (o *GetTermForSectionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get term for section o k response
+func (o *GetTermForSectionOK) Code() int {
+	return 200
+}
+
 func (o *GetTermForSectionOK) Error() string {
 	return fmt.Sprintf("[GET /sections/{id}/term][%d] getTermForSectionOK  %+v", 200, o.Payload)
 }
+
+func (o *GetTermForSectionOK) String() string {
+	return fmt.Sprintf("[GET /sections/{id}/term][%d] getTermForSectionOK  %+v", 200, o.Payload)
+}
+
 func (o *GetTermForSectionOK) GetPayload() *models.TermResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetTermForSectionNotFound() *GetTermForSectionNotFound {
 	return &GetTermForSectionNotFound{}
 }
 
-/* GetTermForSectionNotFound describes a response with status code 404, with default header values.
+/*
+GetTermForSectionNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetTermForSectionNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get term for section not found response has a 2xx status code
+func (o *GetTermForSectionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get term for section not found response has a 3xx status code
+func (o *GetTermForSectionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get term for section not found response has a 4xx status code
+func (o *GetTermForSectionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get term for section not found response has a 5xx status code
+func (o *GetTermForSectionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get term for section not found response a status code equal to that given
+func (o *GetTermForSectionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get term for section not found response
+func (o *GetTermForSectionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetTermForSectionNotFound) Error() string {
 	return fmt.Sprintf("[GET /sections/{id}/term][%d] getTermForSectionNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetTermForSectionNotFound) String() string {
+	return fmt.Sprintf("[GET /sections/{id}/term][%d] getTermForSectionNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetTermForSectionNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

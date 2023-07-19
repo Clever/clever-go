@@ -29,10 +29,10 @@ func NewGetDistrictForTerm(ctx *middleware.Context, handler GetDistrictForTermHa
 	return &GetDistrictForTerm{Context: ctx, Handler: handler}
 }
 
-/* GetDistrictForTerm swagger:route GET /terms/{id}/district Terms getDistrictForTerm
+/*
+	GetDistrictForTerm swagger:route GET /terms/{id}/district Terms getDistrictForTerm
 
 Returns the district for a term
-
 */
 type GetDistrictForTerm struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetDistrictForTerm struct {
 func (o *GetDistrictForTerm) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetDistrictForTermParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetDistrictForTerm) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

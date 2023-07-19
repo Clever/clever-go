@@ -36,7 +36,7 @@ func (o *GetDistrictForUserReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/{id}/district] getDistrictForUser", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetDistrictForUserOK() *GetDistrictForUserOK {
 	return &GetDistrictForUserOK{}
 }
 
-/* GetDistrictForUserOK describes a response with status code 200, with default header values.
+/*
+GetDistrictForUserOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetDistrictForUserOK struct {
 	Payload *models.DistrictResponse
 }
 
+// IsSuccess returns true when this get district for user o k response has a 2xx status code
+func (o *GetDistrictForUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get district for user o k response has a 3xx status code
+func (o *GetDistrictForUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get district for user o k response has a 4xx status code
+func (o *GetDistrictForUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get district for user o k response has a 5xx status code
+func (o *GetDistrictForUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get district for user o k response a status code equal to that given
+func (o *GetDistrictForUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get district for user o k response
+func (o *GetDistrictForUserOK) Code() int {
+	return 200
+}
+
 func (o *GetDistrictForUserOK) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/district][%d] getDistrictForUserOK  %+v", 200, o.Payload)
 }
+
+func (o *GetDistrictForUserOK) String() string {
+	return fmt.Sprintf("[GET /users/{id}/district][%d] getDistrictForUserOK  %+v", 200, o.Payload)
+}
+
 func (o *GetDistrictForUserOK) GetPayload() *models.DistrictResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetDistrictForUserNotFound() *GetDistrictForUserNotFound {
 	return &GetDistrictForUserNotFound{}
 }
 
-/* GetDistrictForUserNotFound describes a response with status code 404, with default header values.
+/*
+GetDistrictForUserNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetDistrictForUserNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get district for user not found response has a 2xx status code
+func (o *GetDistrictForUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get district for user not found response has a 3xx status code
+func (o *GetDistrictForUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get district for user not found response has a 4xx status code
+func (o *GetDistrictForUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get district for user not found response has a 5xx status code
+func (o *GetDistrictForUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get district for user not found response a status code equal to that given
+func (o *GetDistrictForUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get district for user not found response
+func (o *GetDistrictForUserNotFound) Code() int {
+	return 404
+}
+
 func (o *GetDistrictForUserNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/district][%d] getDistrictForUserNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetDistrictForUserNotFound) String() string {
+	return fmt.Sprintf("[GET /users/{id}/district][%d] getDistrictForUserNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetDistrictForUserNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

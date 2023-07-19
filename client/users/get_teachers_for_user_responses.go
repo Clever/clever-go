@@ -36,7 +36,7 @@ func (o *GetTeachersForUserReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/{id}/myteachers] getTeachersForUser", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetTeachersForUserOK() *GetTeachersForUserOK {
 	return &GetTeachersForUserOK{}
 }
 
-/* GetTeachersForUserOK describes a response with status code 200, with default header values.
+/*
+GetTeachersForUserOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetTeachersForUserOK struct {
 	Payload *models.UsersResponse
 }
 
+// IsSuccess returns true when this get teachers for user o k response has a 2xx status code
+func (o *GetTeachersForUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get teachers for user o k response has a 3xx status code
+func (o *GetTeachersForUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get teachers for user o k response has a 4xx status code
+func (o *GetTeachersForUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get teachers for user o k response has a 5xx status code
+func (o *GetTeachersForUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get teachers for user o k response a status code equal to that given
+func (o *GetTeachersForUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get teachers for user o k response
+func (o *GetTeachersForUserOK) Code() int {
+	return 200
+}
+
 func (o *GetTeachersForUserOK) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/myteachers][%d] getTeachersForUserOK  %+v", 200, o.Payload)
 }
+
+func (o *GetTeachersForUserOK) String() string {
+	return fmt.Sprintf("[GET /users/{id}/myteachers][%d] getTeachersForUserOK  %+v", 200, o.Payload)
+}
+
 func (o *GetTeachersForUserOK) GetPayload() *models.UsersResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetTeachersForUserNotFound() *GetTeachersForUserNotFound {
 	return &GetTeachersForUserNotFound{}
 }
 
-/* GetTeachersForUserNotFound describes a response with status code 404, with default header values.
+/*
+GetTeachersForUserNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetTeachersForUserNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get teachers for user not found response has a 2xx status code
+func (o *GetTeachersForUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get teachers for user not found response has a 3xx status code
+func (o *GetTeachersForUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get teachers for user not found response has a 4xx status code
+func (o *GetTeachersForUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get teachers for user not found response has a 5xx status code
+func (o *GetTeachersForUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get teachers for user not found response a status code equal to that given
+func (o *GetTeachersForUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get teachers for user not found response
+func (o *GetTeachersForUserNotFound) Code() int {
+	return 404
+}
+
 func (o *GetTeachersForUserNotFound) Error() string {
 	return fmt.Sprintf("[GET /users/{id}/myteachers][%d] getTeachersForUserNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetTeachersForUserNotFound) String() string {
+	return fmt.Sprintf("[GET /users/{id}/myteachers][%d] getTeachersForUserNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetTeachersForUserNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

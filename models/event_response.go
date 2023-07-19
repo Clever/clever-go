@@ -110,6 +110,8 @@ func (m *EventResponse) validateData(formats strfmt.Registry) error {
 	if err := m.Data().Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("data")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("data")
 		}
 		return err
 	}
@@ -133,9 +135,15 @@ func (m *EventResponse) ContextValidate(ctx context.Context, formats strfmt.Regi
 
 func (m *EventResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Data()) { // not required
+		return nil
+	}
+
 	if err := m.Data().ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("data")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("data")
 		}
 		return err
 	}

@@ -16,7 +16,8 @@ import (
 // GetUsersForSectionOKCode is the HTTP code returned for type GetUsersForSectionOK
 const GetUsersForSectionOKCode int = 200
 
-/*GetUsersForSectionOK OK Response
+/*
+GetUsersForSectionOK OK Response
 
 swagger:response getUsersForSectionOK
 */
@@ -60,7 +61,8 @@ func (o *GetUsersForSectionOK) WriteResponse(rw http.ResponseWriter, producer ru
 // GetUsersForSectionNotFoundCode is the HTTP code returned for type GetUsersForSectionNotFound
 const GetUsersForSectionNotFoundCode int = 404
 
-/*GetUsersForSectionNotFound Entity Not Found
+/*
+GetUsersForSectionNotFound Entity Not Found
 
 swagger:response getUsersForSectionNotFound
 */

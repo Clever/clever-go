@@ -30,7 +30,7 @@ func (o *GetResourcesReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /resources] getResources", response, response.Code())
 	}
 }
 
@@ -39,7 +39,8 @@ func NewGetResourcesOK() *GetResourcesOK {
 	return &GetResourcesOK{}
 }
 
-/* GetResourcesOK describes a response with status code 200, with default header values.
+/*
+GetResourcesOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -47,9 +48,44 @@ type GetResourcesOK struct {
 	Payload *models.ResourcesResponse
 }
 
+// IsSuccess returns true when this get resources o k response has a 2xx status code
+func (o *GetResourcesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get resources o k response has a 3xx status code
+func (o *GetResourcesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get resources o k response has a 4xx status code
+func (o *GetResourcesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get resources o k response has a 5xx status code
+func (o *GetResourcesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get resources o k response a status code equal to that given
+func (o *GetResourcesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get resources o k response
+func (o *GetResourcesOK) Code() int {
+	return 200
+}
+
 func (o *GetResourcesOK) Error() string {
 	return fmt.Sprintf("[GET /resources][%d] getResourcesOK  %+v", 200, o.Payload)
 }
+
+func (o *GetResourcesOK) String() string {
+	return fmt.Sprintf("[GET /resources][%d] getResourcesOK  %+v", 200, o.Payload)
+}
+
 func (o *GetResourcesOK) GetPayload() *models.ResourcesResponse {
 	return o.Payload
 }

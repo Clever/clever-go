@@ -16,7 +16,8 @@ import (
 // GetDistrictOKCode is the HTTP code returned for type GetDistrictOK
 const GetDistrictOKCode int = 200
 
-/*GetDistrictOK OK Response
+/*
+GetDistrictOK OK Response
 
 swagger:response getDistrictOK
 */
@@ -60,7 +61,8 @@ func (o *GetDistrictOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // GetDistrictNotFoundCode is the HTTP code returned for type GetDistrictNotFound
 const GetDistrictNotFoundCode int = 404
 
-/*GetDistrictNotFound Entity Not Found
+/*
+GetDistrictNotFound Entity Not Found
 
 swagger:response getDistrictNotFound
 */

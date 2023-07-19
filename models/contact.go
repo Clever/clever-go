@@ -121,6 +121,8 @@ func (m *Contact) validateStudentRelationships(formats strfmt.Registry) error {
 			if err := m.StudentRelationships[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("student_relationships" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("student_relationships" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -150,9 +152,16 @@ func (m *Contact) contextValidateStudentRelationships(ctx context.Context, forma
 	for i := 0; i < len(m.StudentRelationships); i++ {
 
 		if m.StudentRelationships[i] != nil {
+
+			if swag.IsZero(m.StudentRelationships[i]) { // not required
+				return nil
+			}
+
 			if err := m.StudentRelationships[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("student_relationships" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("student_relationships" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

@@ -52,7 +52,7 @@ type ClientService interface {
 }
 
 /*
-  GetContactsForUser Returns the contact users for a student user
+GetContactsForUser Returns the contact users for a student user
 */
 func (a *Client) GetContactsForUser(params *GetContactsForUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetContactsForUserOK, error) {
 	// TODO: Validate the params before sending
@@ -91,7 +91,7 @@ func (a *Client) GetContactsForUser(params *GetContactsForUserParams, authInfo r
 }
 
 /*
-  GetDistrictForUser Returns the district for a user
+GetDistrictForUser Returns the district for a user
 */
 func (a *Client) GetDistrictForUser(params *GetDistrictForUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictForUserOK, error) {
 	// TODO: Validate the params before sending
@@ -130,7 +130,7 @@ func (a *Client) GetDistrictForUser(params *GetDistrictForUserParams, authInfo r
 }
 
 /*
-  GetResourcesForUser Returns the resources for a user
+GetResourcesForUser Returns the resources for a user
 */
 func (a *Client) GetResourcesForUser(params *GetResourcesForUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourcesForUserOK, error) {
 	// TODO: Validate the params before sending
@@ -169,7 +169,7 @@ func (a *Client) GetResourcesForUser(params *GetResourcesForUserParams, authInfo
 }
 
 /*
-  GetSchoolsForUser Returns the schools for a user
+GetSchoolsForUser Returns the schools for a user
 */
 func (a *Client) GetSchoolsForUser(params *GetSchoolsForUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchoolsForUserOK, error) {
 	// TODO: Validate the params before sending
@@ -208,7 +208,7 @@ func (a *Client) GetSchoolsForUser(params *GetSchoolsForUserParams, authInfo run
 }
 
 /*
-  GetSectionsForUser Returns the sections for a user
+GetSectionsForUser Returns the sections for a user
 */
 func (a *Client) GetSectionsForUser(params *GetSectionsForUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSectionsForUserOK, error) {
 	// TODO: Validate the params before sending
@@ -247,7 +247,7 @@ func (a *Client) GetSectionsForUser(params *GetSectionsForUserParams, authInfo r
 }
 
 /*
-  GetStudentsForUser Returns the student users for a teacher or contact user
+GetStudentsForUser Returns the student users for a teacher or contact user
 */
 func (a *Client) GetStudentsForUser(params *GetStudentsForUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetStudentsForUserOK, error) {
 	// TODO: Validate the params before sending
@@ -286,7 +286,7 @@ func (a *Client) GetStudentsForUser(params *GetStudentsForUserParams, authInfo r
 }
 
 /*
-  GetTeachersForUser Returns the teacher users for a student user
+GetTeachersForUser Returns the teacher users for a student user
 */
 func (a *Client) GetTeachersForUser(params *GetTeachersForUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTeachersForUserOK, error) {
 	// TODO: Validate the params before sending
@@ -325,7 +325,7 @@ func (a *Client) GetTeachersForUser(params *GetTeachersForUserParams, authInfo r
 }
 
 /*
-  GetUser Returns a specific user
+GetUser Returns a specific user
 */
 func (a *Client) GetUser(params *GetUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUserOK, error) {
 	// TODO: Validate the params before sending
@@ -364,7 +364,7 @@ func (a *Client) GetUser(params *GetUserParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  GetUsers Returns a list of contact, district admin, staff, student, and/or teacher users
+GetUsers Returns a list of contact, district admin, staff, student, and/or teacher users
 */
 func (a *Client) GetUsers(params *GetUsersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsersOK, error) {
 	// TODO: Validate the params before sending

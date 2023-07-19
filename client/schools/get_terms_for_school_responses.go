@@ -36,7 +36,7 @@ func (o *GetTermsForSchoolReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /schools/{id}/terms] getTermsForSchool", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetTermsForSchoolOK() *GetTermsForSchoolOK {
 	return &GetTermsForSchoolOK{}
 }
 
-/* GetTermsForSchoolOK describes a response with status code 200, with default header values.
+/*
+GetTermsForSchoolOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetTermsForSchoolOK struct {
 	Payload *models.TermsResponse
 }
 
+// IsSuccess returns true when this get terms for school o k response has a 2xx status code
+func (o *GetTermsForSchoolOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get terms for school o k response has a 3xx status code
+func (o *GetTermsForSchoolOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get terms for school o k response has a 4xx status code
+func (o *GetTermsForSchoolOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get terms for school o k response has a 5xx status code
+func (o *GetTermsForSchoolOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get terms for school o k response a status code equal to that given
+func (o *GetTermsForSchoolOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get terms for school o k response
+func (o *GetTermsForSchoolOK) Code() int {
+	return 200
+}
+
 func (o *GetTermsForSchoolOK) Error() string {
 	return fmt.Sprintf("[GET /schools/{id}/terms][%d] getTermsForSchoolOK  %+v", 200, o.Payload)
 }
+
+func (o *GetTermsForSchoolOK) String() string {
+	return fmt.Sprintf("[GET /schools/{id}/terms][%d] getTermsForSchoolOK  %+v", 200, o.Payload)
+}
+
 func (o *GetTermsForSchoolOK) GetPayload() *models.TermsResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetTermsForSchoolNotFound() *GetTermsForSchoolNotFound {
 	return &GetTermsForSchoolNotFound{}
 }
 
-/* GetTermsForSchoolNotFound describes a response with status code 404, with default header values.
+/*
+GetTermsForSchoolNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetTermsForSchoolNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get terms for school not found response has a 2xx status code
+func (o *GetTermsForSchoolNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get terms for school not found response has a 3xx status code
+func (o *GetTermsForSchoolNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get terms for school not found response has a 4xx status code
+func (o *GetTermsForSchoolNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get terms for school not found response has a 5xx status code
+func (o *GetTermsForSchoolNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get terms for school not found response a status code equal to that given
+func (o *GetTermsForSchoolNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get terms for school not found response
+func (o *GetTermsForSchoolNotFound) Code() int {
+	return 404
+}
+
 func (o *GetTermsForSchoolNotFound) Error() string {
 	return fmt.Sprintf("[GET /schools/{id}/terms][%d] getTermsForSchoolNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetTermsForSchoolNotFound) String() string {
+	return fmt.Sprintf("[GET /schools/{id}/terms][%d] getTermsForSchoolNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetTermsForSchoolNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

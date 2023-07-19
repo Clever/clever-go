@@ -29,10 +29,10 @@ func NewGetResourcesForCourse(ctx *middleware.Context, handler GetResourcesForCo
 	return &GetResourcesForCourse{Context: ctx, Handler: handler}
 }
 
-/* GetResourcesForCourse swagger:route GET /courses/{id}/resources Courses getResourcesForCourse
+/*
+	GetResourcesForCourse swagger:route GET /courses/{id}/resources Courses getResourcesForCourse
 
 Returns the resources for a course
-
 */
 type GetResourcesForCourse struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetResourcesForCourse struct {
 func (o *GetResourcesForCourse) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetResourcesForCourseParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetResourcesForCourse) ServeHTTP(rw http.ResponseWriter, r *http.Reques
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

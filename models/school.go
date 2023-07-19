@@ -242,6 +242,8 @@ func (m *School) validateLocation(formats strfmt.Registry) error {
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}
@@ -361,6 +363,8 @@ func (m *School) validatePrincipal(formats strfmt.Registry) error {
 		if err := m.Principal.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("principal")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("principal")
 			}
 			return err
 		}
@@ -390,9 +394,16 @@ func (m *School) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 func (m *School) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}
@@ -404,9 +415,16 @@ func (m *School) contextValidateLocation(ctx context.Context, formats strfmt.Reg
 func (m *School) contextValidatePrincipal(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Principal != nil {
+
+		if swag.IsZero(m.Principal) { // not required
+			return nil
+		}
+
 		if err := m.Principal.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("principal")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("principal")
 			}
 			return err
 		}

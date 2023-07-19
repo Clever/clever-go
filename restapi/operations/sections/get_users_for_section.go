@@ -29,10 +29,10 @@ func NewGetUsersForSection(ctx *middleware.Context, handler GetUsersForSectionHa
 	return &GetUsersForSection{Context: ctx, Handler: handler}
 }
 
-/* GetUsersForSection swagger:route GET /sections/{id}/users Sections getUsersForSection
+/*
+	GetUsersForSection swagger:route GET /sections/{id}/users Sections getUsersForSection
 
 Returns the student and/or teacher users for a section
-
 */
 type GetUsersForSection struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetUsersForSection struct {
 func (o *GetUsersForSection) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetUsersForSectionParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetUsersForSection) ServeHTTP(rw http.ResponseWriter, r *http.Request) 
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

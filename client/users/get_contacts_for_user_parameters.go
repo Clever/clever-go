@@ -53,10 +53,12 @@ func NewGetContactsForUserParamsWithHTTPClient(client *http.Client) *GetContacts
 	}
 }
 
-/* GetContactsForUserParams contains all the parameters to send to the API endpoint
-   for the get contacts for user operation.
+/*
+GetContactsForUserParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get contacts for user operation.
+
+	Typically these are written to a http.Request.
 */
 type GetContactsForUserParams struct {
 

@@ -111,6 +111,8 @@ func (m *District) validateDistrictContact(formats strfmt.Registry) error {
 		if err := m.DistrictContact.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("district_contact")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("district_contact")
 			}
 			return err
 		}
@@ -238,9 +240,16 @@ func (m *District) ContextValidate(ctx context.Context, formats strfmt.Registry)
 func (m *District) contextValidateDistrictContact(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.DistrictContact != nil {
+
+		if swag.IsZero(m.DistrictContact) { // not required
+			return nil
+		}
+
 		if err := m.DistrictContact.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("district_contact")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("district_contact")
 			}
 			return err
 		}

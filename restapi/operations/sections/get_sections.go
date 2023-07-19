@@ -29,10 +29,10 @@ func NewGetSections(ctx *middleware.Context, handler GetSectionsHandler) *GetSec
 	return &GetSections{Context: ctx, Handler: handler}
 }
 
-/* GetSections swagger:route GET /sections Sections getSections
+/*
+	GetSections swagger:route GET /sections Sections getSections
 
 Returns a list of sections
-
 */
 type GetSections struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetSections struct {
 func (o *GetSections) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetSectionsParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetSections) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

@@ -16,7 +16,8 @@ import (
 // GetCoursesForSchoolOKCode is the HTTP code returned for type GetCoursesForSchoolOK
 const GetCoursesForSchoolOKCode int = 200
 
-/*GetCoursesForSchoolOK OK Response
+/*
+GetCoursesForSchoolOK OK Response
 
 swagger:response getCoursesForSchoolOK
 */
@@ -60,7 +61,8 @@ func (o *GetCoursesForSchoolOK) WriteResponse(rw http.ResponseWriter, producer r
 // GetCoursesForSchoolNotFoundCode is the HTTP code returned for type GetCoursesForSchoolNotFound
 const GetCoursesForSchoolNotFoundCode int = 404
 
-/*GetCoursesForSchoolNotFound Entity Not Found
+/*
+GetCoursesForSchoolNotFound Entity Not Found
 
 swagger:response getCoursesForSchoolNotFound
 */

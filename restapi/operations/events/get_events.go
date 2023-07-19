@@ -29,10 +29,10 @@ func NewGetEvents(ctx *middleware.Context, handler GetEventsHandler) *GetEvents 
 	return &GetEvents{Context: ctx, Handler: handler}
 }
 
-/* GetEvents swagger:route GET /events Events getEvents
+/*
+	GetEvents swagger:route GET /events Events getEvents
 
 Returns a list of events
-
 */
 type GetEvents struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetEvents struct {
 func (o *GetEvents) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetEventsParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetEvents) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

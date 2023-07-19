@@ -29,10 +29,10 @@ func NewGetTermForSection(ctx *middleware.Context, handler GetTermForSectionHand
 	return &GetTermForSection{Context: ctx, Handler: handler}
 }
 
-/* GetTermForSection swagger:route GET /sections/{id}/term Sections getTermForSection
+/*
+	GetTermForSection swagger:route GET /sections/{id}/term Sections getTermForSection
 
 Returns the term for a section
-
 */
 type GetTermForSection struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetTermForSection struct {
 func (o *GetTermForSection) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetTermForSectionParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetTermForSection) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

@@ -53,10 +53,12 @@ func NewGetSectionsForTermParamsWithHTTPClient(client *http.Client) *GetSections
 	}
 }
 
-/* GetSectionsForTermParams contains all the parameters to send to the API endpoint
-   for the get sections for term operation.
+/*
+GetSectionsForTermParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get sections for term operation.
+
+	Typically these are written to a http.Request.
 */
 type GetSectionsForTermParams struct {
 

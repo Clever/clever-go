@@ -36,7 +36,7 @@ func (o *GetSectionsForCourseReader) ReadResponse(response runtime.ClientRespons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /courses/{id}/sections] getSectionsForCourse", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetSectionsForCourseOK() *GetSectionsForCourseOK {
 	return &GetSectionsForCourseOK{}
 }
 
-/* GetSectionsForCourseOK describes a response with status code 200, with default header values.
+/*
+GetSectionsForCourseOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetSectionsForCourseOK struct {
 	Payload *models.SectionsResponse
 }
 
+// IsSuccess returns true when this get sections for course o k response has a 2xx status code
+func (o *GetSectionsForCourseOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get sections for course o k response has a 3xx status code
+func (o *GetSectionsForCourseOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get sections for course o k response has a 4xx status code
+func (o *GetSectionsForCourseOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get sections for course o k response has a 5xx status code
+func (o *GetSectionsForCourseOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get sections for course o k response a status code equal to that given
+func (o *GetSectionsForCourseOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get sections for course o k response
+func (o *GetSectionsForCourseOK) Code() int {
+	return 200
+}
+
 func (o *GetSectionsForCourseOK) Error() string {
 	return fmt.Sprintf("[GET /courses/{id}/sections][%d] getSectionsForCourseOK  %+v", 200, o.Payload)
 }
+
+func (o *GetSectionsForCourseOK) String() string {
+	return fmt.Sprintf("[GET /courses/{id}/sections][%d] getSectionsForCourseOK  %+v", 200, o.Payload)
+}
+
 func (o *GetSectionsForCourseOK) GetPayload() *models.SectionsResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetSectionsForCourseNotFound() *GetSectionsForCourseNotFound {
 	return &GetSectionsForCourseNotFound{}
 }
 
-/* GetSectionsForCourseNotFound describes a response with status code 404, with default header values.
+/*
+GetSectionsForCourseNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetSectionsForCourseNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get sections for course not found response has a 2xx status code
+func (o *GetSectionsForCourseNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get sections for course not found response has a 3xx status code
+func (o *GetSectionsForCourseNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get sections for course not found response has a 4xx status code
+func (o *GetSectionsForCourseNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get sections for course not found response has a 5xx status code
+func (o *GetSectionsForCourseNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get sections for course not found response a status code equal to that given
+func (o *GetSectionsForCourseNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get sections for course not found response
+func (o *GetSectionsForCourseNotFound) Code() int {
+	return 404
+}
+
 func (o *GetSectionsForCourseNotFound) Error() string {
 	return fmt.Sprintf("[GET /courses/{id}/sections][%d] getSectionsForCourseNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetSectionsForCourseNotFound) String() string {
+	return fmt.Sprintf("[GET /courses/{id}/sections][%d] getSectionsForCourseNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetSectionsForCourseNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

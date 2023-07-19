@@ -36,7 +36,7 @@ func (o *GetEventReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /events/{id}] getEvent", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetEventOK() *GetEventOK {
 	return &GetEventOK{}
 }
 
-/* GetEventOK describes a response with status code 200, with default header values.
+/*
+GetEventOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetEventOK struct {
 	Payload *models.EventResponse
 }
 
+// IsSuccess returns true when this get event o k response has a 2xx status code
+func (o *GetEventOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get event o k response has a 3xx status code
+func (o *GetEventOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get event o k response has a 4xx status code
+func (o *GetEventOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get event o k response has a 5xx status code
+func (o *GetEventOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get event o k response a status code equal to that given
+func (o *GetEventOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get event o k response
+func (o *GetEventOK) Code() int {
+	return 200
+}
+
 func (o *GetEventOK) Error() string {
 	return fmt.Sprintf("[GET /events/{id}][%d] getEventOK  %+v", 200, o.Payload)
 }
+
+func (o *GetEventOK) String() string {
+	return fmt.Sprintf("[GET /events/{id}][%d] getEventOK  %+v", 200, o.Payload)
+}
+
 func (o *GetEventOK) GetPayload() *models.EventResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetEventNotFound() *GetEventNotFound {
 	return &GetEventNotFound{}
 }
 
-/* GetEventNotFound describes a response with status code 404, with default header values.
+/*
+GetEventNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetEventNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get event not found response has a 2xx status code
+func (o *GetEventNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get event not found response has a 3xx status code
+func (o *GetEventNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get event not found response has a 4xx status code
+func (o *GetEventNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get event not found response has a 5xx status code
+func (o *GetEventNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get event not found response a status code equal to that given
+func (o *GetEventNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get event not found response
+func (o *GetEventNotFound) Code() int {
+	return 404
+}
+
 func (o *GetEventNotFound) Error() string {
 	return fmt.Sprintf("[GET /events/{id}][%d] getEventNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetEventNotFound) String() string {
+	return fmt.Sprintf("[GET /events/{id}][%d] getEventNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetEventNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

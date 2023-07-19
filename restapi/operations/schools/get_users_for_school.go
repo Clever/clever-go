@@ -29,10 +29,10 @@ func NewGetUsersForSchool(ctx *middleware.Context, handler GetUsersForSchoolHand
 	return &GetUsersForSchool{Context: ctx, Handler: handler}
 }
 
-/* GetUsersForSchool swagger:route GET /schools/{id}/users Schools getUsersForSchool
+/*
+	GetUsersForSchool swagger:route GET /schools/{id}/users Schools getUsersForSchool
 
 Returns the staff, student, and/or teacher users for a school
-
 */
 type GetUsersForSchool struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetUsersForSchool struct {
 func (o *GetUsersForSchool) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetUsersForSchoolParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetUsersForSchool) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

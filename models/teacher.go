@@ -108,6 +108,8 @@ func (m *Teacher) validateCredentials(formats strfmt.Registry) error {
 		if err := m.Credentials.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credentials")
 			}
 			return err
 		}
@@ -137,6 +139,8 @@ func (m *Teacher) validateName(formats strfmt.Registry) error {
 		if err := m.Name.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("name")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("name")
 			}
 			return err
 		}
@@ -166,9 +170,16 @@ func (m *Teacher) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 func (m *Teacher) contextValidateCredentials(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Credentials != nil {
+
+		if swag.IsZero(m.Credentials) { // not required
+			return nil
+		}
+
 		if err := m.Credentials.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credentials")
 			}
 			return err
 		}
@@ -180,9 +191,16 @@ func (m *Teacher) contextValidateCredentials(ctx context.Context, formats strfmt
 func (m *Teacher) contextValidateName(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Name != nil {
+
+		if swag.IsZero(m.Name) { // not required
+			return nil
+		}
+
 		if err := m.Name.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("name")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("name")
 			}
 			return err
 		}

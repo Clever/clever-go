@@ -36,7 +36,7 @@ func (o *GetSchoolReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /schools/{id}] getSchool", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetSchoolOK() *GetSchoolOK {
 	return &GetSchoolOK{}
 }
 
-/* GetSchoolOK describes a response with status code 200, with default header values.
+/*
+GetSchoolOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetSchoolOK struct {
 	Payload *models.SchoolResponse
 }
 
+// IsSuccess returns true when this get school o k response has a 2xx status code
+func (o *GetSchoolOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get school o k response has a 3xx status code
+func (o *GetSchoolOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get school o k response has a 4xx status code
+func (o *GetSchoolOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get school o k response has a 5xx status code
+func (o *GetSchoolOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get school o k response a status code equal to that given
+func (o *GetSchoolOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get school o k response
+func (o *GetSchoolOK) Code() int {
+	return 200
+}
+
 func (o *GetSchoolOK) Error() string {
 	return fmt.Sprintf("[GET /schools/{id}][%d] getSchoolOK  %+v", 200, o.Payload)
 }
+
+func (o *GetSchoolOK) String() string {
+	return fmt.Sprintf("[GET /schools/{id}][%d] getSchoolOK  %+v", 200, o.Payload)
+}
+
 func (o *GetSchoolOK) GetPayload() *models.SchoolResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetSchoolNotFound() *GetSchoolNotFound {
 	return &GetSchoolNotFound{}
 }
 
-/* GetSchoolNotFound describes a response with status code 404, with default header values.
+/*
+GetSchoolNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetSchoolNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get school not found response has a 2xx status code
+func (o *GetSchoolNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get school not found response has a 3xx status code
+func (o *GetSchoolNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get school not found response has a 4xx status code
+func (o *GetSchoolNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get school not found response has a 5xx status code
+func (o *GetSchoolNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get school not found response a status code equal to that given
+func (o *GetSchoolNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get school not found response
+func (o *GetSchoolNotFound) Code() int {
+	return 404
+}
+
 func (o *GetSchoolNotFound) Error() string {
 	return fmt.Sprintf("[GET /schools/{id}][%d] getSchoolNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetSchoolNotFound) String() string {
+	return fmt.Sprintf("[GET /schools/{id}][%d] getSchoolNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetSchoolNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

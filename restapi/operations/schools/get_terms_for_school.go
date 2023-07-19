@@ -29,10 +29,10 @@ func NewGetTermsForSchool(ctx *middleware.Context, handler GetTermsForSchoolHand
 	return &GetTermsForSchool{Context: ctx, Handler: handler}
 }
 
-/* GetTermsForSchool swagger:route GET /schools/{id}/terms Schools getTermsForSchool
+/*
+	GetTermsForSchool swagger:route GET /schools/{id}/terms Schools getTermsForSchool
 
 Returns the terms for a school
-
 */
 type GetTermsForSchool struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetTermsForSchool struct {
 func (o *GetTermsForSchool) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetTermsForSchoolParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetTermsForSchool) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

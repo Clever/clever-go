@@ -29,10 +29,10 @@ func NewGetSection(ctx *middleware.Context, handler GetSectionHandler) *GetSecti
 	return &GetSection{Context: ctx, Handler: handler}
 }
 
-/* GetSection swagger:route GET /sections/{id} Sections getSection
+/*
+	GetSection swagger:route GET /sections/{id} Sections getSection
 
 Returns a specific section
-
 */
 type GetSection struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetSection struct {
 func (o *GetSection) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetSectionParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetSection) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

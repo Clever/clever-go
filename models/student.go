@@ -179,6 +179,8 @@ func (m *Student) validateCredentials(formats strfmt.Registry) error {
 		if err := m.Credentials.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credentials")
 			}
 			return err
 		}
@@ -258,6 +260,8 @@ func (m *Student) validateEnrollments(formats strfmt.Registry) error {
 			if err := m.Enrollments[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("enrollments" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("enrollments" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -664,6 +668,8 @@ func (m *Student) validateLocation(formats strfmt.Registry) error {
 		if err := m.Location.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}
@@ -757,9 +763,16 @@ func (m *Student) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 func (m *Student) contextValidateCredentials(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Credentials != nil {
+
+		if swag.IsZero(m.Credentials) { // not required
+			return nil
+		}
+
 		if err := m.Credentials.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("credentials")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credentials")
 			}
 			return err
 		}
@@ -773,9 +786,16 @@ func (m *Student) contextValidateEnrollments(ctx context.Context, formats strfmt
 	for i := 0; i < len(m.Enrollments); i++ {
 
 		if m.Enrollments[i] != nil {
+
+			if swag.IsZero(m.Enrollments[i]) { // not required
+				return nil
+			}
+
 			if err := m.Enrollments[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("enrollments" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("enrollments" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -789,9 +809,16 @@ func (m *Student) contextValidateEnrollments(ctx context.Context, formats strfmt
 func (m *Student) contextValidateLocation(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Location != nil {
+
+		if swag.IsZero(m.Location) { // not required
+			return nil
+		}
+
 		if err := m.Location.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("location")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location")
 			}
 			return err
 		}

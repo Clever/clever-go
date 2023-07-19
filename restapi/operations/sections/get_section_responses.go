@@ -16,7 +16,8 @@ import (
 // GetSectionOKCode is the HTTP code returned for type GetSectionOK
 const GetSectionOKCode int = 200
 
-/*GetSectionOK OK Response
+/*
+GetSectionOK OK Response
 
 swagger:response getSectionOK
 */
@@ -60,7 +61,8 @@ func (o *GetSectionOK) WriteResponse(rw http.ResponseWriter, producer runtime.Pr
 // GetSectionNotFoundCode is the HTTP code returned for type GetSectionNotFound
 const GetSectionNotFoundCode int = 404
 
-/*GetSectionNotFound Entity Not Found
+/*
+GetSectionNotFound Entity Not Found
 
 swagger:response getSectionNotFound
 */

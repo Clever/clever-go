@@ -29,10 +29,10 @@ func NewGetCourses(ctx *middleware.Context, handler GetCoursesHandler) *GetCours
 	return &GetCourses{Context: ctx, Handler: handler}
 }
 
-/* GetCourses swagger:route GET /courses Courses getCourses
+/*
+	GetCourses swagger:route GET /courses Courses getCourses
 
 Returns a list of courses
-
 */
 type GetCourses struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetCourses struct {
 func (o *GetCourses) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetCoursesParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetCourses) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

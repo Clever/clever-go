@@ -36,7 +36,7 @@ func (o *GetSectionReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /sections/{id}] getSection", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewGetSectionOK() *GetSectionOK {
 	return &GetSectionOK{}
 }
 
-/* GetSectionOK describes a response with status code 200, with default header values.
+/*
+GetSectionOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -53,9 +54,44 @@ type GetSectionOK struct {
 	Payload *models.SectionResponse
 }
 
+// IsSuccess returns true when this get section o k response has a 2xx status code
+func (o *GetSectionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get section o k response has a 3xx status code
+func (o *GetSectionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get section o k response has a 4xx status code
+func (o *GetSectionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get section o k response has a 5xx status code
+func (o *GetSectionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get section o k response a status code equal to that given
+func (o *GetSectionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get section o k response
+func (o *GetSectionOK) Code() int {
+	return 200
+}
+
 func (o *GetSectionOK) Error() string {
 	return fmt.Sprintf("[GET /sections/{id}][%d] getSectionOK  %+v", 200, o.Payload)
 }
+
+func (o *GetSectionOK) String() string {
+	return fmt.Sprintf("[GET /sections/{id}][%d] getSectionOK  %+v", 200, o.Payload)
+}
+
 func (o *GetSectionOK) GetPayload() *models.SectionResponse {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewGetSectionNotFound() *GetSectionNotFound {
 	return &GetSectionNotFound{}
 }
 
-/* GetSectionNotFound describes a response with status code 404, with default header values.
+/*
+GetSectionNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
@@ -85,9 +122,44 @@ type GetSectionNotFound struct {
 	Payload *models.NotFound
 }
 
+// IsSuccess returns true when this get section not found response has a 2xx status code
+func (o *GetSectionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get section not found response has a 3xx status code
+func (o *GetSectionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get section not found response has a 4xx status code
+func (o *GetSectionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get section not found response has a 5xx status code
+func (o *GetSectionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get section not found response a status code equal to that given
+func (o *GetSectionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get section not found response
+func (o *GetSectionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetSectionNotFound) Error() string {
 	return fmt.Sprintf("[GET /sections/{id}][%d] getSectionNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetSectionNotFound) String() string {
+	return fmt.Sprintf("[GET /sections/{id}][%d] getSectionNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetSectionNotFound) GetPayload() *models.NotFound {
 	return o.Payload
 }

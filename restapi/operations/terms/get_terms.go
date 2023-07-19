@@ -29,10 +29,10 @@ func NewGetTerms(ctx *middleware.Context, handler GetTermsHandler) *GetTerms {
 	return &GetTerms{Context: ctx, Handler: handler}
 }
 
-/* GetTerms swagger:route GET /terms Terms getTerms
+/*
+	GetTerms swagger:route GET /terms Terms getTerms
 
 Returns a list of terms
-
 */
 type GetTerms struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetTerms struct {
 func (o *GetTerms) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetTermsParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetTerms) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

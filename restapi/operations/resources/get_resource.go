@@ -29,10 +29,10 @@ func NewGetResource(ctx *middleware.Context, handler GetResourceHandler) *GetRes
 	return &GetResource{Context: ctx, Handler: handler}
 }
 
-/* GetResource swagger:route GET /resources/{id} Resources getResource
+/*
+	GetResource swagger:route GET /resources/{id} Resources getResource
 
 Returns a specific resource
-
 */
 type GetResource struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetResource struct {
 func (o *GetResource) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetResourceParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetResource) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

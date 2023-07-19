@@ -29,10 +29,10 @@ func NewGetUsersForResource(ctx *middleware.Context, handler GetUsersForResource
 	return &GetUsersForResource{Context: ctx, Handler: handler}
 }
 
-/* GetUsersForResource swagger:route GET /resources/{id}/users Resources getUsersForResource
+/*
+	GetUsersForResource swagger:route GET /resources/{id}/users Resources getUsersForResource
 
 Returns the student and/or teacher users for a resource
-
 */
 type GetUsersForResource struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetUsersForResource struct {
 func (o *GetUsersForResource) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetUsersForResourceParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetUsersForResource) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

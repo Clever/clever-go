@@ -29,10 +29,10 @@ func NewGetCourseForSection(ctx *middleware.Context, handler GetCourseForSection
 	return &GetCourseForSection{Context: ctx, Handler: handler}
 }
 
-/* GetCourseForSection swagger:route GET /sections/{id}/course Sections getCourseForSection
+/*
+	GetCourseForSection swagger:route GET /sections/{id}/course Sections getCourseForSection
 
 Returns the course for a section
-
 */
 type GetCourseForSection struct {
 	Context *middleware.Context
@@ -42,7 +42,7 @@ type GetCourseForSection struct {
 func (o *GetCourseForSection) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	route, rCtx, _ := o.Context.RouteInfo(r)
 	if rCtx != nil {
-		r = rCtx
+		*r = *rCtx
 	}
 	var Params = NewGetCourseForSectionParams()
 	uprinc, aCtx, err := o.Context.Authorize(r, route)
@@ -51,7 +51,7 @@ func (o *GetCourseForSection) ServeHTTP(rw http.ResponseWriter, r *http.Request)
 		return
 	}
 	if aCtx != nil {
-		r = aCtx
+		*r = *aCtx
 	}
 	var principal interface{}
 	if uprinc != nil {

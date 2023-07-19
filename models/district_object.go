@@ -45,6 +45,8 @@ func (m *DistrictObject) validateObject(formats strfmt.Registry) error {
 		if err := m.Object.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("object")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("object")
 			}
 			return err
 		}
@@ -70,9 +72,16 @@ func (m *DistrictObject) ContextValidate(ctx context.Context, formats strfmt.Reg
 func (m *DistrictObject) contextValidateObject(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Object != nil {
+
+		if swag.IsZero(m.Object) { // not required
+			return nil
+		}
+
 		if err := m.Object.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("object")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("object")
 			}
 			return err
 		}

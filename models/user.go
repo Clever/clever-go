@@ -102,6 +102,8 @@ func (m *User) validateName(formats strfmt.Registry) error {
 		if err := m.Name.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("name")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("name")
 			}
 			return err
 		}
@@ -119,6 +121,8 @@ func (m *User) validateRoles(formats strfmt.Registry) error {
 		if err := m.Roles.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("roles")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("roles")
 			}
 			return err
 		}
@@ -148,9 +152,16 @@ func (m *User) ContextValidate(ctx context.Context, formats strfmt.Registry) err
 func (m *User) contextValidateName(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Name != nil {
+
+		if swag.IsZero(m.Name) { // not required
+			return nil
+		}
+
 		if err := m.Name.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("name")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("name")
 			}
 			return err
 		}
@@ -162,9 +173,16 @@ func (m *User) contextValidateName(ctx context.Context, formats strfmt.Registry)
 func (m *User) contextValidateRoles(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Roles != nil {
+
+		if swag.IsZero(m.Roles) { // not required
+			return nil
+		}
+
 		if err := m.Roles.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("roles")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("roles")
 			}
 			return err
 		}
