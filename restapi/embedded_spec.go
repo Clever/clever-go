@@ -2894,7 +2894,6 @@ func init() {
         },
         "end_date": {
           "type": "string",
-          "format": "datetime",
           "x-nullable": true,
           "x-validation": true
         },
@@ -2908,7 +2907,6 @@ func init() {
         },
         "start_date": {
           "type": "string",
-          "format": "datetime",
           "x-nullable": true,
           "x-validation": true
         }
@@ -6395,7 +6393,6 @@ func init() {
         },
         "end_date": {
           "type": "string",
-          "format": "datetime",
           "x-nullable": true,
           "x-validation": true
         },
@@ -6409,7 +6406,6 @@ func init() {
         },
         "start_date": {
           "type": "string",
-          "format": "datetime",
           "x-nullable": true,
           "x-validation": true
         }

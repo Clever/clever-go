@@ -25,14 +25,11 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
-type ClientOption func(*runtime.ClientOperation)
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetEvent(params *GetEventParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEventOK, error)
+	GetEvent(params *GetEventParams, authInfo runtime.ClientAuthInfoWriter) (*GetEventOK, error)
 
-	GetEvents(params *GetEventsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEventsOK, error)
+	GetEvents(params *GetEventsParams, authInfo runtime.ClientAuthInfoWriter) (*GetEventsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -40,12 +37,13 @@ type ClientService interface {
 /*
   GetEvent Returns the specific event
 */
-func (a *Client) GetEvent(params *GetEventParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEventOK, error) {
+func (a *Client) GetEvent(params *GetEventParams, authInfo runtime.ClientAuthInfoWriter) (*GetEventOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetEventParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getEvent",
 		Method:             "GET",
 		PathPattern:        "/events/{id}",
@@ -57,12 +55,7 @@ func (a *Client) GetEvent(params *GetEventParams, authInfo runtime.ClientAuthInf
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -79,12 +72,13 @@ func (a *Client) GetEvent(params *GetEventParams, authInfo runtime.ClientAuthInf
 /*
   GetEvents Returns a list of events
 */
-func (a *Client) GetEvents(params *GetEventsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEventsOK, error) {
+func (a *Client) GetEvents(params *GetEventsParams, authInfo runtime.ClientAuthInfoWriter) (*GetEventsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetEventsParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getEvents",
 		Method:             "GET",
 		PathPattern:        "/events",
@@ -96,12 +90,7 @@ func (a *Client) GetEvents(params *GetEventsParams, authInfo runtime.ClientAuthI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}

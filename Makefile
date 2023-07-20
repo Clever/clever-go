@@ -2,7 +2,7 @@ PKG := "github.com/Clever/clever-go/"
 PWD := $(shell pwd)
 PKG_NAME := ${PKG}
 UNAME := $(shell uname | tr '[:upper:]' '[:lower:]')
-SWAGGER_URL := $(shell curl -s https://api.github.com/repos/go-swagger/go-swagger/releases/latest | jq -r '.assets[] | select(.name | contains("'"${UNAME}"'_amd64")) | .browser_download_url')
+SWAGGER_URL := $(shell curl -s https://api.github.com/repos/go-swagger/go-swagger/releases/36578987 | jq -r '.assets[] | select(.name | contains("'"${UNAME}"'_amd64")) | .browser_download_url')
 .PHONY: all 
 
 all: deps test ## Make all

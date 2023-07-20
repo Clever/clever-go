@@ -25,14 +25,11 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
-type ClientOption func(*runtime.ClientOperation)
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetDistrict(params *GetDistrictParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictOK, error)
+	GetDistrict(params *GetDistrictParams, authInfo runtime.ClientAuthInfoWriter) (*GetDistrictOK, error)
 
-	GetDistricts(params *GetDistrictsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictsOK, error)
+	GetDistricts(params *GetDistrictsParams, authInfo runtime.ClientAuthInfoWriter) (*GetDistrictsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -40,12 +37,13 @@ type ClientService interface {
 /*
   GetDistrict Returns a specific district
 */
-func (a *Client) GetDistrict(params *GetDistrictParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictOK, error) {
+func (a *Client) GetDistrict(params *GetDistrictParams, authInfo runtime.ClientAuthInfoWriter) (*GetDistrictOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetDistrictParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getDistrict",
 		Method:             "GET",
 		PathPattern:        "/districts/{id}",
@@ -57,12 +55,7 @@ func (a *Client) GetDistrict(params *GetDistrictParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -79,12 +72,13 @@ func (a *Client) GetDistrict(params *GetDistrictParams, authInfo runtime.ClientA
 /*
   GetDistricts Returns a list of districts
 */
-func (a *Client) GetDistricts(params *GetDistrictsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictsOK, error) {
+func (a *Client) GetDistricts(params *GetDistrictsParams, authInfo runtime.ClientAuthInfoWriter) (*GetDistrictsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetDistrictsParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getDistricts",
 		Method:             "GET",
 		PathPattern:        "/districts",
@@ -96,12 +90,7 @@ func (a *Client) GetDistricts(params *GetDistrictsParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}

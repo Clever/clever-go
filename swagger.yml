@@ -1704,12 +1704,10 @@ definitions:
         x-nullable: true
       start_date:
         type: string
-        format: datetime
         x-nullable: true
         x-validation: true
       end_date:
         type: string
-        format: datetime
         x-nullable: true
         x-validation: true
       district:

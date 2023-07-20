@@ -25,22 +25,19 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
-type ClientOption func(*runtime.ClientOperation)
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetCourse(params *GetCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCourseOK, error)
+	GetCourse(params *GetCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetCourseOK, error)
 
-	GetCourses(params *GetCoursesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCoursesOK, error)
+	GetCourses(params *GetCoursesParams, authInfo runtime.ClientAuthInfoWriter) (*GetCoursesOK, error)
 
-	GetDistrictForCourse(params *GetDistrictForCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictForCourseOK, error)
+	GetDistrictForCourse(params *GetDistrictForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetDistrictForCourseOK, error)
 
-	GetResourcesForCourse(params *GetResourcesForCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourcesForCourseOK, error)
+	GetResourcesForCourse(params *GetResourcesForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetResourcesForCourseOK, error)
 
-	GetSchoolsForCourse(params *GetSchoolsForCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchoolsForCourseOK, error)
+	GetSchoolsForCourse(params *GetSchoolsForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetSchoolsForCourseOK, error)
 
-	GetSectionsForCourse(params *GetSectionsForCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSectionsForCourseOK, error)
+	GetSectionsForCourse(params *GetSectionsForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetSectionsForCourseOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -48,12 +45,13 @@ type ClientService interface {
 /*
   GetCourse Returns a specific course
 */
-func (a *Client) GetCourse(params *GetCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCourseOK, error) {
+func (a *Client) GetCourse(params *GetCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetCourseOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetCourseParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getCourse",
 		Method:             "GET",
 		PathPattern:        "/courses/{id}",
@@ -65,12 +63,7 @@ func (a *Client) GetCourse(params *GetCourseParams, authInfo runtime.ClientAuthI
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -87,12 +80,13 @@ func (a *Client) GetCourse(params *GetCourseParams, authInfo runtime.ClientAuthI
 /*
   GetCourses Returns a list of courses
 */
-func (a *Client) GetCourses(params *GetCoursesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCoursesOK, error) {
+func (a *Client) GetCourses(params *GetCoursesParams, authInfo runtime.ClientAuthInfoWriter) (*GetCoursesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetCoursesParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getCourses",
 		Method:             "GET",
 		PathPattern:        "/courses",
@@ -104,12 +98,7 @@ func (a *Client) GetCourses(params *GetCoursesParams, authInfo runtime.ClientAut
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -126,12 +115,13 @@ func (a *Client) GetCourses(params *GetCoursesParams, authInfo runtime.ClientAut
 /*
   GetDistrictForCourse Returns the district for a course
 */
-func (a *Client) GetDistrictForCourse(params *GetDistrictForCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDistrictForCourseOK, error) {
+func (a *Client) GetDistrictForCourse(params *GetDistrictForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetDistrictForCourseOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetDistrictForCourseParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getDistrictForCourse",
 		Method:             "GET",
 		PathPattern:        "/courses/{id}/district",
@@ -143,12 +133,7 @@ func (a *Client) GetDistrictForCourse(params *GetDistrictForCourseParams, authIn
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -165,12 +150,13 @@ func (a *Client) GetDistrictForCourse(params *GetDistrictForCourseParams, authIn
 /*
   GetResourcesForCourse Returns the resources for a course
 */
-func (a *Client) GetResourcesForCourse(params *GetResourcesForCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourcesForCourseOK, error) {
+func (a *Client) GetResourcesForCourse(params *GetResourcesForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetResourcesForCourseOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetResourcesForCourseParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getResourcesForCourse",
 		Method:             "GET",
 		PathPattern:        "/courses/{id}/resources",
@@ -182,12 +168,7 @@ func (a *Client) GetResourcesForCourse(params *GetResourcesForCourseParams, auth
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -204,12 +185,13 @@ func (a *Client) GetResourcesForCourse(params *GetResourcesForCourseParams, auth
 /*
   GetSchoolsForCourse Returns the schools for a course
 */
-func (a *Client) GetSchoolsForCourse(params *GetSchoolsForCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSchoolsForCourseOK, error) {
+func (a *Client) GetSchoolsForCourse(params *GetSchoolsForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetSchoolsForCourseOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetSchoolsForCourseParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getSchoolsForCourse",
 		Method:             "GET",
 		PathPattern:        "/courses/{id}/schools",
@@ -221,12 +203,7 @@ func (a *Client) GetSchoolsForCourse(params *GetSchoolsForCourseParams, authInfo
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -243,12 +220,13 @@ func (a *Client) GetSchoolsForCourse(params *GetSchoolsForCourseParams, authInfo
 /*
   GetSectionsForCourse Returns the sections for a course
 */
-func (a *Client) GetSectionsForCourse(params *GetSectionsForCourseParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSectionsForCourseOK, error) {
+func (a *Client) GetSectionsForCourse(params *GetSectionsForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetSectionsForCourseOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetSectionsForCourseParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getSectionsForCourse",
 		Method:             "GET",
 		PathPattern:        "/courses/{id}/sections",
@@ -260,12 +238,7 @@ func (a *Client) GetSectionsForCourse(params *GetSectionsForCourseParams, authIn
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
