@@ -28,7 +28,7 @@ func init() {
   "info": {
     "description": "Serves the Clever Data API",
     "title": "Data API",
-    "version": "3.0.0"
+    "version": "3.0.1"
   },
   "host": "api.clever.com",
   "paths": {
@@ -3416,7 +3416,7 @@ func init() {
   "info": {
     "description": "Serves the Clever Data API",
     "title": "Data API",
-    "version": "3.0.0"
+    "version": "3.0.1"
   },
   "host": "api.clever.com",
   "paths": {

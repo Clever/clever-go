@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Data API
   description: Serves the Clever Data API
-  version: 3.0.0
+  version: 3.0.1
 schemes:
   - https
 produces:

@@ -1,3 +1,6 @@
+## v3.0.1 (July 20, 2023)
+  * fixed term.start_date and term.end_date type
+  * pinned swagger-go version
 ## v3.0.0 (February 26, 2021)
   * Add support for client auto generation
   * Add support for mock auto generation
