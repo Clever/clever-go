@@ -25,20 +25,17 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
-// ClientOption is the option for Client methods
-type ClientOption func(*runtime.ClientOperation)
-
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetCoursesForResource(params *GetCoursesForResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCoursesForResourceOK, error)
+	GetCoursesForResource(params *GetCoursesForResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetCoursesForResourceOK, error)
 
-	GetResource(params *GetResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceOK, error)
+	GetResource(params *GetResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetResourceOK, error)
 
-	GetResources(params *GetResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourcesOK, error)
+	GetResources(params *GetResourcesParams, authInfo runtime.ClientAuthInfoWriter) (*GetResourcesOK, error)
 
-	GetSectionsForResource(params *GetSectionsForResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSectionsForResourceOK, error)
+	GetSectionsForResource(params *GetSectionsForResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetSectionsForResourceOK, error)
 
-	GetUsersForResource(params *GetUsersForResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsersForResourceOK, error)
+	GetUsersForResource(params *GetUsersForResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetUsersForResourceOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -46,12 +43,13 @@ type ClientService interface {
 /*
   GetCoursesForResource Returns the courses for a resource
 */
-func (a *Client) GetCoursesForResource(params *GetCoursesForResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCoursesForResourceOK, error) {
+func (a *Client) GetCoursesForResource(params *GetCoursesForResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetCoursesForResourceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetCoursesForResourceParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getCoursesForResource",
 		Method:             "GET",
 		PathPattern:        "/resources/{id}/courses",
@@ -63,12 +61,7 @@ func (a *Client) GetCoursesForResource(params *GetCoursesForResourceParams, auth
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -85,12 +78,13 @@ func (a *Client) GetCoursesForResource(params *GetCoursesForResourceParams, auth
 /*
   GetResource Returns a specific resource
 */
-func (a *Client) GetResource(params *GetResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourceOK, error) {
+func (a *Client) GetResource(params *GetResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetResourceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetResourceParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getResource",
 		Method:             "GET",
 		PathPattern:        "/resources/{id}",
@@ -102,12 +96,7 @@ func (a *Client) GetResource(params *GetResourceParams, authInfo runtime.ClientA
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -124,12 +113,13 @@ func (a *Client) GetResource(params *GetResourceParams, authInfo runtime.ClientA
 /*
   GetResources Returns a list of resources
 */
-func (a *Client) GetResources(params *GetResourcesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetResourcesOK, error) {
+func (a *Client) GetResources(params *GetResourcesParams, authInfo runtime.ClientAuthInfoWriter) (*GetResourcesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetResourcesParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getResources",
 		Method:             "GET",
 		PathPattern:        "/resources",
@@ -141,12 +131,7 @@ func (a *Client) GetResources(params *GetResourcesParams, authInfo runtime.Clien
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -163,12 +148,13 @@ func (a *Client) GetResources(params *GetResourcesParams, authInfo runtime.Clien
 /*
   GetSectionsForResource Returns the sections for a resource
 */
-func (a *Client) GetSectionsForResource(params *GetSectionsForResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetSectionsForResourceOK, error) {
+func (a *Client) GetSectionsForResource(params *GetSectionsForResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetSectionsForResourceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetSectionsForResourceParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getSectionsForResource",
 		Method:             "GET",
 		PathPattern:        "/resources/{id}/sections",
@@ -180,12 +166,7 @@ func (a *Client) GetSectionsForResource(params *GetSectionsForResourceParams, au
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -202,12 +183,13 @@ func (a *Client) GetSectionsForResource(params *GetSectionsForResourceParams, au
 /*
   GetUsersForResource Returns the student and/or teacher users for a resource
 */
-func (a *Client) GetUsersForResource(params *GetUsersForResourceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsersForResourceOK, error) {
+func (a *Client) GetUsersForResource(params *GetUsersForResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetUsersForResourceOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetUsersForResourceParams()
 	}
-	op := &runtime.ClientOperation{
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
 		ID:                 "getUsersForResource",
 		Method:             "GET",
 		PathPattern:        "/resources/{id}/users",
@@ -219,12 +201,7 @@ func (a *Client) GetUsersForResource(params *GetUsersForResourceParams, authInfo
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
+	})
 	if err != nil {
 		return nil, err
 	}

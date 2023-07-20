@@ -28,7 +28,7 @@ func init() {
   "info": {
     "description": "Serves the Clever Data API",
     "title": "Data API",
-    "version": "3.0.0"
+    "version": "3.0.1"
   },
   "host": "api.clever.com",
   "paths": {
@@ -2894,7 +2894,6 @@ func init() {
         },
         "end_date": {
           "type": "string",
-          "format": "datetime",
           "x-nullable": true,
           "x-validation": true
         },
@@ -2908,7 +2907,6 @@ func init() {
         },
         "start_date": {
           "type": "string",
-          "format": "datetime",
           "x-nullable": true,
           "x-validation": true
         }
@@ -3418,7 +3416,7 @@ func init() {
   "info": {
     "description": "Serves the Clever Data API",
     "title": "Data API",
-    "version": "3.0.0"
+    "version": "3.0.1"
   },
   "host": "api.clever.com",
   "paths": {
@@ -6395,7 +6393,6 @@ func init() {
         },
         "end_date": {
           "type": "string",
-          "format": "datetime",
           "x-nullable": true,
           "x-validation": true
         },
@@ -6409,7 +6406,6 @@ func init() {
         },
         "start_date": {
           "type": "string",
-          "format": "datetime",
           "x-nullable": true,
           "x-validation": true
         }

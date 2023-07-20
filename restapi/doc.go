@@ -7,7 +7,7 @@
 //    https
 //  Host: api.clever.com
 //  BasePath: /
-//  Version: 3.0.0
+//  Version: 3.0.1
 //
 //  Consumes:
 //    - application/json

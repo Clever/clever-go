@@ -8,10 +8,8 @@ package models
 import (
 	"context"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	"github.com/go-openapi/validate"
 )
 
 // Term term
@@ -23,8 +21,7 @@ type Term struct {
 	District string `json:"district,omitempty"`
 
 	// end date
-	// Format: datetime
-	EndDate *strfmt.DateTime `json:"end_date,omitempty"`
+	EndDate *string `json:"end_date,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`
@@ -33,49 +30,11 @@ type Term struct {
 	Name *string `json:"name,omitempty"`
 
 	// start date
-	// Format: datetime
-	StartDate *strfmt.DateTime `json:"start_date,omitempty"`
+	StartDate *string `json:"start_date,omitempty"`
 }
 
 // Validate validates this term
 func (m *Term) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := m.validateEndDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateStartDate(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (m *Term) validateEndDate(formats strfmt.Registry) error {
-	if swag.IsZero(m.EndDate) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("end_date", "body", "datetime", m.EndDate.String(), formats); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *Term) validateStartDate(formats strfmt.Registry) error {
-	if swag.IsZero(m.StartDate) { // not required
-		return nil
-	}
-
-	if err := validate.FormatOf("start_date", "body", "datetime", m.StartDate.String(), formats); err != nil {
-		return err
-	}
-
 	return nil
 }
 
