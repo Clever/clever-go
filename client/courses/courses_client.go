@@ -43,7 +43,7 @@ type ClientService interface {
 }
 
 /*
-  GetCourse Returns a specific course
+GetCourse Returns a specific course
 */
 func (a *Client) GetCourse(params *GetCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetCourseOK, error) {
 	// TODO: Validate the params before sending
@@ -78,7 +78,7 @@ func (a *Client) GetCourse(params *GetCourseParams, authInfo runtime.ClientAuthI
 }
 
 /*
-  GetCourses Returns a list of courses
+GetCourses Returns a list of courses
 */
 func (a *Client) GetCourses(params *GetCoursesParams, authInfo runtime.ClientAuthInfoWriter) (*GetCoursesOK, error) {
 	// TODO: Validate the params before sending
@@ -113,7 +113,7 @@ func (a *Client) GetCourses(params *GetCoursesParams, authInfo runtime.ClientAut
 }
 
 /*
-  GetDistrictForCourse Returns the district for a course
+GetDistrictForCourse Returns the district for a course
 */
 func (a *Client) GetDistrictForCourse(params *GetDistrictForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetDistrictForCourseOK, error) {
 	// TODO: Validate the params before sending
@@ -148,7 +148,7 @@ func (a *Client) GetDistrictForCourse(params *GetDistrictForCourseParams, authIn
 }
 
 /*
-  GetResourcesForCourse Returns the resources for a course
+GetResourcesForCourse Returns the resources for a course
 */
 func (a *Client) GetResourcesForCourse(params *GetResourcesForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetResourcesForCourseOK, error) {
 	// TODO: Validate the params before sending
@@ -183,7 +183,7 @@ func (a *Client) GetResourcesForCourse(params *GetResourcesForCourseParams, auth
 }
 
 /*
-  GetSchoolsForCourse Returns the schools for a course
+GetSchoolsForCourse Returns the schools for a course
 */
 func (a *Client) GetSchoolsForCourse(params *GetSchoolsForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetSchoolsForCourseOK, error) {
 	// TODO: Validate the params before sending
@@ -218,7 +218,7 @@ func (a *Client) GetSchoolsForCourse(params *GetSchoolsForCourseParams, authInfo
 }
 
 /*
-  GetSectionsForCourse Returns the sections for a course
+GetSectionsForCourse Returns the sections for a course
 */
 func (a *Client) GetSectionsForCourse(params *GetSectionsForCourseParams, authInfo runtime.ClientAuthInfoWriter) (*GetSectionsForCourseOK, error) {
 	// TODO: Validate the params before sending

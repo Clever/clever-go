@@ -16,7 +16,8 @@ import (
 // GetTermsOKCode is the HTTP code returned for type GetTermsOK
 const GetTermsOKCode int = 200
 
-/*GetTermsOK OK Response
+/*
+GetTermsOK OK Response
 
 swagger:response getTermsOK
 */

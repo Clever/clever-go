@@ -16,7 +16,8 @@ import (
 // GetTermOKCode is the HTTP code returned for type GetTermOK
 const GetTermOKCode int = 200
 
-/*GetTermOK OK Response
+/*
+GetTermOK OK Response
 
 swagger:response getTermOK
 */
@@ -60,7 +61,8 @@ func (o *GetTermOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produ
 // GetTermNotFoundCode is the HTTP code returned for type GetTermNotFound
 const GetTermNotFoundCode int = 404
 
-/*GetTermNotFound Entity Not Found
+/*
+GetTermNotFound Entity Not Found
 
 swagger:response getTermNotFound
 */

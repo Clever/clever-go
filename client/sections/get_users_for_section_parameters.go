@@ -53,10 +53,12 @@ func NewGetUsersForSectionParamsWithHTTPClient(client *http.Client) *GetUsersFor
 	}
 }
 
-/* GetUsersForSectionParams contains all the parameters to send to the API endpoint
-   for the get users for section operation.
+/*
+GetUsersForSectionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get users for section operation.
+
+	Typically these are written to a http.Request.
 */
 type GetUsersForSectionParams struct {
 

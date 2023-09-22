@@ -45,7 +45,8 @@ func NewGetSectionsForSchoolOK() *GetSectionsForSchoolOK {
 	return &GetSectionsForSchoolOK{}
 }
 
-/* GetSectionsForSchoolOK describes a response with status code 200, with default header values.
+/*
+	GetSectionsForSchoolOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetSectionsForSchoolNotFound() *GetSectionsForSchoolNotFound {
 	return &GetSectionsForSchoolNotFound{}
 }
 
-/* GetSectionsForSchoolNotFound describes a response with status code 404, with default header values.
+/*
+	GetSectionsForSchoolNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */

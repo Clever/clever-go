@@ -16,7 +16,8 @@ import (
 // GetResourcesForUserOKCode is the HTTP code returned for type GetResourcesForUserOK
 const GetResourcesForUserOKCode int = 200
 
-/*GetResourcesForUserOK OK Response
+/*
+GetResourcesForUserOK OK Response
 
 swagger:response getResourcesForUserOK
 */
@@ -60,7 +61,8 @@ func (o *GetResourcesForUserOK) WriteResponse(rw http.ResponseWriter, producer r
 // GetResourcesForUserNotFoundCode is the HTTP code returned for type GetResourcesForUserNotFound
 const GetResourcesForUserNotFoundCode int = 404
 
-/*GetResourcesForUserNotFound Entity Not Found
+/*
+GetResourcesForUserNotFound Entity Not Found
 
 swagger:response getResourcesForUserNotFound
 */

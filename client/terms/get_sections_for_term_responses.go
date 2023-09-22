@@ -45,7 +45,8 @@ func NewGetSectionsForTermOK() *GetSectionsForTermOK {
 	return &GetSectionsForTermOK{}
 }
 
-/* GetSectionsForTermOK describes a response with status code 200, with default header values.
+/*
+	GetSectionsForTermOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetSectionsForTermNotFound() *GetSectionsForTermNotFound {
 	return &GetSectionsForTermNotFound{}
 }
 
-/* GetSectionsForTermNotFound describes a response with status code 404, with default header values.
+/*
+	GetSectionsForTermNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */

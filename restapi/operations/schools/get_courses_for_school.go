@@ -29,10 +29,10 @@ func NewGetCoursesForSchool(ctx *middleware.Context, handler GetCoursesForSchool
 	return &GetCoursesForSchool{Context: ctx, Handler: handler}
 }
 
-/* GetCoursesForSchool swagger:route GET /schools/{id}/courses Schools getCoursesForSchool
+/*
+	GetCoursesForSchool swagger:route GET /schools/{id}/courses Schools getCoursesForSchool
 
 Returns the courses for a school
-
 */
 type GetCoursesForSchool struct {
 	Context *middleware.Context

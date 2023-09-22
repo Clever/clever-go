@@ -29,10 +29,10 @@ func NewGetDistricts(ctx *middleware.Context, handler GetDistrictsHandler) *GetD
 	return &GetDistricts{Context: ctx, Handler: handler}
 }
 
-/* GetDistricts swagger:route GET /districts Districts getDistricts
+/*
+	GetDistricts swagger:route GET /districts Districts getDistricts
 
 Returns a list of districts
-
 */
 type GetDistricts struct {
 	Context *middleware.Context

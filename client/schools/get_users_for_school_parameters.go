@@ -53,10 +53,12 @@ func NewGetUsersForSchoolParamsWithHTTPClient(client *http.Client) *GetUsersForS
 	}
 }
 
-/* GetUsersForSchoolParams contains all the parameters to send to the API endpoint
-   for the get users for school operation.
+/*
+GetUsersForSchoolParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get users for school operation.
+
+	Typically these are written to a http.Request.
 */
 type GetUsersForSchoolParams struct {
 

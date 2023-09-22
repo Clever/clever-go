@@ -16,7 +16,8 @@ import (
 // GetSectionsOKCode is the HTTP code returned for type GetSectionsOK
 const GetSectionsOKCode int = 200
 
-/*GetSectionsOK OK Response
+/*
+GetSectionsOK OK Response
 
 swagger:response getSectionsOK
 */

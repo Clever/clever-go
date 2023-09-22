@@ -16,7 +16,8 @@ import (
 // GetContactsForUserOKCode is the HTTP code returned for type GetContactsForUserOK
 const GetContactsForUserOKCode int = 200
 
-/*GetContactsForUserOK OK Response
+/*
+GetContactsForUserOK OK Response
 
 swagger:response getContactsForUserOK
 */
@@ -60,7 +61,8 @@ func (o *GetContactsForUserOK) WriteResponse(rw http.ResponseWriter, producer ru
 // GetContactsForUserNotFoundCode is the HTTP code returned for type GetContactsForUserNotFound
 const GetContactsForUserNotFoundCode int = 404
 
-/*GetContactsForUserNotFound Entity Not Found
+/*
+GetContactsForUserNotFound Entity Not Found
 
 swagger:response getContactsForUserNotFound
 */

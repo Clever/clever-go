@@ -45,7 +45,8 @@ func NewGetTermOK() *GetTermOK {
 	return &GetTermOK{}
 }
 
-/* GetTermOK describes a response with status code 200, with default header values.
+/*
+	GetTermOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetTermNotFound() *GetTermNotFound {
 	return &GetTermNotFound{}
 }
 
-/* GetTermNotFound describes a response with status code 404, with default header values.
+/*
+	GetTermNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */

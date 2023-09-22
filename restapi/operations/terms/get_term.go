@@ -29,10 +29,10 @@ func NewGetTerm(ctx *middleware.Context, handler GetTermHandler) *GetTerm {
 	return &GetTerm{Context: ctx, Handler: handler}
 }
 
-/* GetTerm swagger:route GET /terms/{id} Terms getTerm
+/*
+	GetTerm swagger:route GET /terms/{id} Terms getTerm
 
 Returns a specific term
-
 */
 type GetTerm struct {
 	Context *middleware.Context

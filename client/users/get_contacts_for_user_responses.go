@@ -45,7 +45,8 @@ func NewGetContactsForUserOK() *GetContactsForUserOK {
 	return &GetContactsForUserOK{}
 }
 
-/* GetContactsForUserOK describes a response with status code 200, with default header values.
+/*
+	GetContactsForUserOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetContactsForUserNotFound() *GetContactsForUserNotFound {
 	return &GetContactsForUserNotFound{}
 }
 
-/* GetContactsForUserNotFound describes a response with status code 404, with default header values.
+/*
+	GetContactsForUserNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */

@@ -29,10 +29,10 @@ func NewGetUsersForSection(ctx *middleware.Context, handler GetUsersForSectionHa
 	return &GetUsersForSection{Context: ctx, Handler: handler}
 }
 
-/* GetUsersForSection swagger:route GET /sections/{id}/users Sections getUsersForSection
+/*
+	GetUsersForSection swagger:route GET /sections/{id}/users Sections getUsersForSection
 
 Returns the student and/or teacher users for a section
-
 */
 type GetUsersForSection struct {
 	Context *middleware.Context

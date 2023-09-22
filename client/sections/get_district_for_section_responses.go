@@ -45,7 +45,8 @@ func NewGetDistrictForSectionOK() *GetDistrictForSectionOK {
 	return &GetDistrictForSectionOK{}
 }
 
-/* GetDistrictForSectionOK describes a response with status code 200, with default header values.
+/*
+	GetDistrictForSectionOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetDistrictForSectionNotFound() *GetDistrictForSectionNotFound {
 	return &GetDistrictForSectionNotFound{}
 }
 
-/* GetDistrictForSectionNotFound describes a response with status code 404, with default header values.
+/*
+	GetDistrictForSectionNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */

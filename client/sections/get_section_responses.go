@@ -45,7 +45,8 @@ func NewGetSectionOK() *GetSectionOK {
 	return &GetSectionOK{}
 }
 
-/* GetSectionOK describes a response with status code 200, with default header values.
+/*
+	GetSectionOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetSectionNotFound() *GetSectionNotFound {
 	return &GetSectionNotFound{}
 }
 
-/* GetSectionNotFound describes a response with status code 404, with default header values.
+/*
+	GetSectionNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */
