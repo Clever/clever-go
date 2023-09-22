@@ -16,7 +16,8 @@ import (
 // GetSchoolsOKCode is the HTTP code returned for type GetSchoolsOK
 const GetSchoolsOKCode int = 200
 
-/*GetSchoolsOK OK Response
+/*
+GetSchoolsOK OK Response
 
 swagger:response getSchoolsOK
 */

@@ -29,10 +29,10 @@ func NewGetEvent(ctx *middleware.Context, handler GetEventHandler) *GetEvent {
 	return &GetEvent{Context: ctx, Handler: handler}
 }
 
-/* GetEvent swagger:route GET /events/{id} Events getEvent
+/*
+	GetEvent swagger:route GET /events/{id} Events getEvent
 
 Returns the specific event
-
 */
 type GetEvent struct {
 	Context *middleware.Context

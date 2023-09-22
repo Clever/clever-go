@@ -29,10 +29,10 @@ func NewGetDistrictForTerm(ctx *middleware.Context, handler GetDistrictForTermHa
 	return &GetDistrictForTerm{Context: ctx, Handler: handler}
 }
 
-/* GetDistrictForTerm swagger:route GET /terms/{id}/district Terms getDistrictForTerm
+/*
+	GetDistrictForTerm swagger:route GET /terms/{id}/district Terms getDistrictForTerm
 
 Returns the district for a term
-
 */
 type GetDistrictForTerm struct {
 	Context *middleware.Context

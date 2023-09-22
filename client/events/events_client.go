@@ -35,7 +35,7 @@ type ClientService interface {
 }
 
 /*
-  GetEvent Returns the specific event
+GetEvent Returns the specific event
 */
 func (a *Client) GetEvent(params *GetEventParams, authInfo runtime.ClientAuthInfoWriter) (*GetEventOK, error) {
 	// TODO: Validate the params before sending
@@ -70,7 +70,7 @@ func (a *Client) GetEvent(params *GetEventParams, authInfo runtime.ClientAuthInf
 }
 
 /*
-  GetEvents Returns a list of events
+GetEvents Returns a list of events
 */
 func (a *Client) GetEvents(params *GetEventsParams, authInfo runtime.ClientAuthInfoWriter) (*GetEventsOK, error) {
 	// TODO: Validate the params before sending

@@ -53,10 +53,12 @@ func NewGetCoursesForResourceParamsWithHTTPClient(client *http.Client) *GetCours
 	}
 }
 
-/* GetCoursesForResourceParams contains all the parameters to send to the API endpoint
-   for the get courses for resource operation.
+/*
+GetCoursesForResourceParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get courses for resource operation.
+
+	Typically these are written to a http.Request.
 */
 type GetCoursesForResourceParams struct {
 

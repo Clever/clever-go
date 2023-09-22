@@ -29,10 +29,10 @@ func NewGetSectionsForResource(ctx *middleware.Context, handler GetSectionsForRe
 	return &GetSectionsForResource{Context: ctx, Handler: handler}
 }
 
-/* GetSectionsForResource swagger:route GET /resources/{id}/sections Resources getSectionsForResource
+/*
+	GetSectionsForResource swagger:route GET /resources/{id}/sections Resources getSectionsForResource
 
 Returns the sections for a resource
-
 */
 type GetSectionsForResource struct {
 	Context *middleware.Context

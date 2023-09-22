@@ -45,7 +45,8 @@ func NewGetEventsOK() *GetEventsOK {
 	return &GetEventsOK{}
 }
 
-/* GetEventsOK describes a response with status code 200, with default header values.
+/*
+	GetEventsOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetEventsNotFound() *GetEventsNotFound {
 	return &GetEventsNotFound{}
 }
 
-/* GetEventsNotFound describes a response with status code 404, with default header values.
+/*
+	GetEventsNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */

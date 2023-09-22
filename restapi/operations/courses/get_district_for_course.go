@@ -29,10 +29,10 @@ func NewGetDistrictForCourse(ctx *middleware.Context, handler GetDistrictForCour
 	return &GetDistrictForCourse{Context: ctx, Handler: handler}
 }
 
-/* GetDistrictForCourse swagger:route GET /courses/{id}/district Courses getDistrictForCourse
+/*
+	GetDistrictForCourse swagger:route GET /courses/{id}/district Courses getDistrictForCourse
 
 Returns the district for a course
-
 */
 type GetDistrictForCourse struct {
 	Context *middleware.Context

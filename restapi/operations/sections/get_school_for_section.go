@@ -29,10 +29,10 @@ func NewGetSchoolForSection(ctx *middleware.Context, handler GetSchoolForSection
 	return &GetSchoolForSection{Context: ctx, Handler: handler}
 }
 
-/* GetSchoolForSection swagger:route GET /sections/{id}/school Sections getSchoolForSection
+/*
+	GetSchoolForSection swagger:route GET /sections/{id}/school Sections getSchoolForSection
 
 Returns the school for a section
-
 */
 type GetSchoolForSection struct {
 	Context *middleware.Context

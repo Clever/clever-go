@@ -16,7 +16,8 @@ import (
 // GetEventOKCode is the HTTP code returned for type GetEventOK
 const GetEventOKCode int = 200
 
-/*GetEventOK OK Response
+/*
+GetEventOK OK Response
 
 swagger:response getEventOK
 */
@@ -60,7 +61,8 @@ func (o *GetEventOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // GetEventNotFoundCode is the HTTP code returned for type GetEventNotFound
 const GetEventNotFoundCode int = 404
 
-/*GetEventNotFound Entity Not Found
+/*
+GetEventNotFound Entity Not Found
 
 swagger:response getEventNotFound
 */

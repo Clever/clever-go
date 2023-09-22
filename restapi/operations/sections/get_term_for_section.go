@@ -29,10 +29,10 @@ func NewGetTermForSection(ctx *middleware.Context, handler GetTermForSectionHand
 	return &GetTermForSection{Context: ctx, Handler: handler}
 }
 
-/* GetTermForSection swagger:route GET /sections/{id}/term Sections getTermForSection
+/*
+	GetTermForSection swagger:route GET /sections/{id}/term Sections getTermForSection
 
 Returns the term for a section
-
 */
 type GetTermForSection struct {
 	Context *middleware.Context

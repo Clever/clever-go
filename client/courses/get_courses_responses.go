@@ -39,7 +39,8 @@ func NewGetCoursesOK() *GetCoursesOK {
 	return &GetCoursesOK{}
 }
 
-/* GetCoursesOK describes a response with status code 200, with default header values.
+/*
+	GetCoursesOK describes a response with status code 200, with default header values.
 
 OK Response
 */

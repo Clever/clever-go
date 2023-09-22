@@ -45,7 +45,8 @@ func NewGetResourceOK() *GetResourceOK {
 	return &GetResourceOK{}
 }
 
-/* GetResourceOK describes a response with status code 200, with default header values.
+/*
+	GetResourceOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetResourceNotFound() *GetResourceNotFound {
 	return &GetResourceNotFound{}
 }
 
-/* GetResourceNotFound describes a response with status code 404, with default header values.
+/*
+	GetResourceNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */

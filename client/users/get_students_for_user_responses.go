@@ -45,7 +45,8 @@ func NewGetStudentsForUserOK() *GetStudentsForUserOK {
 	return &GetStudentsForUserOK{}
 }
 
-/* GetStudentsForUserOK describes a response with status code 200, with default header values.
+/*
+	GetStudentsForUserOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetStudentsForUserNotFound() *GetStudentsForUserNotFound {
 	return &GetStudentsForUserNotFound{}
 }
 
-/* GetStudentsForUserNotFound describes a response with status code 404, with default header values.
+/*
+	GetStudentsForUserNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */

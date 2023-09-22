@@ -39,7 +39,8 @@ func NewGetDistrictsOK() *GetDistrictsOK {
 	return &GetDistrictsOK{}
 }
 
-/* GetDistrictsOK describes a response with status code 200, with default header values.
+/*
+	GetDistrictsOK describes a response with status code 200, with default header values.
 
 OK Response
 */

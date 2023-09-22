@@ -45,7 +45,8 @@ func NewGetSchoolsForTermOK() *GetSchoolsForTermOK {
 	return &GetSchoolsForTermOK{}
 }
 
-/* GetSchoolsForTermOK describes a response with status code 200, with default header values.
+/*
+	GetSchoolsForTermOK describes a response with status code 200, with default header values.
 
 OK Response
 */
@@ -77,7 +78,8 @@ func NewGetSchoolsForTermNotFound() *GetSchoolsForTermNotFound {
 	return &GetSchoolsForTermNotFound{}
 }
 
-/* GetSchoolsForTermNotFound describes a response with status code 404, with default header values.
+/*
+	GetSchoolsForTermNotFound describes a response with status code 404, with default header values.
 
 Entity Not Found
 */

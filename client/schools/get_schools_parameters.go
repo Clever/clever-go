@@ -53,10 +53,12 @@ func NewGetSchoolsParamsWithHTTPClient(client *http.Client) *GetSchoolsParams {
 	}
 }
 
-/* GetSchoolsParams contains all the parameters to send to the API endpoint
-   for the get schools operation.
+/*
+GetSchoolsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get schools operation.
+
+	Typically these are written to a http.Request.
 */
 type GetSchoolsParams struct {
 

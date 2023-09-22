@@ -29,10 +29,10 @@ func NewGetResourcesForUser(ctx *middleware.Context, handler GetResourcesForUser
 	return &GetResourcesForUser{Context: ctx, Handler: handler}
 }
 
-/* GetResourcesForUser swagger:route GET /users/{id}/resources Users getResourcesForUser
+/*
+	GetResourcesForUser swagger:route GET /users/{id}/resources Users getResourcesForUser
 
 Returns the resources for a user
-
 */
 type GetResourcesForUser struct {
 	Context *middleware.Context

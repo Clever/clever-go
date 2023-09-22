@@ -41,7 +41,7 @@ type ClientService interface {
 }
 
 /*
-  GetDistrictForTerm Returns the district for a term
+GetDistrictForTerm Returns the district for a term
 */
 func (a *Client) GetDistrictForTerm(params *GetDistrictForTermParams, authInfo runtime.ClientAuthInfoWriter) (*GetDistrictForTermOK, error) {
 	// TODO: Validate the params before sending
@@ -76,7 +76,7 @@ func (a *Client) GetDistrictForTerm(params *GetDistrictForTermParams, authInfo r
 }
 
 /*
-  GetSchoolsForTerm Returns the schools for a term
+GetSchoolsForTerm Returns the schools for a term
 */
 func (a *Client) GetSchoolsForTerm(params *GetSchoolsForTermParams, authInfo runtime.ClientAuthInfoWriter) (*GetSchoolsForTermOK, error) {
 	// TODO: Validate the params before sending
@@ -111,7 +111,7 @@ func (a *Client) GetSchoolsForTerm(params *GetSchoolsForTermParams, authInfo run
 }
 
 /*
-  GetSectionsForTerm Returns the sections for a term
+GetSectionsForTerm Returns the sections for a term
 */
 func (a *Client) GetSectionsForTerm(params *GetSectionsForTermParams, authInfo runtime.ClientAuthInfoWriter) (*GetSectionsForTermOK, error) {
 	// TODO: Validate the params before sending
@@ -146,7 +146,7 @@ func (a *Client) GetSectionsForTerm(params *GetSectionsForTermParams, authInfo r
 }
 
 /*
-  GetTerm Returns a specific term
+GetTerm Returns a specific term
 */
 func (a *Client) GetTerm(params *GetTermParams, authInfo runtime.ClientAuthInfoWriter) (*GetTermOK, error) {
 	// TODO: Validate the params before sending
@@ -181,7 +181,7 @@ func (a *Client) GetTerm(params *GetTermParams, authInfo runtime.ClientAuthInfoW
 }
 
 /*
-  GetTerms Returns a list of terms
+GetTerms Returns a list of terms
 */
 func (a *Client) GetTerms(params *GetTermsParams, authInfo runtime.ClientAuthInfoWriter) (*GetTermsOK, error) {
 	// TODO: Validate the params before sending

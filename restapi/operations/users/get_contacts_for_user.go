@@ -29,10 +29,10 @@ func NewGetContactsForUser(ctx *middleware.Context, handler GetContactsForUserHa
 	return &GetContactsForUser{Context: ctx, Handler: handler}
 }
 
-/* GetContactsForUser swagger:route GET /users/{id}/mycontacts Users getContactsForUser
+/*
+	GetContactsForUser swagger:route GET /users/{id}/mycontacts Users getContactsForUser
 
 Returns the contact users for a student user
-
 */
 type GetContactsForUser struct {
 	Context *middleware.Context

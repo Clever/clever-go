@@ -29,10 +29,10 @@ func NewGetTeachersForUser(ctx *middleware.Context, handler GetTeachersForUserHa
 	return &GetTeachersForUser{Context: ctx, Handler: handler}
 }
 
-/* GetTeachersForUser swagger:route GET /users/{id}/myteachers Users getTeachersForUser
+/*
+	GetTeachersForUser swagger:route GET /users/{id}/myteachers Users getTeachersForUser
 
 Returns the teacher users for a student user
-
 */
 type GetTeachersForUser struct {
 	Context *middleware.Context

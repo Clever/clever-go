@@ -53,10 +53,12 @@ func NewGetSectionsForResourceParamsWithHTTPClient(client *http.Client) *GetSect
 	}
 }
 
-/* GetSectionsForResourceParams contains all the parameters to send to the API endpoint
-   for the get sections for resource operation.
+/*
+GetSectionsForResourceParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get sections for resource operation.
+
+	Typically these are written to a http.Request.
 */
 type GetSectionsForResourceParams struct {
 
