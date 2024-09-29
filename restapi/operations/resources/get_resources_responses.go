@@ -16,7 +16,8 @@ import (
 // GetResourcesOKCode is the HTTP code returned for type GetResourcesOK
 const GetResourcesOKCode int = 200
 
-/*GetResourcesOK OK Response
+/*
+GetResourcesOK OK Response
 
 swagger:response getResourcesOK
 */

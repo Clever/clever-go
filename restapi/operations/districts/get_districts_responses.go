@@ -16,7 +16,8 @@ import (
 // GetDistrictsOKCode is the HTTP code returned for type GetDistrictsOK
 const GetDistrictsOKCode int = 200
 
-/*GetDistrictsOK OK Response
+/*
+GetDistrictsOK OK Response
 
 swagger:response getDistrictsOK
 */

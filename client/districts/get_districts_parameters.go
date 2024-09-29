@@ -52,10 +52,12 @@ func NewGetDistrictsParamsWithHTTPClient(client *http.Client) *GetDistrictsParam
 	}
 }
 
-/* GetDistrictsParams contains all the parameters to send to the API endpoint
-   for the get districts operation.
+/*
+GetDistrictsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get districts operation.
+
+	Typically these are written to a http.Request.
 */
 type GetDistrictsParams struct {
 

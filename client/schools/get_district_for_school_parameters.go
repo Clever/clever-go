@@ -52,10 +52,12 @@ func NewGetDistrictForSchoolParamsWithHTTPClient(client *http.Client) *GetDistri
 	}
 }
 
-/* GetDistrictForSchoolParams contains all the parameters to send to the API endpoint
-   for the get district for school operation.
+/*
+GetDistrictForSchoolParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get district for school operation.
+
+	Typically these are written to a http.Request.
 */
 type GetDistrictForSchoolParams struct {
 

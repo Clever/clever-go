@@ -16,7 +16,8 @@ import (
 // GetSectionsForTermOKCode is the HTTP code returned for type GetSectionsForTermOK
 const GetSectionsForTermOKCode int = 200
 
-/*GetSectionsForTermOK OK Response
+/*
+GetSectionsForTermOK OK Response
 
 swagger:response getSectionsForTermOK
 */
@@ -60,7 +61,8 @@ func (o *GetSectionsForTermOK) WriteResponse(rw http.ResponseWriter, producer ru
 // GetSectionsForTermNotFoundCode is the HTTP code returned for type GetSectionsForTermNotFound
 const GetSectionsForTermNotFoundCode int = 404
 
-/*GetSectionsForTermNotFound Entity Not Found
+/*
+GetSectionsForTermNotFound Entity Not Found
 
 swagger:response getSectionsForTermNotFound
 */

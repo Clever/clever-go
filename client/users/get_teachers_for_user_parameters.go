@@ -53,10 +53,12 @@ func NewGetTeachersForUserParamsWithHTTPClient(client *http.Client) *GetTeachers
 	}
 }
 
-/* GetTeachersForUserParams contains all the parameters to send to the API endpoint
-   for the get teachers for user operation.
+/*
+GetTeachersForUserParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get teachers for user operation.
+
+	Typically these are written to a http.Request.
 */
 type GetTeachersForUserParams struct {
 

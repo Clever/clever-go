@@ -16,7 +16,8 @@ import (
 // GetSectionsForResourceOKCode is the HTTP code returned for type GetSectionsForResourceOK
 const GetSectionsForResourceOKCode int = 200
 
-/*GetSectionsForResourceOK OK Response
+/*
+GetSectionsForResourceOK OK Response
 
 swagger:response getSectionsForResourceOK
 */
@@ -60,7 +61,8 @@ func (o *GetSectionsForResourceOK) WriteResponse(rw http.ResponseWriter, produce
 // GetSectionsForResourceNotFoundCode is the HTTP code returned for type GetSectionsForResourceNotFound
 const GetSectionsForResourceNotFoundCode int = 404
 
-/*GetSectionsForResourceNotFound Entity Not Found
+/*
+GetSectionsForResourceNotFound Entity Not Found
 
 swagger:response getSectionsForResourceNotFound
 */

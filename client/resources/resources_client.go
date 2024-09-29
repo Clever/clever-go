@@ -41,7 +41,7 @@ type ClientService interface {
 }
 
 /*
-  GetCoursesForResource Returns the courses for a resource
+GetCoursesForResource Returns the courses for a resource
 */
 func (a *Client) GetCoursesForResource(params *GetCoursesForResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetCoursesForResourceOK, error) {
 	// TODO: Validate the params before sending
@@ -76,7 +76,7 @@ func (a *Client) GetCoursesForResource(params *GetCoursesForResourceParams, auth
 }
 
 /*
-  GetResource Returns a specific resource
+GetResource Returns a specific resource
 */
 func (a *Client) GetResource(params *GetResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetResourceOK, error) {
 	// TODO: Validate the params before sending
@@ -111,7 +111,7 @@ func (a *Client) GetResource(params *GetResourceParams, authInfo runtime.ClientA
 }
 
 /*
-  GetResources Returns a list of resources
+GetResources Returns a list of resources
 */
 func (a *Client) GetResources(params *GetResourcesParams, authInfo runtime.ClientAuthInfoWriter) (*GetResourcesOK, error) {
 	// TODO: Validate the params before sending
@@ -146,7 +146,7 @@ func (a *Client) GetResources(params *GetResourcesParams, authInfo runtime.Clien
 }
 
 /*
-  GetSectionsForResource Returns the sections for a resource
+GetSectionsForResource Returns the sections for a resource
 */
 func (a *Client) GetSectionsForResource(params *GetSectionsForResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetSectionsForResourceOK, error) {
 	// TODO: Validate the params before sending
@@ -181,7 +181,7 @@ func (a *Client) GetSectionsForResource(params *GetSectionsForResourceParams, au
 }
 
 /*
-  GetUsersForResource Returns the student and/or teacher users for a resource
+GetUsersForResource Returns the student and/or teacher users for a resource
 */
 func (a *Client) GetUsersForResource(params *GetUsersForResourceParams, authInfo runtime.ClientAuthInfoWriter) (*GetUsersForResourceOK, error) {
 	// TODO: Validate the params before sending

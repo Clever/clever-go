@@ -52,10 +52,12 @@ func NewGetCourseForSectionParamsWithHTTPClient(client *http.Client) *GetCourseF
 	}
 }
 
-/* GetCourseForSectionParams contains all the parameters to send to the API endpoint
-   for the get course for section operation.
+/*
+GetCourseForSectionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get course for section operation.
+
+	Typically these are written to a http.Request.
 */
 type GetCourseForSectionParams struct {
 

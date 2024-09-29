@@ -29,10 +29,10 @@ func NewGetCourses(ctx *middleware.Context, handler GetCoursesHandler) *GetCours
 	return &GetCourses{Context: ctx, Handler: handler}
 }
 
-/* GetCourses swagger:route GET /courses Courses getCourses
+/*
+	GetCourses swagger:route GET /courses Courses getCourses
 
 Returns a list of courses
-
 */
 type GetCourses struct {
 	Context *middleware.Context

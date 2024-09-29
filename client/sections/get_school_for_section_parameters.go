@@ -52,10 +52,12 @@ func NewGetSchoolForSectionParamsWithHTTPClient(client *http.Client) *GetSchoolF
 	}
 }
 
-/* GetSchoolForSectionParams contains all the parameters to send to the API endpoint
-   for the get school for section operation.
+/*
+GetSchoolForSectionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get school for section operation.
+
+	Typically these are written to a http.Request.
 */
 type GetSchoolForSectionParams struct {
 
