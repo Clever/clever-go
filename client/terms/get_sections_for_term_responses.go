@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/Clever/clever-go/models"
+	"github.com/Clever/clever-go/v3/models"
 )
 
 // GetSectionsForTermReader is a Reader for the GetSectionsForTerm structure.

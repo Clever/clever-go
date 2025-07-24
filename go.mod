@@ -1,4 +1,4 @@
-module github.com/Clever/clever-go
+module github.com/Clever/clever-go/v3
 
 go 1.13
 

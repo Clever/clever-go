@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"github.com/Clever/clever-go/models"
+	"github.com/Clever/clever-go/v3/models"
 )
 
 // GetStudentsForUserOKCode is the HTTP code returned for type GetStudentsForUserOK

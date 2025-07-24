@@ -1,4 +1,4 @@
-PKG := "github.com/Clever/clever-go/"
+PKG := "github.com/Clever/clever-go/v3/"
 PWD := $(shell pwd)
 PKG_NAME := ${PKG}
 UNAME := $(shell uname | tr '[:upper:]' '[:lower:]')
