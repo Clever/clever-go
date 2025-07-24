@@ -6,7 +6,6 @@ jobs:
     docker:
     - image: cimg/go:1.24
     environment:
-      GOPRIVATE: github.com/Clever/*
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     steps:
