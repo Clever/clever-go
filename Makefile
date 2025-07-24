@@ -1,4 +1,6 @@
-PKG := "github.com/Clever/clever-go/v3/"
+include golang.mk
+
+PKG := "github.com/Clever/clever-go/v4/"
 PWD := $(shell pwd)
 PKG_NAME := ${PKG}
 UNAME := $(shell uname | tr '[:upper:]' '[:lower:]')
@@ -11,8 +13,8 @@ deps: ## Go modules download
 	@go mod download
 
 generate: ## Generate client and mock server from swagger.yml 
-	@swagger generate client -f swagger.yml -A clever
-	@swagger generate server -f swagger.yml -A clever
+	bin/swagger generate client -f ./swagger.yml -A clever
+	bin/swagger generate server -f ./swagger.yml -A clever
 
 gdoc:  ## View Go Docs
 	@echo "==> Running Local Go Docs"
@@ -21,8 +23,9 @@ gdoc:  ## View Go Docs
 	@godoc -http=:8181
 
 getswagger: ## Download go-swagger
-	@curl -o /usr/local/bin/swagger -L'#' "${SWAGGER_URL}"
-	@chmod +x /usr/local/bin/swagger
+	@mkdir ./bin
+	@curl -o ./bin/swagger -L'#' "${SWAGGER_URL}"
+	@chmod +x ./bin/swagger
 
 swaggerdoc:  ## View Swagger Docs
 	@echo "==> Running Swagger Docs"

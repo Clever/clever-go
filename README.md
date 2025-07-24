@@ -13,7 +13,7 @@ clever-go is a Go library for the [Clever API](https://clever.com/developers/doc
 Client
 ```go
 import (
-    "github.com/Clever/clever-go/v3/client"
+    "github.com/Clever/clever-go/v4/client"
 	"github.com/Clever/go-clever/client/sections"
 	"github.com/go-openapi/strfmt"
 
@@ -35,7 +35,7 @@ func main() {
 Auth
 ```go
 import (
-    "github.com/Clever/clever-go/v3/auth"
+    "github.com/Clever/clever-go/v4/auth"
 )
 
 func main() {

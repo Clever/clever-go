@@ -10,15 +10,15 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
-	"github.com/Clever/clever-go/v3/restapi/operations"
-	"github.com/Clever/clever-go/v3/restapi/operations/courses"
-	"github.com/Clever/clever-go/v3/restapi/operations/districts"
-	"github.com/Clever/clever-go/v3/restapi/operations/events"
-	"github.com/Clever/clever-go/v3/restapi/operations/resources"
-	"github.com/Clever/clever-go/v3/restapi/operations/schools"
-	"github.com/Clever/clever-go/v3/restapi/operations/sections"
-	"github.com/Clever/clever-go/v3/restapi/operations/terms"
-	"github.com/Clever/clever-go/v3/restapi/operations/users"
+	"github.com/Clever/clever-go/v4/restapi/operations"
+	"github.com/Clever/clever-go/v4/restapi/operations/courses"
+	"github.com/Clever/clever-go/v4/restapi/operations/districts"
+	"github.com/Clever/clever-go/v4/restapi/operations/events"
+	"github.com/Clever/clever-go/v4/restapi/operations/resources"
+	"github.com/Clever/clever-go/v4/restapi/operations/schools"
+	"github.com/Clever/clever-go/v4/restapi/operations/sections"
+	"github.com/Clever/clever-go/v4/restapi/operations/terms"
+	"github.com/Clever/clever-go/v4/restapi/operations/users"
 )
 
 //go:generate swagger generate server --target ../../clever-go --name Clever --spec ../swagger.yml --principal interface{}
