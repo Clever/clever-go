@@ -10,13 +10,13 @@ SWAGGER_URL := $(shell curl -s https://api.github.com/repos/go-swagger/go-swagge
 all: deps test ## Make all
 
 deps: ## Go modules download
-	@go mod download
+	@go mod vendor
 
 generate: ## Generate client and mock server from swagger.yml 
 	bin/swagger generate client -f ./swagger.yml -A clever
 	bin/swagger generate server -f ./swagger.yml -A clever
 
-gdoc:  ## View Go Docs
+gdoc: ## View Go Docs
 	@echo "==> Running Local Go Docs"
 	@echo ""
 	@echo "Browse to: http://localhost:8181/pkg/${PKG}"
