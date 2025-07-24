@@ -1,1 +1,19 @@
+# osx / sshfs
+._*
+.DS_Store
+
+# emacs / vim
 *~
+\#*\#
+.\#*
+
+# JetBrains
+.idea
+
+# don't commit mock files
+*mock_*
+
+vendor/
+bin/
+
+test-out/

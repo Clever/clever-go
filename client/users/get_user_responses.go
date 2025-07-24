@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/Clever/clever-go/models"
+	"github.com/Clever/clever-go/v4/models"
 )
 
 // GetUserReader is a Reader for the GetUser structure.

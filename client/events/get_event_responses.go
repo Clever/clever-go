@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/Clever/clever-go/models"
+	"github.com/Clever/clever-go/v4/models"
 )
 
 // GetEventReader is a Reader for the GetEvent structure.

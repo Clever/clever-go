@@ -19,14 +19,14 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/Clever/clever-go/restapi/operations/courses"
-	"github.com/Clever/clever-go/restapi/operations/districts"
-	"github.com/Clever/clever-go/restapi/operations/events"
-	"github.com/Clever/clever-go/restapi/operations/resources"
-	"github.com/Clever/clever-go/restapi/operations/schools"
-	"github.com/Clever/clever-go/restapi/operations/sections"
-	"github.com/Clever/clever-go/restapi/operations/terms"
-	"github.com/Clever/clever-go/restapi/operations/users"
+	"github.com/Clever/clever-go/v4/restapi/operations/courses"
+	"github.com/Clever/clever-go/v4/restapi/operations/districts"
+	"github.com/Clever/clever-go/v4/restapi/operations/events"
+	"github.com/Clever/clever-go/v4/restapi/operations/resources"
+	"github.com/Clever/clever-go/v4/restapi/operations/schools"
+	"github.com/Clever/clever-go/v4/restapi/operations/sections"
+	"github.com/Clever/clever-go/v4/restapi/operations/terms"
+	"github.com/Clever/clever-go/v4/restapi/operations/users"
 )
 
 // NewCleverAPI creates a new Clever instance
